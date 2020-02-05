@@ -7,15 +7,18 @@ using UnityEngine.UI;
 public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDragHandler
 {
     private RectTransform rectTransform;
-    public Canvas canvas;
-    public OnHover onHover;
     private Vector3 initialPosition;
+    private Vector3 initialScale;
     private Quaternion initialRotation;
     private CanvasGroup canvasGroup;
     private CanvasGroup playerFieldCanvasGroup;
     private ChangeBackgroundLighting backgroundLighting;
-    public bool isDragging;
     private LayoutElement layout;
+    private GridLayoutGroup cardGroup;
+
+    public Canvas canvas;
+    public OnHover onHover;
+    public bool isDragging;
     private void Awake()
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
@@ -24,6 +27,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         onHover = GetComponent<OnHover>();
         playerFieldCanvasGroup = GameObject.FindGameObjectWithTag("Player Field").GetComponent<CanvasGroup>();
         layout = GetComponent<LayoutElement>();
+        cardGroup = GetComponentInParent<GridLayoutGroup>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -33,6 +37,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        initialScale = transform.localScale;
         toggleCardDragProperites(true);
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -45,6 +50,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         onHover.removePlaceHolder();
         transform.position = initialPosition;
         transform.rotation = initialRotation;
+        transform.localScale = initialScale;
         toggleCardDragProperites(false);
         togglePlayerFieldInteractable(false);
     }
@@ -54,8 +60,16 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     {
         canvasGroup.blocksRaycasts = !isDragging;
         canvasGroup.alpha = isDragging ? .8f : 1f;
-        if (isDragging) { backgroundLighting.whiteBacklighting(); }
-        else { backgroundLighting.blackBacklighting(); };
+        if (isDragging) {
+            backgroundLighting.whiteBacklighting();
+            if(cardGroup.name == "Hand") {
+                transform.localScale = new Vector3(.6f, .6f, 1);
+            }
+        }
+        else {
+            backgroundLighting.blackBacklighting();
+        };
+
         this.isDragging = isDragging;
         layout.ignoreLayout = isDragging;
     }
