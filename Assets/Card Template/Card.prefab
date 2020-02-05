@@ -2056,7 +2056,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 072d18332b76f5949bcd09273e7983f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ac33e6257c0247249b02e45c9fa96565, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2168,6 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragDropCard: {fileID: 4760673835591094996}
   canvas: {fileID: 0}
+  layout: {fileID: 0}
 --- !u!114 &4128228592606986691
 MonoBehaviour:
   m_ObjectHideFlags: 0
