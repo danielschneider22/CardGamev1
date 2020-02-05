@@ -110,7 +110,7 @@ Transform:
   m_LocalScale: {x: 130.24496, y: 130.24496, z: 130.24496}
   m_Children: []
   m_Father: {fileID: 5827292775147990347}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5827292775024058075
 SpriteRenderer:
@@ -190,11 +190,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5827292775898691351}
   - {fileID: 5827292775024058076}
   - {fileID: 5827292776502576019}
   - {fileID: 5827292775607386579}
   - {fileID: 5827292775724560361}
+  - {fileID: 5827292775898691351}
   m_Father: {fileID: 5827292776213004359}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -314,7 +314,7 @@ Transform:
   m_LocalScale: {x: 130.24496, y: 130.24496, z: 130.24496}
   m_Children: []
   m_Father: {fileID: 5827292775147990347}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5827292775607386578
 SpriteRenderer:
@@ -396,7 +396,7 @@ Transform:
   m_LocalScale: {x: 130.24496, y: 130.24496, z: 130.24496}
   m_Children: []
   m_Father: {fileID: 5827292775147990347}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5827292775724560360
 SpriteRenderer:
@@ -478,7 +478,7 @@ Transform:
   m_LocalScale: {x: 130.24496, y: 130.24496, z: 130.24496}
   m_Children: []
   m_Father: {fileID: 5827292775147990347}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.734001}
 --- !u!212 &5827292775898691350
 SpriteRenderer:
@@ -518,7 +518,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -8095979842608007803, guid: 8dbb248c3cc2a804281114126fc7cfb7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -618,7 +618,7 @@ Transform:
   m_LocalScale: {x: 130.24496, y: 130.24496, z: 130.24496}
   m_Children: []
   m_Father: {fileID: 5827292775147990347}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5827292776502576018
 SpriteRenderer:
