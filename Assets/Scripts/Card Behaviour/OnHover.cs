@@ -28,10 +28,8 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GridLayoutGroup cardGroup = eventData.pointerEnter.GetComponentInParent<GridLayoutGroup>();
         backgroundLighting.blueBacklighting();
 
-        if (cardGroup.name == "Hand")
+        if (cardGroup.name == "Hand" && !eventData.dragging)
         {
-            
-
             createGroupPlaceHolder(cardGroup);
             increaseYPosition(cardGroup);
             transform.SetAsLastSibling();
