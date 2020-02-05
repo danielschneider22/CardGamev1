@@ -2141,6 +2141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  onHover: {fileID: 0}
   isDragging: 0
 --- !u!225 &7684169872259025898
 CanvasGroup:
@@ -2169,6 +2170,7 @@ MonoBehaviour:
   dragDropCard: {fileID: 4760673835591094996}
   canvas: {fileID: 0}
   layout: {fileID: 0}
+  hoverYPositionIncrease: 0
 --- !u!114 &4128228592606986691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2217,7 +2219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2782004483284870577
 RectTransform:
   m_ObjectHideFlags: 0
