@@ -8,18 +8,22 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 {
     private RectTransform rectTransform;
     public Canvas canvas;
+    public OnHover onHover;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     private CanvasGroup canvasGroup;
     private CanvasGroup playerFieldCanvasGroup;
     private ChangeBackgroundLighting backgroundLighting;
     public bool isDragging;
+    private LayoutElement layout;
     private void Awake()
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        onHover = GetComponent<OnHover>();
         playerFieldCanvasGroup = GameObject.FindGameObjectWithTag("Player Field").GetComponent<CanvasGroup>();
+        layout = GetComponent<LayoutElement>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -29,14 +33,16 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        toggleCardDragProperites(true);
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         setCardPositionToMousePointer();
         togglePlayerFieldInteractable(true);
-        toggleCardDragProperites(true);
+        
     }
     public void OnPointerUp(PointerEventData eventData)
     {
+        onHover.removePlaceHolder();
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         toggleCardDragProperites(false);
@@ -51,6 +57,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if (isDragging) { backgroundLighting.whiteBacklighting(); }
         else { backgroundLighting.blackBacklighting(); };
         this.isDragging = isDragging;
+        layout.ignoreLayout = isDragging;
     }
     public void togglePlayerFieldInteractable(bool canInteract)
     {
