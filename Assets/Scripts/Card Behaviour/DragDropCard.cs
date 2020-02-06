@@ -34,6 +34,10 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     {
         rectTransform.anchoredPosition += eventData.delta / getCardScaling(eventData);
     }
+    public void Update()
+    {
+        transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -62,9 +66,6 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         canvasGroup.alpha = isDragging ? .8f : 1f;
         if (isDragging) {
             backgroundLighting.whiteBacklighting();
-            if(cardGroup.name == "Hand") {
-                transform.localScale = new Vector3(.6f, .6f, 1);
-            }
         }
         else {
             backgroundLighting.blackBacklighting();

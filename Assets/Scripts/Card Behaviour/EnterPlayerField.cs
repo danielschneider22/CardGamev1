@@ -29,6 +29,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
 
             newChild.transform.SetParent(gridLayoutGroup.transform, false);
             Destroy(eventData.pointerDrag);
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -37,6 +38,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.greenBacklighting();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, .06f);
         }
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -45,6 +47,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.whiteBacklighting();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         }
     }
 }
