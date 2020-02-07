@@ -2124,7 +2124,7 @@ MonoBehaviour:
   nameText: {fileID: 2691062641626193031}
   attackText: {fileID: 2691062641322087525}
   defenseText: {fileID: 2691062639667893516}
-  healthText: {fileID: 0}
+  healthText: {fileID: 2691062641618390093}
   cardCostText: {fileID: 2691062640397755223}
   artworkImage: {fileID: 2691062641467057085}
   effect1: {fileID: 2691062640959133465}
