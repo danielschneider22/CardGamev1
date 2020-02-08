@@ -10,7 +10,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private RectTransform rectTransform;
     private int handPosition;
     private GameObject placeHolderGameObject;
-    private static float hoverYAxisIncreaseScale = 2f;
+    private static float hoverYAxisIncreaseScale = 1.8f;
 
     public DragDropCard dragDropCard;
     public Canvas canvas;

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Card")]
 public class Card : ScriptableObject
 {
-    public string name;
+    public string cardName;
     public CardSlotEffect[] effects;
 
     public Sprite artwork;
