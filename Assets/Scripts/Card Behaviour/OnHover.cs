@@ -11,6 +11,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private int handPosition;
     private GameObject placeHolderGameObject;
     private static float hoverYAxisIncreaseScale = 1.8f;
+    private Color initBacklightColor;
 
     public DragDropCard dragDropCard;
     public Canvas canvas;
@@ -26,7 +27,8 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         GridLayoutGroup cardGroup = eventData.pointerEnter.GetComponentInParent<GridLayoutGroup>();
-        backgroundLighting.blueBacklighting();
+        initBacklightColor = backgroundLighting.backlightingImage.color;
+        backgroundLighting.hoverBacklighting();
 
         if (cardGroup.name == "Hand" && !Input.GetMouseButton(0))
         {
@@ -42,7 +44,8 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(!dragDropCard.isDragging)
         {
             GridLayoutGroup cardGroup = eventData.pointerEnter.GetComponentInParent<GridLayoutGroup>();
-            backgroundLighting.blackBacklighting();
+            backgroundLighting.backlightingImage.color = initBacklightColor;
+
             if (cardGroup.name == "Hand")
             {
                 decreaseYPosition(cardGroup);

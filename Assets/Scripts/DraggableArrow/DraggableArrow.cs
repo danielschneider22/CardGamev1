@@ -10,12 +10,13 @@ public class DraggableArrow : MonoBehaviour
     public GameObject circle;
     public Canvas canvas;
 
-    private Vector3 startPos;
+    public Vector3 startPos;
 
     private GameObject[] drawnLineObjects;
     private GameObject arrow;
     public GameObject arrowPrefab;
     public int numCircles;
+    public bool drawArrow;
 
     public void Start()
     {
@@ -39,11 +40,11 @@ public class DraggableArrow : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             startPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-        }
-        if (Input.GetMouseButton(0))
+        }*/
+        if (Input.GetMouseButton(0) && drawArrow)
         {
             Vector3 endPos = Input.mousePosition;
 

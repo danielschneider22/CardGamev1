@@ -15,9 +15,12 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     private ChangeBackgroundLighting backgroundLighting;
     private LayoutElement layout;
     private GridLayoutGroup cardGroup;
+    private OnHover onHover;
+    private CardDisplay cardDisplay;
+    private DraggableArrow draggableArrow;
 
+    public Renderer myRenderer;
     public Canvas canvas;
-    public OnHover onHover;
     public bool isDragging;
     private void Awake()
     {
@@ -26,37 +29,58 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         canvasGroup = GetComponent<CanvasGroup>();
         onHover = GetComponent<OnHover>();
         playerFieldCanvasGroup = GameObject.FindGameObjectWithTag("Player Field").GetComponent<CanvasGroup>();
+        draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
         layout = GetComponent<LayoutElement>();
+        cardDisplay = GetComponent<CardDisplay>();
         cardGroup = GetComponentInParent<GridLayoutGroup>();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / getCardScaling(eventData);
-    }
-    public void Update()
-    {
-        transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        if(!draggableArrow.drawArrow)
+        {
+            rectTransform.anchoredPosition += eventData.delta / getCardScaling(eventData);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        initialScale = transform.localScale;
-        toggleCardDragProperites(true);
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
-        setCardPositionToMousePointer();
-        togglePlayerFieldInteractable(true);
-        
+        storeCardPropertiesAtMouseClick();
+        if (transform.parent.name == "Hand" && cardDisplay.card.cardType == "Creature")
+        {
+            toggleCardDragProperites(true);
+            setCardPositionToMousePointer();
+            togglePlayerFieldInteractable(true);
+        } else
+        {
+            Vector3 cardPosition = transform.parent.name == "Hand" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
+            /*if(transform.parent.name != "Hand") {
+                cardPosition = new Vector3(
+                    cardPosition.x + (rectTransform.rect.width * transform.parent.localScale.x),
+                    cardPosition.y + (rectTransform.rect.height * transform.parent.localScale.y)
+                );
+            }*/
+            this.isDragging = true;
+            draggableArrow.startPos = cardPosition;
+            draggableArrow.drawArrow = true;
+        }
     }
     public void OnPointerUp(PointerEventData eventData)
     {
+        // when hovering a card, a placeholder is added to hand to keep card positioning
         onHover.removePlaceHolder();
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
-        transform.localScale = initialScale;
-        toggleCardDragProperites(false);
-        togglePlayerFieldInteractable(false);
+        restoreCardPropertiesToMouseClickState();
+        layout.ignoreLayout = false;
+        if (transform.parent.name == "Hand" && cardDisplay.card.cardType == "Creature")
+        {
+            toggleCardDragProperites(false);
+            togglePlayerFieldInteractable(false);
+        } else
+        {
+            this.isDragging = false;
+            draggableArrow.drawArrow = false;
+            backgroundLighting.selectableBacklighting();
+        }
     }
 
     /*Helper Functions*/
@@ -68,13 +92,25 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             backgroundLighting.whiteBacklighting();
         }
         else {
-            backgroundLighting.blackBacklighting();
+            backgroundLighting.selectableBacklighting();
         };
 
         this.isDragging = isDragging;
         layout.ignoreLayout = isDragging;
     }
-    public void togglePlayerFieldInteractable(bool canInteract)
+    private void storeCardPropertiesAtMouseClick()
+    {
+        initialScale = transform.localScale;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+    private void restoreCardPropertiesToMouseClickState()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        transform.localScale = initialScale;
+    }
+    private void togglePlayerFieldInteractable(bool canInteract)
     {
         playerFieldCanvasGroup.blocksRaycasts = canInteract;
     }

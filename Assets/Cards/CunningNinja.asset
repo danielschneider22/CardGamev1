@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b7d0a2b9cbdf04b9186f5f261c9fb6, type: 3}
   m_Name: CunningNinja
   m_EditorClassIdentifier: 
-  name: Cunning Ninja
+  cardName: Cunning Ninja
+  cardType: Creature
   effects:
   - name: Shadow Strike
     description: Can attack twice per turn.

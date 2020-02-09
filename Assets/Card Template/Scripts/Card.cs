@@ -6,6 +6,8 @@ using UnityEngine;
 public class Card : ScriptableObject
 {
     public string cardName;
+    public string cardType;
+
     public CardSlotEffect[] effects;
 
     public Sprite artwork;

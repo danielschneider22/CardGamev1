@@ -3352,6 +3352,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1ac2d5c3e630dec408e660573f777767,
         type: 2}
+    - target: {fileID: 6452821187826400430, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452821187826400430, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452821187826400430, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f0b528dcd64f64d9f8fe263c68b5ef, type: 3}
 --- !u!1 &687835445
@@ -4870,7 +4885,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eface893bd8019949916fae2e10716c0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5474,6 +5489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 4760673835591094996, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 687835448}
     - target: {fileID: 6161537157606756943, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: card
@@ -7045,7 +7065,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 94ebf172ac4ecb94491dd318a450eb8b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9564,7 +9584,7 @@ GameObject:
   - component: {fileID: 1841793526}
   m_Layer: 5
   m_Name: DraggableArrow
-  m_TagString: Untagged
+  m_TagString: Draggable Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9603,9 +9623,11 @@ MonoBehaviour:
   controlPoints: []
   circle: {fileID: 6322906518764560395, guid: 272ea649181a11f4191a7a042825a1ad, type: 3}
   canvas: {fileID: 480585302}
+  startPos: {x: 0, y: 0, z: 0}
   arrowPrefab: {fileID: 5167438042653226438, guid: fd0ef83d6876d914187c01fc73342515,
     type: 3}
   numCircles: 20
+  drawArrow: 0
 --- !u!1 &1844569294
 GameObject:
   m_ObjectHideFlags: 0

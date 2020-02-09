@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player Field
   - World Canvas
+  - Draggable Arrow
   layers:
   - Default
   - TransparentFX

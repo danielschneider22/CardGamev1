@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b7d0a2b9cbdf04b9186f5f261c9fb6, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  name: Goblin Trailmaker
+  cardName: Goblin
+  cardType: Creature
   effects:
   - name: Foul Stench
     description: When attacking or defending a creature, deal 2 damage to that creature
