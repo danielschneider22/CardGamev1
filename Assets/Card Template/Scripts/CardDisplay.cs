@@ -21,7 +21,7 @@ public class CardDisplay : MonoBehaviour
     {
         if(card != null)
         {
-            nameText.text = card.name;
+            nameText.text = card.cardName;
             artworkImage.sprite = card.artwork;
             attackText.text = card.attack.ToString();
             defenseText.text = card.defense.ToString();

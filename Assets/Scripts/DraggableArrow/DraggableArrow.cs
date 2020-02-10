@@ -17,6 +17,7 @@ public class DraggableArrow : MonoBehaviour
     public GameObject arrowPrefab;
     public int numCircles;
     public bool drawArrow;
+    public GameObject draggedCard;
 
     public void Start()
     {

@@ -141,7 +141,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.75
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2154,6 +2154,7 @@ GameObject:
   - component: {fileID: 8861385970924611986}
   - component: {fileID: 4128228592606986691}
   - component: {fileID: 7902455019196583512}
+  - component: {fileID: 8626823646181452031}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -2176,10 +2177,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 190.76, y: 263.65}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -669, y: -317}
+  m_SizeDelta: {x: 190.76001, y: 263.65002}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &6161537157606756943
 MonoBehaviour:
@@ -2213,7 +2214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4375ad0b9ff0c164996c801a3621f638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRenderer: {fileID: 0}
   canvas: {fileID: 0}
   isDragging: 0
 --- !u!225 &7684169872259025898
@@ -2277,6 +2277,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8626823646181452031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290865966551162083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7a9fd13960aaf488adbdb7b2839da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1120769807207598431}
 --- !u!1 &5509666089068333070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,6 +3152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6828555538386395867}
+  - component: {fileID: 1120769807207598431}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -3171,6 +3185,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -148.3}
   m_SizeDelta: {x: 119.52, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1120769807207598431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6828555538386395866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4b585899b04474aa21240236257bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFillGreen: {fileID: 5580363342950358855}
+  healthFillRed: {fileID: 4143463349972809467}
+  healthText: {fileID: 2691062641618390093}
+  cardDisplay: {fileID: 6161537157606756943}
 --- !u!1 &6910337156206247743
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,7 +3424,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.25
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0

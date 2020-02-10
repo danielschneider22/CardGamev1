@@ -19,7 +19,6 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     private CardDisplay cardDisplay;
     private DraggableArrow draggableArrow;
 
-    public Renderer myRenderer;
     public Canvas canvas;
     public bool isDragging;
     private void Awake()
@@ -37,7 +36,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(!draggableArrow.drawArrow)
+        if(!draggableArrow.drawArrow && transform.parent.name != "Enemy Field")
         {
             rectTransform.anchoredPosition += eventData.delta / getCardScaling(eventData);
         }
@@ -51,18 +50,13 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             toggleCardDragProperites(true);
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
-        } else
+        } else if (transform.parent.name != "Enemy Field")
         {
             Vector3 cardPosition = transform.parent.name == "Hand" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
-            /*if(transform.parent.name != "Hand") {
-                cardPosition = new Vector3(
-                    cardPosition.x + (rectTransform.rect.width * transform.parent.localScale.x),
-                    cardPosition.y + (rectTransform.rect.height * transform.parent.localScale.y)
-                );
-            }*/
             this.isDragging = true;
             draggableArrow.startPos = cardPosition;
             draggableArrow.drawArrow = true;
+            draggableArrow.draggedCard = gameObject;
         }
     }
     public void OnPointerUp(PointerEventData eventData)
@@ -75,7 +69,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
-        } else
+        } else if (transform.parent.name != "Enemy Field")
         {
             this.isDragging = false;
             draggableArrow.drawArrow = false;

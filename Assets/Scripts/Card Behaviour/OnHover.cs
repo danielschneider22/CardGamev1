@@ -37,7 +37,6 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             transform.SetAsLastSibling();
             layout.ignoreLayout = true;
         }
-        
     }
     public void OnPointerExit(PointerEventData eventData)
     {
