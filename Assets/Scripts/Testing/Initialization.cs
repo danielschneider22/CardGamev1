@@ -14,6 +14,7 @@ public class Initialization : MonoBehaviour
     public int numPlayerHandCards;
     public Card ninjaCard;
     public Card goblinCard;
+    public Material material;
     void Start()
     {
         initializeHand();
@@ -26,9 +27,10 @@ public class Initialization : MonoBehaviour
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
-            card.GetComponent<CardDisplay>().card = copyGoblin;
+            card.GetComponent<CardDisplay>().card = copyNinja;
             card.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
             card.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
+            card.GetComponent<CardDisplay>().material = Instantiate(material);
             card.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
             card.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             GameObject copyCard = Instantiate(card, playerHand.transform, false);
@@ -43,6 +45,7 @@ public class Initialization : MonoBehaviour
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
             card.GetComponent<CardDisplay>().card = copyNinja;
+            card.GetComponent<CardDisplay>().material = Instantiate(material);
             card.GetComponent<DragDropCard>().canvas = worldCanvas;
             card.GetComponent<OnHover>().canvas = worldCanvas;
             card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();

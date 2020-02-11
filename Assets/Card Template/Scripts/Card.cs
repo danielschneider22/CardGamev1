@@ -17,4 +17,6 @@ public class Card : ScriptableObject
     public int maxHealth;
     public int currHealth;
     public int cardCost;
+
+    public bool isDestroyed;
 }

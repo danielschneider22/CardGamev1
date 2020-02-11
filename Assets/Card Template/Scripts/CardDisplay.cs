@@ -14,8 +14,10 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI cardCostText;
 
     public Image artworkImage;
+    public Image front;
 
     public TextMeshProUGUI effect1;
+    public Material material;
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class CardDisplay : MonoBehaviour
             healthText.text = card.currHealth.ToString() + "/" + card.maxHealth.ToString();
             cardCostText.text = card.cardCost.ToString();
             effect1.text = card.effects[0].name;
+            front.material = material;
 
         } else
         {

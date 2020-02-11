@@ -9,6 +9,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
     private GameObject attackingCardObj;
+    private Card defendingCard;
 
     public HealthBar healthBar;
 
@@ -16,6 +17,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
+        defendingCard = GetComponent<CardDisplay>().card;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -47,7 +49,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         bool shouldDestroy = healthBar.applyTempDecreaseHealth();
         if(shouldDestroy)
         {
-            Destroy(gameObject);
+            defendingCard.isDestroyed = true;
         }
     }
 
@@ -66,7 +68,6 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private int calculateDamage(Card attackingCard)
     {
-        Card defendingCard = GetComponent<CardDisplay>().card;
         int damage = attackingCard.attack - defendingCard.defense;
         return damage > 0 ? damage : 0;
     }
