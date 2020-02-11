@@ -81,7 +81,6 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void toggleCardDragProperites(bool isDragging)
     {
         canvasGroup.blocksRaycasts = !isDragging;
-        canvasGroup.alpha = isDragging ? .8f : 1f;
         if (isDragging) {
             backgroundLighting.whiteBacklighting();
         }
