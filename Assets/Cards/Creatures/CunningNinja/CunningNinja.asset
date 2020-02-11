@@ -25,3 +25,4 @@ MonoBehaviour:
   maxHealth: 12
   currHealth: 12
   cardCost: 1
+  isDestroyed: 0

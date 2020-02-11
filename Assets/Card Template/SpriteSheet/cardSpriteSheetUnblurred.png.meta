@@ -1,0 +1,367 @@
+fileFormatVersion: 2
+guid: 5f1e064348bdea74bbe661f15b975187
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6503827665764252152
+    second: cardSpriteSheetUnblurred_0
+  - first:
+      213: 8375208298143094551
+    second: cardSpriteSheetUnblurred_1
+  - first:
+      213: -8432382950161106112
+    second: cardSpriteSheetUnblurred_2
+  - first:
+      213: -4212007216552210721
+    second: cardSpriteSheetUnblurred_3
+  - first:
+      213: -5920923649209569713
+    second: cardSpriteSheetUnblurred_4
+  - first:
+      213: 5549679653566903279
+    second: cardSpriteSheetUnblurred_5
+  - first:
+      213: 3711612458588404211
+    second: cardSpriteSheetUnblurred_6
+  - first:
+      213: -5260524384068091180
+    second: cardSpriteSheetUnblurred_7
+  - first:
+      213: -6119780969070223522
+    second: cardSpriteSheetUnblurred_8
+  - first:
+      213: -3391158957873408398
+    second: cardSpriteSheetUnblurred_9
+  - first:
+      213: -5803743915735912894
+    second: cardSpriteSheetUnblurred_10
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 996
+        height: 1398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80683cd5233cdb5a0800000000000000
+      internalID: -6503827665764252152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_1
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 1296
+        width: 764
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71719bac297ba3470800000000000000
+      internalID: 8375208298143094551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_2
+      rect:
+        serializedVersion: 2
+        x: 2562
+        y: 0
+        width: 1103
+        height: 1500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b369d22682afa80800000000000000
+      internalID: -8432382950161106112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_3
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 964
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde0602b0c1fb85c0800000000000000
+      internalID: -4212007216552210721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_4
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 1144
+        width: 530
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e67aabf47a4dda0800000000000000
+      internalID: -5920923649209569713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_5
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 1032
+        width: 531
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe37110dd3c640d40800000000000000
+      internalID: 5549679653566903279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_6
+      rect:
+        serializedVersion: 2
+        x: 1784
+        y: 913
+        width: 531
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f9731abddb428330800000000000000
+      internalID: 3711612458588404211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_7
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 659
+        width: 225
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d24753b1fcdef6b0800000000000000
+      internalID: -5260524384068091180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_8
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 726
+        width: 623
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f9f53f1ab221ba0800000000000000
+      internalID: -6119780969070223522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_9
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 546
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 276521b15ee20f0d0800000000000000
+      internalID: -3391158957873408398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_10
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 11
+        width: 963
+        height: 603
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24ee93f78a5f47fa0800000000000000
+      internalID: -5803743915735912894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
