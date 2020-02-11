@@ -20,6 +20,9 @@ public class DissolveDestroy : MonoBehaviour
         {
             dissolveAmount = Mathf.Clamp01(dissolveAmount + (Time.deltaTime));
             material.SetFloat("_DissolveAmount", dissolveAmount);
+        } else if (defendingCard.isDestroyed && dissolveAmount >= 1)
+        {
+            Destroy(gameObject);
         }
     }
 }
