@@ -22,6 +22,10 @@ public class CardDisplay : MonoBehaviour
     public Image defenseImage;
     public Image innerFrame;
     public Image backLighting;
+    public Image healthRed;
+    public Image healthGreen;
+    public Image healthOrange;
+    public Image healthOutline;
 
     public TextMeshProUGUI effect1;
     public Material material;
@@ -43,6 +47,10 @@ public class CardDisplay : MonoBehaviour
             defenseImage.material = material;
             innerFrame.material = material;
             backLighting.material = material;
+            healthRed.material = material;
+            healthGreen.material = material;
+            healthOrange.material = material;
+            healthOutline.material = material;
             foreach (Image slot in effectSlots)
             {
                 slot.material = material;
