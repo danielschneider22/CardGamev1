@@ -51,6 +51,9 @@ public class Initialization : MonoBehaviour
             card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
             GameObject copyCard = Instantiate(card);
             copyCard.transform.SetParent(enemyField.transform, false);
+            var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
+            rotationVector.x = -.2f;
+            copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
         
     }

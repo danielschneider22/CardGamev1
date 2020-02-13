@@ -27,6 +27,8 @@ public class CardDisplay : MonoBehaviour
     public Image healthOrange;
     public Image healthOutline;
 
+    public GameObject healthBar;
+
     public TextMeshProUGUI effect1;
     public Material material;
 

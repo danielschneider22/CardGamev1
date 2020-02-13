@@ -22,6 +22,9 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
             GameObject draggedObject = eventData.pointerDrag;
             draggedObject.transform.localScale = new Vector3(1f, 1f, 1);
             // draggedObject.transform.rotation = new Quaternion(.1f, 0f, 0f, 1f);
+            var rotationVector = draggedObject.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
+            rotationVector.x = -.2f;
+            draggedObject.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
             draggedObject.GetComponent<DragDropCard>().canvas = worldCanvas;
             GameObject newChild = Instantiate(draggedObject);
 

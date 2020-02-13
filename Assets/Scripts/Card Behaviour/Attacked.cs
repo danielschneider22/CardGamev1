@@ -45,21 +45,25 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        backgroundLighting.nonselectableBacklighting();
-        bool shouldDestroy = healthBar.applyTempDecreaseHealth();
-        if(shouldDestroy)
+        if (isValidAttack(attackingCardObj))
         {
-            defendingCard.isDestroyed = true;
+            backgroundLighting.nonselectableBacklighting();
+            bool shouldDestroy = healthBar.applyTempDecreaseHealth();
+            if (shouldDestroy)
+            {
+                defendingCard.isDestroyed = true;
+            }
         }
     }
 
     private bool isValidAttack(GameObject attackingCard)
     {
         GridLayoutGroup cardGroup = GetComponentInParent<GridLayoutGroup>();
-        GridLayoutGroup draggedCardGroup = attackingCard.GetComponentInParent<GridLayoutGroup>();
-        if(cardGroup.name == "Player Field" || cardGroup.name == "Enemy Field" &&
-           draggedCardGroup.name == "Player Field" || draggedCardGroup.name == "Enemy Field" &&
-           cardGroup.name != draggedCardGroup.name)
+        GridLayoutGroup attackingCardGroup = attackingCard.GetComponentInParent<GridLayoutGroup>();
+        Card attackingCardStats = attackingCard.GetComponent<CardDisplay>().card;
+        if (((cardGroup.name == "Player Field" || cardGroup.name == "Enemy Field") &&
+           (attackingCardGroup.name == "Player Field" || attackingCardGroup.name == "Enemy Field") &&
+           cardGroup.name != attackingCardGroup.name) && !attackingCardStats.isDestroyed && !defendingCard.isDestroyed)
         {
             return true;
         }
