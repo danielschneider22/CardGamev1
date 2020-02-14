@@ -10,19 +10,26 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private DraggableArrow draggableArrow;
     private GameObject attackingCardObj;
     private Card defendingCard;
+    private Animator animator;
+    private bool validEnterTriggered;
 
     public HealthBar healthBar;
-
+    
     private void Awake()
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
         defendingCard = GetComponent<CardDisplay>().card;
+        animator = GetComponent<Animator>();
+        validEnterTriggered = false;
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && isValidAttack(draggableArrow.draggedCard))
         {
+            validEnterTriggered = true;
+
             attackingCardObj = draggableArrow.draggedCard;
 
             backgroundLighting.greenBacklighting();
@@ -35,24 +42,30 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject)
+        if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && validEnterTriggered)
         {
             backgroundLighting.nonselectableBacklighting();
             healthBar.restoreTempHealth();
             attackingCardObj = null;
+            validEnterTriggered = false;
         }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (isValidAttack(attackingCardObj))
+        if (isValidAttack(attackingCardObj) && validEnterTriggered)
         {
             backgroundLighting.nonselectableBacklighting();
             bool shouldDestroy = healthBar.applyTempDecreaseHealth();
             if (shouldDestroy)
             {
-                defendingCard.isDestroyed = true;
+                animator.SetTrigger("CardDestroyedTrigger");
+                //defendingCard.isDestroyed = true;
+            } else
+            {
+                animator.SetTrigger("CardDamagedTrigger");
             }
+            validEnterTriggered = false;
         }
     }
 
@@ -74,5 +87,10 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         int damage = attackingCard.attack - defendingCard.defense;
         return damage > 0 ? damage : 0;
+    }
+
+    public void destroyCard()
+    {
+        defendingCard.isDestroyed = true;
     }
 }

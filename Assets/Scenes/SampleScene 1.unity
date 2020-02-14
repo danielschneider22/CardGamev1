@@ -325,7 +325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -71, y: 52.623}
+  m_AnchoredPosition: {x: -71, y: 52.623047}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &56363657
@@ -4961,13 +4961,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eface893bd8019949916fae2e10716c0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.254
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -8236,7 +8236,7 @@ MonoBehaviour:
   screenSpaceOverlayCanvas: {fileID: 480585302}
   worldCanvas: {fileID: 687835448}
   numEnemyFieldCards: 3
-  numPlayerHandCards: 1
+  numPlayerHandCards: 4
   ninjaCard: {fileID: 11400000, guid: 1ac2d5c3e630dec408e660573f777767, type: 2}
   goblinCard: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81, type: 2}
   material: {fileID: 2100000, guid: 70e594f41c8c746459dbb58830057ee0, type: 2}
@@ -9032,7 +9032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1591635050
 MonoBehaviour:
   m_ObjectHideFlags: 0
