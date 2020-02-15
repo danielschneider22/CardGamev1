@@ -32,6 +32,7 @@ public class Initialization : MonoBehaviour
             card.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
             card.GetComponent<CardDisplay>().material = Instantiate(material);
             card.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+            card.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
             card.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             GameObject copyCard = Instantiate(card, playerHand.transform, false);
             copyCard.transform.SetParent(playerHand.transform, true);
