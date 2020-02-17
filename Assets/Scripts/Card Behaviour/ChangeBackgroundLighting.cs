@@ -24,6 +24,10 @@ public class ChangeBackgroundLighting : MonoBehaviour
     {
         backlightingImage.color = Color.white;
     }
+    public void redBacklighting()
+    {
+        backlightingImage.color = Color.red;
+    }
     public void selectableBacklighting()
     {
         backlightingImage.color = new Color(0.6775098f, 0.9541942f, 0.9905f);
