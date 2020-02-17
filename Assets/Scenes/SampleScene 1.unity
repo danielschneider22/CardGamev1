@@ -6122,6 +6122,26 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2691062640397755223, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691062640397755223, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691062640397755223, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691062640397755223, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294506744
+      objectReference: {fileID: 0}
     - target: {fileID: 2691062640684328583, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_textInfo.characterCount

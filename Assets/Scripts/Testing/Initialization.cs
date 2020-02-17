@@ -36,6 +36,7 @@ public class Initialization : MonoBehaviour
             card.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             GameObject copyCard = Instantiate(card, playerHand.transform, false);
             copyCard.transform.SetParent(playerHand.transform, true);
+            copyCard.GetComponent<Animator>().enabled = false;
         }
     }
 

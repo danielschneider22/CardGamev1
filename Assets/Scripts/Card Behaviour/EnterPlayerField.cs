@@ -31,6 +31,8 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
             playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, 0);
 
             playerController.decreaseCurrEnergy(draggedObject.GetComponent<CardDisplay>().card.cardCost);
+
+            draggedObject.GetComponent<Animator>().enabled = false;
         }
     }
     public void OnPointerEnter(PointerEventData eventData)

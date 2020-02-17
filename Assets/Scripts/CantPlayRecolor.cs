@@ -16,8 +16,9 @@ public class CantPlayRecolor : MonoBehaviour
 
     public void Update()
     {
+        GridLayoutGroup parentGroup = cardDisplay.GetComponentInParent<GridLayoutGroup>();
         Card droppingCard = cardDisplay.card;
-        if (droppingCard.cardCost > playerController.currEnergy)
+        if (droppingCard.cardCost > playerController.currEnergy && parentGroup && parentGroup.name == "Hand")
         {
             cardDisplay.cardCostText.color = Color.red;
         }
