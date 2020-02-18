@@ -35,6 +35,36 @@ TextureImporter:
   - first:
       213: -5803743915735912894
     second: cardSpriteSheetUnblurred_10
+  - first:
+      213: 2473311096349463548
+    second: cardSpriteSheetUnblurred_0
+  - first:
+      213: 2845679717530354829
+    second: cardSpriteSheetUnblurred_1
+  - first:
+      213: -6758683579935018842
+    second: cardSpriteSheetUnblurred_2
+  - first:
+      213: 5850762071263794200
+    second: cardSpriteSheetUnblurred_3
+  - first:
+      213: 2701884557933694983
+    second: cardSpriteSheetUnblurred_4
+  - first:
+      213: -971764116583012717
+    second: cardSpriteSheetUnblurred_5
+  - first:
+      213: 4392975442746961424
+    second: cardSpriteSheetUnblurred_6
+  - first:
+      213: 630835929889385893
+    second: cardSpriteSheetUnblurred_7
+  - first:
+      213: 2872737065501508072
+    second: cardSpriteSheetUnblurred_8
+  - first:
+      213: 7596671106804922072
+    second: cardSpriteSheetUnblurred_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,10 +152,10 @@ TextureImporter:
       name: cardSpriteSheetUnblurred_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 52
-        width: 996
-        height: 1398
+        x: 17
+        y: 2
+        width: 1067
+        height: 1484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,8 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80683cd5233cdb5a0800000000000000
-      internalID: -6503827665764252152
+      spriteID: cf311f48657f25220800000000000000
+      internalID: 2473311096349463548
       vertices: []
       indices: 
       edges: []
@@ -154,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71719bac297ba3470800000000000000
-      internalID: 8375208298143094551
+      spriteID: d844ee340a2ed7720800000000000000
+      internalID: 2845679717530354829
       vertices: []
       indices: 
       edges: []
@@ -164,9 +194,9 @@ TextureImporter:
       name: cardSpriteSheetUnblurred_2
       rect:
         serializedVersion: 2
-        x: 2562
+        x: 2565
         y: 0
-        width: 1103
+        width: 1102
         height: 1500
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -175,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04b369d22682afa80800000000000000
-      internalID: -8432382950161106112
+      spriteID: 6a035b4d7155432a0800000000000000
+      internalID: -6758683579935018842
       vertices: []
       indices: 
       edges: []
@@ -196,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fde0602b0c1fb85c0800000000000000
-      internalID: -4212007216552210721
+      spriteID: 814d10bea15123150800000000000000
+      internalID: 5850762071263794200
       vertices: []
       indices: 
       edges: []
@@ -217,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4e67aabf47a4dda0800000000000000
-      internalID: -5920923649209569713
+      spriteID: 70050c3b0b50f7520800000000000000
+      internalID: 2701884557933694983
       vertices: []
       indices: 
       edges: []
@@ -238,8 +268,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe37110dd3c640d40800000000000000
-      internalID: 5549679653566903279
+      spriteID: 39629914fa99382f0800000000000000
+      internalID: -971764116583012717
       vertices: []
       indices: 
       edges: []
@@ -259,8 +289,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f9731abddb428330800000000000000
-      internalID: 3711612458588404211
+      spriteID: 01e62f3e3ebf6fc30800000000000000
+      internalID: 4392975442746961424
       vertices: []
       indices: 
       edges: []
@@ -280,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d24753b1fcdef6b0800000000000000
-      internalID: -5260524384068091180
+      spriteID: 5ad2c989fed21c800800000000000000
+      internalID: 630835929889385893
       vertices: []
       indices: 
       edges: []
@@ -301,35 +331,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5f9f53f1ab221ba0800000000000000
-      internalID: -6119780969070223522
+      spriteID: 8e1c05204230ed720800000000000000
+      internalID: 2872737065501508072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: cardSpriteSheetUnblurred_9
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 546
-        width: 16
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 276521b15ee20f0d0800000000000000
-      internalID: -3391158957873408398
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cardSpriteSheetUnblurred_10
       rect:
         serializedVersion: 2
         x: 1147
@@ -343,8 +352,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ee93f78a5f47fa0800000000000000
-      internalID: -5803743915735912894
+      spriteID: 8d6b49c6f1ccc6960800000000000000
+      internalID: 7596671106804922072
       vertices: []
       indices: 
       edges: []
