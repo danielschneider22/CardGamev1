@@ -7,50 +7,85 @@ using UnityEngine.UI;
 public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GridLayoutGroup gridLayoutGroup;
-    private Image image;
+    private Image playerFieldImage;
     private Canvas worldCanvas;
+    private PlayerController playerController;
     private void Awake()
     {
-        image = GetComponent<Image>();
+        playerFieldImage = GetComponent<Image>();
         worldCanvas = GameObject.FindGameObjectWithTag("World Canvas").GetComponent<Canvas>();
+        playerController = GameObject.FindGameObjectWithTag("Player Controller").GetComponent<PlayerController>();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>().name == "Hand")
+        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        GameObject draggedObject = eventData.pointerDrag;
+        if (draggedObject != null && parentGroup.name == "Hand" && canDrop(draggedObject))
         {
-            GameObject draggedObject = eventData.pointerDrag;
-            draggedObject.transform.localScale = new Vector3(1f, 1f, 1);
-            // draggedObject.transform.rotation = new Quaternion(.1f, 0f, 0f, 1f);
-            var rotationVector = draggedObject.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
-            rotationVector.x = -.2f;
-            draggedObject.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
-            draggedObject.GetComponent<DragDropCard>().canvas = worldCanvas;
-            GameObject newChild = Instantiate(draggedObject);
+            placeCardInPlayerField(draggedObject);
 
+            // decrease cell size if too many creatures on player field
             // gridLayoutGroup.cellSize = new Vector2(gridLayoutGroup.cellSize.x - 10, gridLayoutGroup.cellSize.y);
 
-            newChild.transform.SetParent(gridLayoutGroup.transform, false);
-            Destroy(eventData.pointerDrag);
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, 0);
+
+            playerController.decreaseCurrEnergy(draggedObject.GetComponent<CardDisplay>().card.cardCost);
+
+            draggedObject.GetComponent<Animator>().enabled = false;
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>().name == "Hand")
+        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        GameObject draggedObject = eventData.pointerDrag;
+        if (draggedObject != null && parentGroup.name == "Hand" && canDrop(draggedObject))
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.greenBacklighting();
-            image.color = new Color(image.color.r, image.color.g, image.color.b, .06f);
+            playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, .06f);
+        } else if(draggedObject != null && parentGroup.name == "Hand" && !canDrop(draggedObject))
+        {
+            ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
+            backgroundLighting.redBacklighting();
         }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>().name == "Hand")
+        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        GameObject draggedObject = eventData.pointerDrag;
+        if (draggedObject != null && parentGroup.name == "Hand")
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.whiteBacklighting();
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, 0);
         }
+    }
+
+    private void placeCardInPlayerField(GameObject cardObj)
+    {
+        cardObj.transform.localScale = new Vector3(1f, 1f, 1);
+        setHealthBarToFlatRotation(cardObj);
+        cardObj.GetComponent<DragDropCard>().canvas = worldCanvas;
+        GameObject newChild = Instantiate(cardObj);
+        newChild.transform.SetParent(gridLayoutGroup.transform, false);
+        Destroy(cardObj);
+    }
+
+    private void setHealthBarToFlatRotation(GameObject cardObj)
+    {
+        Vector3 rotationVector = cardObj.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
+        rotationVector.x = -.2f;
+        cardObj.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
+    }
+
+    private bool canDrop(GameObject cardObj)
+    {
+        Card droppingCard = cardObj.GetComponent<CardDisplay>().card;
+        if(droppingCard.cardCost > playerController.currEnergy)
+        {
+            return false;
+        }
+        return true;
     }
 }
