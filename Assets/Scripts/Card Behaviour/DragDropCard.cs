@@ -50,7 +50,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             toggleCardDragProperites(true);
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
-        } else if (transform.parent.name != "Enemy Field")
+        } else if (transform.parent.name == "Player Field")
         {
             Vector3 cardPosition = transform.parent.name == "Hand" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
             this.isDragging = true;
@@ -69,7 +69,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
-        } else if (transform.parent.name != "Enemy Field")
+        } else if (transform.parent.name == "Player Field")
         {
             this.isDragging = false;
             draggableArrow.drawArrow = false;
