@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GridLayoutGroup gridLayoutGroup;
+    private GridLayoutGroup gridLayoutGroup;
     private Image playerFieldImage;
     private Canvas worldCanvas;
     private PlayerController playerController;
