@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private GridLayoutGroup gridLayoutGroup;
     private Image playerFieldImage;
     private Canvas worldCanvas;
     private PlayerController playerController;
+
+    public GridLayoutGroup gridLayoutGroup;
     private void Awake()
     {
         playerFieldImage = GetComponent<Image>();
