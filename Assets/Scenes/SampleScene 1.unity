@@ -18271,7 +18271,7 @@ MonoBehaviour:
   - transform: {fileID: 2041101966}
     speed: 750
     endpointTransform: {fileID: 733458835}
-    endpointScale: {x: 0, y: 0, z: 0}
+    endpointScale: {x: 0.55, y: 0.55, z: 1}
   testTransform: {fileID: 689015991}
 --- !u!1 &693921157
 GameObject:
