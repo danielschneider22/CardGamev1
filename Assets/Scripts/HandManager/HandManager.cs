@@ -52,12 +52,14 @@ public class HandManager : MonoBehaviour
     {
         Vector2 pos1 = new Vector2(t1.transform.position.x, t1.transform.position.y);
         Vector2 pos2 = new Vector2(t2.transform.position.x, t2.transform.position.y);
-        return pos1 == pos2;
+        return System.Math.Abs(pos1.x - pos2.x) < .001;
+        // return pos1.Equals(pos2);
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)
     {
-        Vector2 scale1 = new Vector2(t1.x, t1.y);
-        Vector2 scale2 = new Vector2(t2.x, t2.y);
-        return scale1 == scale2;
+        return System.Math.Abs(t1.x - t2.x) < .001;
+        // Vector2 scale1 = new Vector2(t1.x, t1.y);
+        // Vector2 scale2 = new Vector2(t2.x, t2.y);
+        // return scale1.Equals(scale2);
     }
 }
