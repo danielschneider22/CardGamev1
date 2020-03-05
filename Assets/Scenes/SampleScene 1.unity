@@ -18271,6 +18271,7 @@ MonoBehaviour:
   - transform: {fileID: 2041101966}
     speed: 750
     endpointTransform: {fileID: 733458835}
+    endpointScale: {x: 0, y: 0, z: 0}
   testTransform: {fileID: 689015991}
 --- !u!1 &693921157
 GameObject:
@@ -51106,17 +51107,17 @@ PrefabInstance:
     - target: {fileID: 4290865966551162082, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4290865966551162082, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4290865966551162082, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4290865966551162083, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
