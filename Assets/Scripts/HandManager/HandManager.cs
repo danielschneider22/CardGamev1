@@ -37,7 +37,7 @@ public class HandManager : MonoBehaviour
             } 
             if (handCard.endpointScale != null && !scalesAreTheSame(handCard.transform.localScale, handCard.endpointScale))
             {
-                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .01f, handCard.transform.localScale.y + .01f, handCard.transform.localScale.z);
+                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
                 changeOccurred = true;
             }
             if(!changeOccurred)
@@ -88,17 +88,19 @@ public class HandManager : MonoBehaviour
                 }
                 float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
                 gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1 * 10));
+                // cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f));
             } else
             {
                 int centerElementIdx = (children - 1) / 2;
                 float diffFromCenter = (float)(i - centerElementIdx) * cellXSize;
                 float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
                 gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1 * 10));
+                // cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f));
             }
 
-            MovingHandCard newHandCard = new MovingHandCard(cardTransform, 500, gridPosition, new Vector3(.55f, .55f, 1));
+            Vector2 distanceToTravel = gridCell.anchoredPosition - handCell.anchoredPosition;
+            float speed = System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 15, 2), 50f);
+            MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, gridPosition, new Vector3(.55f, .55f, 1));
             movingCards.Add(newHandCard);
         }
     }
@@ -112,7 +114,7 @@ public class HandManager : MonoBehaviour
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)
     {
-        return System.Math.Abs(t1.x - t2.x) < .001;
+        return System.Math.Abs(t1.x - t2.x) < .01;
         // Vector2 scale1 = new Vector2(t1.x, t1.y);
         // Vector2 scale2 = new Vector2(t2.x, t2.y);
         // return scale1.Equals(scale2);
