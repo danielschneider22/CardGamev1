@@ -86,12 +86,14 @@ public class HandManager : MonoBehaviour
                 {
                     diffFromCenter = ((float)(i - centerElementRightIdx) * cellXSize) + (cellXSize / 2);
                 }
-                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, 0, 1f);
+                float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
+                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
             } else
             {
                 int centerElementIdx = (children - 1) / 2;
                 float diffFromCenter = (float)(i - centerElementIdx) * cellXSize;
-                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, 0, 1f);
+                float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
+                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
             }
 
             MovingHandCard newHandCard = new MovingHandCard(cardTransform, 500, gridPosition, new Vector3(.55f, .55f, 1));
