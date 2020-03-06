@@ -18339,9 +18339,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingCards: []
   hand: {fileID: 595612994}
-  handPlacementGrid: {fileID: 1635327239}
+  handPlacementGrid: {fileID: 1635327237}
   placeholderObj: {fileID: 3900997186542374988, guid: 6c3124eae15aed94ca8366214fd99f29,
     type: 3}
+  cellXSize: 50
 --- !u!1 &693921157
 GameObject:
   m_ObjectHideFlags: 0
@@ -19518,7 +19519,6 @@ MonoBehaviour:
   goblinCard: {fileID: 11400000, guid: a12ed3a5e08871745aef95bff677c1c0, type: 2}
   material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   handManager: {fileID: 689015992}
-  startingPosition: {fileID: 1816641094}
 --- !u!1001 &791755483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44286,7 +44286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635327237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
@@ -46204,7 +46204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467041814}
   m_HandleRect: {fileID: 1467041813}
   m_Direction: 2
-  m_Value: 1.0000031
+  m_Value: 1.0000036
   m_Size: 0.81268555
   m_NumberOfSteps: 0
   m_OnValueChanged:

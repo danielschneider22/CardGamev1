@@ -11,7 +11,6 @@ public class PlayerDeckManager : MonoBehaviour
     public Card goblinCard;
     public Material material;
     public HandManager handManager;
-    public RectTransform startingPosition;
 
     private List<Card> cards;
     void Start()
@@ -37,10 +36,11 @@ public class PlayerDeckManager : MonoBehaviour
         copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
         copyCard.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
         copyCard.GetComponent<Animator>().enabled = false;
-        GameObject newCard = Instantiate(card, startingPosition.anchoredPosition, new Quaternion());
+        GameObject newCard = Instantiate(card);
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
-        newCard.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 1f);
-        newCard.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 1f);
+        newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-300f, 0f);
+        // newCard.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 1f);
+        // newCard.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 1f);
         return newCard;
     }
     public void drawCard()

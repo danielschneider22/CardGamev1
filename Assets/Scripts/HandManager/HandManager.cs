@@ -7,12 +7,17 @@ public class HandManager : MonoBehaviour
 {
     public List<MovingHandCard> movingCards;
     public GameObject hand;
-    public GridLayoutGroup handPlacementGrid;
+    public GameObject handPlacementGrid;
     public GameObject placeholderObj;
+
+    public float cellXSize;
+
+    private float centerOfHand;
 
     public void Start()
     {
         movingCards = new List<MovingHandCard>();
+        centerOfHand = hand.transform.GetComponent<RectTransform>().rect.center.x;
     }
 
     private void FixedUpdate()
@@ -64,6 +69,31 @@ public class HandManager : MonoBehaviour
         {
             Transform cardTransform = hand.transform.GetChild(i);
             Transform gridPosition = handPlacementGrid.transform.GetChild(i);
+
+            RectTransform gridCell = gridPosition.GetComponent<RectTransform>();
+            RectTransform handCell = cardTransform.GetComponent<RectTransform>();
+
+            if(children % 2 == 0)
+            {
+                float centerElementIdx = (float)(children - 1) / 2;
+                int centerElementLeftIdx = (children - 1) / 2;
+                int centerElementRightIdx = (children - 1) / 2 + 1;
+                float diffFromCenter = 0f;
+                if(i < centerElementIdx)
+                {
+                    diffFromCenter = ((float)(i - centerElementLeftIdx) * cellXSize) - (cellXSize / 2);
+                } else
+                {
+                    diffFromCenter = ((float)(i - centerElementLeftIdx) * cellXSize) + (cellXSize / 2);
+                }
+                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, 0, 1f);
+            } else
+            {
+                int centerElementIdx = (children - 1) / 2;
+                float diffFromCenter = (float)(i - centerElementIdx) * cellXSize;
+                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, 0, 1f);
+            }
+
             MovingHandCard newHandCard = new MovingHandCard(cardTransform, 500, gridPosition, new Vector3(.55f, .55f, 1));
             movingCards.Add(newHandCard);
         }
