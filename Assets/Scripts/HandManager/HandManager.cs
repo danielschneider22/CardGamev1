@@ -20,11 +20,14 @@ public class HandManager : MonoBehaviour
         List<MovingHandCard> cardsToRemove = new List<MovingHandCard>();
         foreach(MovingHandCard handCard in movingCards)
         {
-            Vector2 handCardPos = new Vector2(handCard.transform.position.x, handCard.transform.position.y);
+            RectTransform handCardRectTransform = handCard.transform.gameObject.GetComponent<RectTransform>();
+            RectTransform endPointRectTransform = handCard.endpointTransform.gameObject.GetComponent<RectTransform>();
+
+            Vector2 handCardPos = new Vector2(handCardRectTransform.anchoredPosition.x, handCardRectTransform.anchoredPosition.y);
             bool changeOccurred = false;
-            if (!positionsAreTheSame(handCard.transform, handCard.endpointTransform))
+            if (!positionsAreTheSame(handCardRectTransform, endPointRectTransform))
             {
-                handCard.transform.position = Vector2.MoveTowards(handCardPos, handCard.endpointTransform.position, handCard.speed * Time.deltaTime);
+                handCardRectTransform.anchoredPosition = Vector2.MoveTowards(handCardPos, endPointRectTransform.anchoredPosition, handCard.speed * Time.deltaTime);
                 changeOccurred = true;
             } 
             if (handCard.endpointScale != null && !scalesAreTheSame(handCard.transform.localScale, handCard.endpointScale))
@@ -66,10 +69,10 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    private bool positionsAreTheSame(Transform t1, Transform t2)
+    private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
     {
-        Vector2 pos1 = new Vector2(t1.transform.position.x, t1.transform.position.y);
-        Vector2 pos2 = new Vector2(t2.transform.position.x, t2.transform.position.y);
+        Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);
+        Vector2 pos2 = new Vector2(t2.anchoredPosition.x, t2.anchoredPosition.y);
         return System.Math.Abs(pos1.x - pos2.x) < .001;
         // return pos1.Equals(pos2);
     }
