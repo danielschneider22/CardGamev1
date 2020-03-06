@@ -55,8 +55,10 @@ public class HandManager : MonoBehaviour
     public void addCardToHand(GameObject card)
     {
         card.transform.SetParent(hand.transform, false);
+        card.transform.SetAsFirstSibling();
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(handPlacementGrid.transform, false);
+        placeholder.transform.SetAsFirstSibling();
 
         resetHandPositions();
     }
@@ -102,7 +104,7 @@ public class HandManager : MonoBehaviour
             }
 
             Vector2 distanceToTravel = gridCell.anchoredPosition - handCell.anchoredPosition;
-            float speed = oldMovingHandCard != null ? oldMovingHandCard.speed : System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 12, 2), 100f);
+            float speed = oldMovingHandCard != null ? oldMovingHandCard.speed : System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 15, 2), 100f);
             MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, gridPosition, new Vector3(.55f, .55f, 1));
             movingCards.Add(newHandCard);
         }

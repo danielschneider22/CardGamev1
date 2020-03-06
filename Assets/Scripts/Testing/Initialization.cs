@@ -34,7 +34,7 @@ public class Initialization : MonoBehaviour
         if(drawCardTimer <= 0f && numCardsDrawn < numCardsToDraw)
         {
             playerDeckManager.drawCard();
-            drawCardTimer = .25f;
+            drawCardTimer = .20f;
             numCardsDrawn++;
         } else if (numCardsDrawn < numCardsToDraw)
         {
