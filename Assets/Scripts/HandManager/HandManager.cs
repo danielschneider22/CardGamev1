@@ -84,7 +84,7 @@ public class HandManager : MonoBehaviour
                     diffFromCenter = ((float)(i - centerElementLeftIdx) * cellXSize) - (cellXSize / 2);
                 } else
                 {
-                    diffFromCenter = ((float)(i - centerElementLeftIdx) * cellXSize) + (cellXSize / 2);
+                    diffFromCenter = ((float)(i - centerElementRightIdx) * cellXSize) + (cellXSize / 2);
                 }
                 gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, 0, 1f);
             } else
