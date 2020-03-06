@@ -91,16 +91,16 @@ public class HandManager : MonoBehaviour
                 {
                     diffFromCenter = ((float)(i - centerElementRightIdx) * cellXSize) + (cellXSize / 2);
                 }
-                float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
+                float yPos = System.Math.Min(System.Math.Abs((float)(i - centerElementIdx)) * -1 * 13f, 5f);
                 gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                // cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f));
+                cardTransform.eulerAngles = new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f);
             } else
             {
                 int centerElementIdx = (children - 1) / 2;
                 float diffFromCenter = (float)(i - centerElementIdx) * cellXSize;
-                float yPos = System.Math.Abs((float)(i - centerElementIdx)) * -1 * 5f;
+                float yPos = System.Math.Min(System.Math.Abs((float)(i - centerElementIdx)) * -1 * 13f, -5f);
                 gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                // cardTransform.Rotate(new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f));
+                cardTransform.eulerAngles = new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f);
             }
 
             Vector2 distanceToTravel = gridCell.anchoredPosition - handCell.anchoredPosition;

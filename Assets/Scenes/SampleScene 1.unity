@@ -17864,7 +17864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 42.1, y: 13.9}
+  m_AnchoredPosition: {x: 42.1, y: -50}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &661471447
@@ -18340,7 +18340,7 @@ MonoBehaviour:
   movingCards: []
   hand: {fileID: 595612994}
   handPlacementGrid: {fileID: 1635327237}
-  placeholderObj: {fileID: 3900997186542374988, guid: 6c3124eae15aed94ca8366214fd99f29,
+  placeholderObj: {fileID: 4290865966551162083, guid: 673b0320f475b164990cada2477ad890,
     type: 3}
   cellXSize: 50
 --- !u!1 &693921157
@@ -44276,7 +44276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 42.1, y: 13.9}
+  m_AnchoredPosition: {x: 42.1, y: -50}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635327239
@@ -46204,7 +46204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467041814}
   m_HandleRect: {fileID: 1467041813}
   m_Direction: 2
-  m_Value: 1.0000036
+  m_Value: 1.0000031
   m_Size: 0.81268555
   m_NumberOfSteps: 0
   m_OnValueChanged:
