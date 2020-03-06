@@ -38,10 +38,8 @@ public class PlayerDeckManager : MonoBehaviour
         copyCard.GetComponent<Animator>().enabled = false;
         GameObject newCard = Instantiate(card);
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
-        newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 30f);
+        newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 80f);
         newCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
-        // newCard.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 1f);
-        // newCard.GetComponent<RectTransform>().anchorMax = new Vector2(0f, 1f);
         return newCard;
     }
     public void drawCard()

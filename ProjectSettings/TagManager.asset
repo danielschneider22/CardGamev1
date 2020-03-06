@@ -8,6 +8,8 @@ TagManager:
   - World Canvas
   - Draggable Arrow
   - Player Controller
+  - Card
+  - Hand Manager
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,12 @@ public class HandManager : MonoBehaviour
             } 
             if (handCard.endpointScale != null && !scalesAreTheSame(handCard.transform.localScale, handCard.endpointScale))
             {
-                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
+                if(handCard.transform.localScale.x < handCard.endpointScale.x) {
+                    handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
+                } else
+                {
+                    handCard.transform.localScale = new Vector3(handCard.transform.localScale.x - .02f, handCard.transform.localScale.y - .02f, handCard.transform.localScale.z);
+                }
                 changeOccurred = true;
             }
             if(!changeOccurred)
@@ -63,7 +68,7 @@ public class HandManager : MonoBehaviour
         resetHandPositions();
     }
 
-    private void resetHandPositions()
+    public void resetHandPositions(float resetSpeed = -1f)
     {
         List<MovingHandCard> oldMoveCards = new List<MovingHandCard>(movingCards);
         movingCards.Clear();
@@ -104,8 +109,22 @@ public class HandManager : MonoBehaviour
             }
 
             Vector2 distanceToTravel = gridCell.anchoredPosition - handCell.anchoredPosition;
-            float speed = oldMovingHandCard != null ? oldMovingHandCard.speed : System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 10, 2), 100f);
+            float speed = oldMovingHandCard != null ? oldMovingHandCard.speed : resetSpeed != -1f ? resetSpeed : System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 10, 2), 100f);
             MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, gridPosition, new Vector3(.55f, .55f, 1));
+            movingCards.Add(newHandCard);
+        }
+    }
+
+    public void hoverCard(Transform card)
+    {
+        int cardIdx = getCardIdxInTransform(hand.transform, card);
+        if(cardIdx != -1)
+        {
+            GameObject placeholderObj = handPlacementGrid.transform.GetChild(cardIdx).gameObject;
+            RectTransform gridCell = placeholderObj.GetComponent<RectTransform>();
+
+            gridCell.anchoredPosition = new Vector3(gridCell.anchoredPosition.x, gridCell.anchoredPosition.y + 50f, 1f);
+            MovingHandCard newHandCard = new MovingHandCard(card, 600, placeholderObj.transform, new Vector3(.6f, 6f, 1));
             movingCards.Add(newHandCard);
         }
     }
@@ -122,11 +141,25 @@ public class HandManager : MonoBehaviour
         return null;
     }
 
+    private int getCardIdxInTransform(Transform parent, Transform card)
+    {
+        int counter = 0;
+        foreach (Transform c in parent)
+        {
+            if (c == card)
+            {
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    }
+
     private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
     {
         Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);
         Vector2 pos2 = new Vector2(t2.anchoredPosition.x, t2.anchoredPosition.y);
-        return System.Math.Abs(pos1.x - pos2.x) < .001;
+        return System.Math.Abs(pos1.x - pos2.x) < .001 && System.Math.Abs(pos1.y - pos2.y) < .001;
         // return pos1.Equals(pos2);
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)

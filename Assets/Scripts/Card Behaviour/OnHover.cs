@@ -12,6 +12,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private GameObject placeHolderGameObject;
     private static float hoverYAxisIncreaseScale = 1.8f;
     private Color initBacklightColor;
+    private HandManager handManager;
 
     public DragDropCard dragDropCard;
     public Canvas canvas;
@@ -22,35 +23,36 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         rectTransform = GetComponent<RectTransform>();
         layout = GetComponent<LayoutElement>();
+        handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GridLayoutGroup cardGroup = eventData.pointerEnter.GetComponentInParent<GridLayoutGroup>();
+        string parentObjName = gameObject.transform.parent.name;
         initBacklightColor = backgroundLighting.backlightingImage.color;
         backgroundLighting.hoverBacklighting();
 
-        if (cardGroup.name == "Hand" && !Input.GetMouseButton(0))
+        if (parentObjName == "Hand" && !Input.GetMouseButton(0))
         {
-            createGroupPlaceHolder(cardGroup);
-            increaseYPosition(cardGroup);
-            transform.SetAsLastSibling();
-            layout.ignoreLayout = true;
+            handManager.hoverCard(gameObject.transform);
+            // increaseYPosition(cardGroup);
+            // transform.SetAsLastSibling();
+            // layout.ignoreLayout = true;
         }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         if(!dragDropCard.isDragging)
         {
-            GridLayoutGroup cardGroup = eventData.pointerEnter.GetComponentInParent<GridLayoutGroup>();
+            string parentObjName = gameObject.transform.parent.name;
             backgroundLighting.backlightingImage.color = initBacklightColor;
 
-            if (cardGroup.name == "Hand")
+            if (parentObjName == "Hand")
             {
-                decreaseYPosition(cardGroup);
-                transform.SetSiblingIndex(handPosition);
-                layout.ignoreLayout = false;
-                removePlaceHolder();
+                handManager.resetHandPositions(200);
+                // decreaseYPosition(cardGroup);
+                // transform.SetSiblingIndex(handPosition);
+                // layout.ignoreLayout = false;
             }
         } 
     }
