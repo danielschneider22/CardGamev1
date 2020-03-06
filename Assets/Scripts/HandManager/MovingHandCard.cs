@@ -9,6 +9,7 @@ public class MovingHandCard
     public float speed;
     public Transform endpointTransform;
     public Vector3 endpointScale;
+    public Quaternion rotation;
 
     public MovingHandCard(Transform transform, float speed, Transform endpointTransform)
     {
