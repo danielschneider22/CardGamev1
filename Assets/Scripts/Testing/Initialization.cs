@@ -15,10 +15,31 @@ public class Initialization : MonoBehaviour
     public Card ninjaCard;
     public Card goblinCard;
     public Material material;
+    public PlayerDeckManager playerDeckManager;
+    public int numCardsToDraw;
+
+    private float drawCardTimer;
+    private int numCardsDrawn;
     void Start()
     {
-        initializeHand();
+        // initializeHand();
+        // drawCards();
         initializeEnemyField();
+        drawCardTimer = 0f;
+        numCardsDrawn = 0;
+    }
+
+    private void Update()
+    {
+        if(drawCardTimer <= 0f && numCardsDrawn < numCardsToDraw)
+        {
+            playerDeckManager.drawCard();
+            drawCardTimer = 1.5f;
+            numCardsDrawn++;
+        } else if (numCardsDrawn < numCardsToDraw)
+        {
+            drawCardTimer -= Time.deltaTime;
+        }
     }
 
     private void initializeHand()
@@ -57,6 +78,15 @@ public class Initialization : MonoBehaviour
             rotationVector.x = -.2f;
             copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
-        
+    }
+
+    private void drawCards()
+    {
+        playerDeckManager.drawCard();
+        playerDeckManager.drawCard();
+        playerDeckManager.drawCard();
+        playerDeckManager.drawCard();
+        playerDeckManager.drawCard();
+        playerDeckManager.drawCard();
     }
 }
