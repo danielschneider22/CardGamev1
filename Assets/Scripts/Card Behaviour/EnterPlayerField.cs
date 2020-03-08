@@ -19,10 +19,10 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     }
 
     public void OnDrop(PointerEventData eventData)
-    {
-        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+    { 
         GameObject draggedObject = eventData.pointerDrag;
-        if (draggedObject != null && parentGroup.name == "Hand" && canDrop(draggedObject))
+        string parentObjName = draggedObject != null ? draggedObject.transform.parent.name : "";
+        if (draggedObject != null && parentObjName == "TopOfHandArea" && canDrop(draggedObject))
         {
             placeCardInPlayerField(draggedObject);
 
@@ -40,8 +40,8 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     {
         // GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
         GameObject draggedObject = eventData.pointerDrag;
-        string parentObjName = draggedObject.transform.parent.name;
-        
+        string parentObjName = draggedObject != null ? draggedObject.transform.parent.name : "";
+
         if (draggedObject != null && parentObjName == "TopOfHandArea" && canDrop(draggedObject))
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
@@ -55,9 +55,10 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameObject parentGroup = eventData.pointerDrag.transform.parent.gameObject;
         GameObject draggedObject = eventData.pointerDrag;
-        if (draggedObject != null && parentGroup.name == "Hand")
+        string parentObjName = draggedObject != null ? draggedObject.transform.parent.name : "";
+
+        if (draggedObject != null && parentObjName == "TopOfHandArea")
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.whiteBacklighting();
