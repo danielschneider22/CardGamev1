@@ -18380,7 +18380,7 @@ MonoBehaviour:
   placeholderObj: {fileID: 4290865966551162083, guid: 673b0320f475b164990cada2477ad890,
     type: 3}
   topOfHandArea: {fileID: 1214785668}
-  cellXSize: 50
+  cellXSize: 70
 --- !u!1 &693921157
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             if (parentObjName == "TopOfHandArea")
             {
-                handManager.resetHandPositions(200);
+                handManager.resetHandPositions(500);
                 // decreaseYPosition(cardGroup);
                 // transform.SetSiblingIndex(handPosition);
                 // layout.ignoreLayout = false;

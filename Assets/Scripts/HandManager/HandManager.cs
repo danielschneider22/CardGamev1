@@ -15,7 +15,7 @@ public class HandManager : MonoBehaviour
 
     private float centerOfHand;
     private float minMoveSpeed = 100f;
-    private float hoverXPosMove = 20f;
+    private float hoverXPosMove = 15f;
     private float hoverMoveUp = 60f;
     private HoverCopyTopCard hoverCopyTopCard;
 
@@ -223,8 +223,20 @@ public class HandManager : MonoBehaviour
     private void moveCardsLeft(int cardIdx)
     {
         int currcardIdx = cardIdx - 1;
+        if(currcardIdx < 0) { return; }
 
-        while (currcardIdx >= 0)
+        GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
+        GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
+        RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
+        MovingHandCard movingHandCard = findMovingHandCard(card.transform);
+        int distFromHoverCard = System.Math.Abs(cardIdx - currcardIdx);
+
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x - hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+        movingHandCard.speed = 200;
+        movingHandCard.endpointTransform = placeholderObj.transform;
+
+        // move all the cards to the left of the index to the left
+        /*while (currcardIdx >= 0)
         {
             GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
             GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
@@ -237,13 +249,24 @@ public class HandManager : MonoBehaviour
             movingHandCard.endpointTransform = placeholderObj.transform;
 
             currcardIdx--;
-        }
+        }*/
     }
     private void moveCardsRight(int cardIdx)
     {
         int currcardIdx = cardIdx + 1;
+        if (currcardIdx > hand.transform.childCount - 1) { return; }
 
-        while (currcardIdx <= hand.transform.childCount - 1)
+        GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
+        GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
+        RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
+        MovingHandCard movingHandCard = findMovingHandCard(card.transform);
+
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x + hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+        movingHandCard.speed = 200;
+        movingHandCard.endpointTransform = placeholderObj.transform;
+
+        // move all the cards to the right of the index to the right
+        /*while (currcardIdx <= hand.transform.childCount - 1)
         {
             GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
             GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
@@ -255,7 +278,7 @@ public class HandManager : MonoBehaviour
             movingHandCard.endpointTransform = placeholderObj.transform;
 
             currcardIdx++;
-        } 
+        }*/
     }
 
     private MovingHandCard findMovingHandCard(Transform card)

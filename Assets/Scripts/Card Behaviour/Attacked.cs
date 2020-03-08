@@ -53,7 +53,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (isValidAttack(attackingCardObj) && validEnterTriggered)
+        if (validEnterTriggered && isValidAttack(attackingCardObj))
         {
             backgroundLighting.nonselectableBacklighting();
             bool shouldDestroy = healthBar.applyTempDecreaseHealth();
