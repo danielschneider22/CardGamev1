@@ -79,6 +79,7 @@ public class HandManager : MonoBehaviour
 
             MovingHandCard oldMovingHandCard = getExistingMovingHandCard(oldMoveCards, cardTransform);
 
+            cardTransform.GetComponent<ToggleVisibility>().makeVisible();
             setCardPosition(childCount, i, placeholderRectTransform);
             setCardRotation(childCount, i, cardTransform);
             float speed = getCardSpeed(oldMovingHandCard, placeholderRectTransform, handRectTransform, resetSpeed);
@@ -209,10 +210,9 @@ public class HandManager : MonoBehaviour
         GameObject placeholderObj = handPlacementGrid.transform.GetChild(cardIdx).gameObject;
         RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
         MovingHandCard movingHandCard = findMovingHandCard(card);
-        // card.eulerAngles = new Vector3(0, 0, 0);
         GameObject copyCard = Instantiate(card.gameObject, topOfHandArea.transform);
         hoverCopyTopCard = new HoverCopyTopCard(copyCard.transform, card);
-        // card.SetParent(topOfHandArea.transform);
+        card.GetComponent<ToggleVisibility>().makeInvisible();
 
         placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x, hoverMoveUp, 1f);
         movingHandCard.speed = 600;
