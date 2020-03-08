@@ -13,6 +13,8 @@ public class HandManager : MonoBehaviour
     public float cellXSize;
 
     private float centerOfHand;
+    private float minMoveSpeed = 100f;
+    private float hoverXPosMove = 20f;
 
     public void Start()
     {
@@ -25,27 +27,10 @@ public class HandManager : MonoBehaviour
         List<MovingHandCard> cardsToRemove = new List<MovingHandCard>();
         foreach(MovingHandCard handCard in movingCards)
         {
-            RectTransform handCardRectTransform = handCard.transform.gameObject.GetComponent<RectTransform>();
-            RectTransform endPointRectTransform = handCard.endpointTransform.gameObject.GetComponent<RectTransform>();
-
-            Vector2 handCardPos = new Vector2(handCardRectTransform.anchoredPosition.x, handCardRectTransform.anchoredPosition.y);
-            bool changeOccurred = false;
-            if (!positionsAreTheSame(handCardRectTransform, endPointRectTransform))
-            {
-                handCardRectTransform.anchoredPosition = Vector2.MoveTowards(handCardPos, endPointRectTransform.anchoredPosition, handCard.speed * Time.deltaTime);
-                changeOccurred = true;
-            } 
-            if (handCard.endpointScale != null && !scalesAreTheSame(handCard.transform.localScale, handCard.endpointScale))
-            {
-                if(handCard.transform.localScale.x < handCard.endpointScale.x) {
-                    handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
-                } else
-                {
-                    handCard.transform.localScale = new Vector3(handCard.transform.localScale.x - .02f, handCard.transform.localScale.y - .02f, handCard.transform.localScale.z);
-                }
-                changeOccurred = true;
-            }
-            if(!changeOccurred)
+            bool moveOccurred = moveTowardEndPoint(handCard);
+            bool resizeOccurred = rescale(handCard);
+            
+            if(!moveOccurred && !resizeOccurred)
             {
                 cardsToRemove.Add(handCard);
             }
@@ -61,6 +46,7 @@ public class HandManager : MonoBehaviour
     {
         card.transform.SetParent(hand.transform, false);
         card.transform.SetAsFirstSibling();
+
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(handPlacementGrid.transform, false);
         placeholder.transform.SetAsFirstSibling();
@@ -72,47 +58,108 @@ public class HandManager : MonoBehaviour
     {
         List<MovingHandCard> oldMoveCards = new List<MovingHandCard>(movingCards);
         movingCards.Clear();
-        int children = hand.transform.childCount;
-        for (int i = 0; i < children; i++)
+        int childCount = hand.transform.childCount;
+        for (int i = 0; i < childCount; i++)
         {
             Transform cardTransform = hand.transform.GetChild(i);
-            Transform gridPosition = handPlacementGrid.transform.GetChild(i);
+            Transform placeholderTransform = handPlacementGrid.transform.GetChild(i);
 
-            RectTransform gridCell = gridPosition.GetComponent<RectTransform>();
-            RectTransform handCell = cardTransform.GetComponent<RectTransform>();
+            RectTransform placeholderRectTransform = placeholderTransform.GetComponent<RectTransform>();
+            RectTransform handRectTransform = cardTransform.GetComponent<RectTransform>();
 
             MovingHandCard oldMovingHandCard = getExistingMovingHandCard(oldMoveCards, cardTransform);
 
-            if (children % 2 == 0)
-            {
-                float centerElementIdx = (float)(children - 1) / 2;
-                int centerElementLeftIdx = (children - 1) / 2;
-                int centerElementRightIdx = (children - 1) / 2 + 1;
-                float diffFromCenter = 0f;
-                if(i < centerElementIdx)
-                {
-                    diffFromCenter = ((float)(i - centerElementLeftIdx) * cellXSize) - (cellXSize / 2);
-                } else
-                {
-                    diffFromCenter = ((float)(i - centerElementRightIdx) * cellXSize) + (cellXSize / 2);
-                }
-                float yPos = System.Math.Min(System.Math.Abs((float)(i - centerElementIdx)) * -1 * 13f, 5f);
-                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                cardTransform.eulerAngles = new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f);
-            } else
-            {
-                int centerElementIdx = (children - 1) / 2;
-                float diffFromCenter = (float)(i - centerElementIdx) * cellXSize;
-                float yPos = System.Math.Min(System.Math.Abs((float)(i - centerElementIdx)) * -1 * 13f, -5f);
-                gridCell.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
-                cardTransform.eulerAngles = new Vector3(0, 0, (float)(i - centerElementIdx) * -1f * 5f);
-            }
+            setCardPosition(childCount, i, placeholderRectTransform);
+            setCardRotation(childCount, i, cardTransform);
+            float speed = getCardSpeed(oldMovingHandCard, placeholderRectTransform, handRectTransform, resetSpeed);
 
-            Vector2 distanceToTravel = gridCell.anchoredPosition - handCell.anchoredPosition;
-            float speed = oldMovingHandCard != null ? oldMovingHandCard.speed : resetSpeed != -1f ? resetSpeed : System.Math.Max((float)System.Math.Pow(distanceToTravel.magnitude / 10, 2), 100f);
-            MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, gridPosition, new Vector3(.55f, .55f, 1));
+            MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, placeholderTransform, new Vector3(.55f, .55f, 1));
             movingCards.Add(newHandCard);
         }
+    }
+
+    // return if movement occurred
+    private bool moveTowardEndPoint(MovingHandCard handCard)
+    {
+        RectTransform handCardRectTransform = handCard.transform.gameObject.GetComponent<RectTransform>();
+        RectTransform endPointRectTransform = handCard.endpointTransform.gameObject.GetComponent<RectTransform>();
+
+        Vector2 handCardPos = new Vector2(handCardRectTransform.anchoredPosition.x, handCardRectTransform.anchoredPosition.y);
+        if (!positionsAreTheSame(handCardRectTransform, endPointRectTransform))
+        {
+            handCardRectTransform.anchoredPosition = Vector2.MoveTowards(handCardPos, endPointRectTransform.anchoredPosition, handCard.speed * Time.deltaTime);
+            return true;
+        }
+        return false;
+    }
+
+    // return if rescaling occurred
+    private bool rescale(MovingHandCard handCard)
+    {
+        if (handCard.endpointScale != null && !scalesAreTheSame(handCard.transform.localScale, handCard.endpointScale))
+        {
+            if (handCard.transform.localScale.x < handCard.endpointScale.x)
+            {
+                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
+            }
+            else
+            {
+                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x - .02f, handCard.transform.localScale.y - .02f, handCard.transform.localScale.z);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void setCardPosition(int childCount, int idx, RectTransform placeholderRectTransform)
+    {
+        float diffFromCenter = 0f;
+        float centerElementIdx = (float)(childCount - 1) / 2;
+
+        if (childCount % 2 == 0)
+        {
+            int centerElementLeftIdx = (childCount - 1) / 2;
+            int centerElementRightIdx = (childCount - 1) / 2 + 1;
+
+            if (idx < centerElementIdx)
+            {
+                diffFromCenter = ((float)(idx - centerElementLeftIdx) * cellXSize) - (cellXSize / 2);
+            }
+            else
+            {
+                diffFromCenter = ((float)(idx - centerElementRightIdx) * cellXSize) + (cellXSize / 2);
+            }
+        }
+        else
+        {
+            diffFromCenter = (float)(idx - centerElementIdx) * cellXSize;
+        }
+        float yPos = System.Math.Min(System.Math.Abs((float)(idx - centerElementIdx)) * -13f, 5f);
+        placeholderRectTransform.anchoredPosition = new Vector3(centerOfHand + diffFromCenter, yPos, 1f);
+    }
+
+    private float getCardSpeed(MovingHandCard oldMovingHandCard, RectTransform placeholderRectTransform, RectTransform handRectTransform, float resetSpeed)
+    {
+        Vector2 distanceToTravel = placeholderRectTransform.anchoredPosition - handRectTransform.anchoredPosition;
+        if (oldMovingHandCard != null)
+        {
+            return oldMovingHandCard.speed;
+        }
+        else if (resetSpeed != -1f)
+        {
+            return resetSpeed;
+        }
+        else
+        {
+            float calculatedMoveSpeed = (float)System.Math.Pow(distanceToTravel.magnitude / 10, 2);
+            return System.Math.Max(calculatedMoveSpeed, minMoveSpeed);
+        }
+    }
+
+    private void setCardRotation(int childCount, int idx, Transform cardTransform)
+    {
+        float centerElementIdx = (float)(childCount - 1) / 2;
+        cardTransform.eulerAngles = new Vector3(0, 0, (float)(idx - centerElementIdx) * -1f * 5f);
     }
 
     public void hoverCard(Transform card)
@@ -120,13 +167,74 @@ public class HandManager : MonoBehaviour
         int cardIdx = getCardIdxInTransform(hand.transform, card);
         if(cardIdx != -1)
         {
-            GameObject placeholderObj = handPlacementGrid.transform.GetChild(cardIdx).gameObject;
-            RectTransform gridCell = placeholderObj.GetComponent<RectTransform>();
+            //set-up moving cards list to move everything back to original positions
+            resetHandPositions();
 
-            gridCell.anchoredPosition = new Vector3(gridCell.anchoredPosition.x, gridCell.anchoredPosition.y + 50f, 1f);
-            MovingHandCard newHandCard = new MovingHandCard(card, 600, placeholderObj.transform, new Vector3(.6f, 6f, 1));
-            movingCards.Add(newHandCard);
+            moveCardUp(cardIdx, card);
+            moveCardsLeft(cardIdx);
+            moveCardsRight(cardIdx);
         }
+    }
+
+    private void moveCardUp(int cardIdx, Transform card)
+    {
+        GameObject placeholderObj = handPlacementGrid.transform.GetChild(cardIdx).gameObject;
+        RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
+        MovingHandCard movingHandCard = findMovingHandCard(card);
+
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x, placeholderRectTransform.anchoredPosition.y + 50f, 1f);
+        movingHandCard.speed = 600;
+        movingHandCard.endpointTransform = placeholderObj.transform;
+        movingHandCard.endpointScale = new Vector3(.6f, 6f, 1);
+    }
+
+    private void moveCardsLeft(int cardIdx)
+    {
+        int currcardIdx = cardIdx - 1;
+
+        while (currcardIdx >= 0)
+        {
+            GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
+            GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
+            RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
+            MovingHandCard movingHandCard = findMovingHandCard(card.transform);
+
+            placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x - hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+            movingHandCard.speed = 300;
+            movingHandCard.endpointTransform = placeholderObj.transform;
+
+            currcardIdx--;
+        }
+    }
+    private void moveCardsRight(int cardIdx)
+    {
+        int currcardIdx = cardIdx + 1;
+
+        while (currcardIdx <= hand.transform.childCount - 1)
+        {
+            GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
+            GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
+            RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
+            MovingHandCard movingHandCard = findMovingHandCard(card.transform);
+
+            placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x + hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+            movingHandCard.speed = 300;
+            movingHandCard.endpointTransform = placeholderObj.transform;
+
+            currcardIdx++;
+        } 
+    }
+
+    private MovingHandCard findMovingHandCard(Transform card)
+    {
+        foreach(MovingHandCard movingHandCard in movingCards)
+        {
+            if(card == movingHandCard.transform)
+            {
+                return movingHandCard;
+            }
+        }
+        return null;
     }
 
     private MovingHandCard getExistingMovingHandCard(List<MovingHandCard> moveCards, Transform transform)
