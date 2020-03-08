@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 4290865966551162082}
   - component: {fileID: 7684169872259025898}
   - component: {fileID: 7902455019196583512}
-  - component: {fileID: 8626823646181452031}
   m_Layer: 5
   m_Name: CardPlaceHolder
   m_TagString: Untagged
@@ -230,16 +229,3 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &8626823646181452031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290865966551162083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7a9fd13960aaf488adbdb7b2839da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}

@@ -47,7 +47,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             string parentObjName = gameObject.transform.parent.name;
             backgroundLighting.backlightingImage.color = initBacklightColor;
 
-            if (parentObjName == "Hand")
+            if (parentObjName == "TopOfHandArea")
             {
                 handManager.resetHandPositions(200);
                 // decreaseYPosition(cardGroup);

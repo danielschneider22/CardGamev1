@@ -28,14 +28,6 @@ public class PlayerDeckManager : MonoBehaviour
 
     private GameObject createCopyCard(Card cardObjToCopy)
     {
-        GameObject copyCard = Instantiate(card);
-        copyCard.GetComponent<CardDisplay>().card = cardObjToCopy;
-        copyCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
-        copyCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
-        copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
-        copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
-        copyCard.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
-        copyCard.GetComponent<Animator>().enabled = false;
         GameObject newCard = Instantiate(card);
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
         newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 80f);

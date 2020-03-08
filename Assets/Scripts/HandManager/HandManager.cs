@@ -9,12 +9,15 @@ public class HandManager : MonoBehaviour
     public GameObject hand;
     public GameObject handPlacementGrid;
     public GameObject placeholderObj;
+    public GameObject topOfHandArea;
 
     public float cellXSize;
 
     private float centerOfHand;
     private float minMoveSpeed = 100f;
     private float hoverXPosMove = 20f;
+    private float hoverMoveUp = 60f;
+    private HoverCopyTopCard hoverCopyTopCard;
 
     public void Start()
     {
@@ -33,6 +36,11 @@ public class HandManager : MonoBehaviour
             if(!moveOccurred && !resizeOccurred)
             {
                 cardsToRemove.Add(handCard);
+            }
+
+            if(hoverCopyTopCard != null && handCard.transform == hoverCopyTopCard.handTransform)
+            {
+                setCopyTransformToHandTransform(handCard.transform);
             }
         }
 
@@ -57,6 +65,8 @@ public class HandManager : MonoBehaviour
     public void resetHandPositions(float resetSpeed = -1f)
     {
         List<MovingHandCard> oldMoveCards = new List<MovingHandCard>(movingCards);
+
+        removeAllTopOfHandObjs();
         movingCards.Clear();
         int childCount = hand.transform.childCount;
         for (int i = 0; i < childCount; i++)
@@ -78,6 +88,15 @@ public class HandManager : MonoBehaviour
         }
     }
 
+    private void removeAllTopOfHandObjs()
+    {
+        foreach(Transform child in topOfHandArea.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        hoverCopyTopCard = null;
+    }
+
     // return if movement occurred
     private bool moveTowardEndPoint(MovingHandCard handCard)
     {
@@ -91,6 +110,15 @@ public class HandManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void setCopyTransformToHandTransform(Transform handCardTransform)
+    {
+        RectTransform copyCardRectTransform = hoverCopyTopCard.copyTransform.GetComponent<RectTransform>();
+        RectTransform handCardRectTransform = handCardTransform.GetComponent<RectTransform>();
+
+        copyCardRectTransform.anchoredPosition = handCardRectTransform.anchoredPosition;
+        copyCardRectTransform.localScale = handCardRectTransform.localScale;
     }
 
     // return if rescaling occurred
@@ -181,8 +209,12 @@ public class HandManager : MonoBehaviour
         GameObject placeholderObj = handPlacementGrid.transform.GetChild(cardIdx).gameObject;
         RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
         MovingHandCard movingHandCard = findMovingHandCard(card);
+        // card.eulerAngles = new Vector3(0, 0, 0);
+        GameObject copyCard = Instantiate(card.gameObject, topOfHandArea.transform);
+        hoverCopyTopCard = new HoverCopyTopCard(copyCard.transform, card);
+        // card.SetParent(topOfHandArea.transform);
 
-        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x, placeholderRectTransform.anchoredPosition.y + 50f, 1f);
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x, hoverMoveUp, 1f);
         movingHandCard.speed = 600;
         movingHandCard.endpointTransform = placeholderObj.transform;
         movingHandCard.endpointScale = new Vector3(.6f, 6f, 1);
@@ -198,6 +230,7 @@ public class HandManager : MonoBehaviour
             GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
             RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
             MovingHandCard movingHandCard = findMovingHandCard(card.transform);
+            int distFromHoverCard = System.Math.Abs(cardIdx - currcardIdx);
 
             placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x - hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
             movingHandCard.speed = 300;
