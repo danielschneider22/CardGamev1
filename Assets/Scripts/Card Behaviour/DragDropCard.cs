@@ -45,14 +45,14 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         storeCardPropertiesAtMouseClick();
-        if (transform.parent.name == "Hand" && cardDisplay.card.cardType == "Creature")
+        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
         {
             toggleCardDragProperites(true);
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
         } else if (transform.parent.name == "Player Field")
         {
-            Vector3 cardPosition = transform.parent.name == "Hand" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
+            Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
             this.isDragging = true;
             draggableArrow.startPos = cardPosition;
             draggableArrow.drawArrow = true;
@@ -65,7 +65,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         onHover.removePlaceHolder();
         restoreCardPropertiesToMouseClickState();
         layout.ignoreLayout = false;
-        if (transform.parent.name == "Hand" && cardDisplay.card.cardType == "Creature")
+        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
@@ -109,15 +109,19 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     }
     private float getCardScaling(PointerEventData eventData)
     {
-        GridLayoutGroup cardGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
-        float cardGroupScale = cardGroup ? cardGroup.transform.localScale.x : 1f;
-        return canvas.scaleFactor * cardGroupScale;
+        // GridLayoutGroup cardGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        // float cardGroupScale = cardGroup ? cardGroup.transform.localScale.x : 1f;
+        return canvas.scaleFactor; //* transform.localScale.x;
     }
     private void setCardPositionToMousePointer()
     {
-        Vector2 pos;
+        /* Vector2 pos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, Input.mousePosition, canvas.worldCamera, out pos);
-        transform.position = canvas.transform.TransformPoint(pos);
+        transform.position = canvas.transform.TransformPoint(pos); */
+        RectTransform cardRectTransform = GetComponent<RectTransform>();
+        float halfHeight = cardRectTransform.rect.height / 2;
+
+        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);
         transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
     }
 

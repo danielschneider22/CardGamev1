@@ -37611,7 +37611,7 @@ MonoBehaviour:
   goblinCard: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81, type: 2}
   material: {fileID: 2100000, guid: 70e594f41c8c746459dbb58830057ee0, type: 2}
   playerDeckManager: {fileID: 779922666}
-  numCardsToDraw: 5
+  numCardsToDraw: 1
 --- !u!4 &1390871127
 Transform:
   m_ObjectHideFlags: 0

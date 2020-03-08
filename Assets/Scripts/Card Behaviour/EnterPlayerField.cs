@@ -38,14 +38,16 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        // GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
         GameObject draggedObject = eventData.pointerDrag;
-        if (draggedObject != null && parentGroup.name == "Hand" && canDrop(draggedObject))
+        string parentObjName = draggedObject.transform.parent.name;
+        
+        if (draggedObject != null && parentObjName == "TopOfHandArea" && canDrop(draggedObject))
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.greenBacklighting();
             playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, .06f);
-        } else if(draggedObject != null && parentGroup.name == "Hand" && !canDrop(draggedObject))
+        } else if(draggedObject != null && parentObjName == "TopOfHandArea" && !canDrop(draggedObject))
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.redBacklighting();
@@ -53,7 +55,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        GridLayoutGroup parentGroup = eventData.pointerDrag.GetComponentInParent<GridLayoutGroup>();
+        GameObject parentGroup = eventData.pointerDrag.transform.parent.gameObject;
         GameObject draggedObject = eventData.pointerDrag;
         if (draggedObject != null && parentGroup.name == "Hand")
         {
