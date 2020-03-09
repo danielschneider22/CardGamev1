@@ -18,6 +18,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     private OnHover onHover;
     private CardDisplay cardDisplay;
     private DraggableArrow draggableArrow;
+    private HandManager handManager;
 
     public Canvas canvas;
     public bool isDragging;
@@ -32,6 +33,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         layout = GetComponent<LayoutElement>();
         cardDisplay = GetComponent<CardDisplay>();
         cardGroup = GetComponentInParent<GridLayoutGroup>();
+        handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -39,6 +41,10 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if(!draggableArrow.drawArrow && transform.parent.name != "Enemy Field")
         {
             rectTransform.anchoredPosition += eventData.delta / getCardScaling(eventData);
+            if(handManager.hoverCopyTopCard != null)
+            {
+                handManager.hoverCopyTopCard.handTransform.GetComponent<RectTransform>().anchoredPosition += eventData.delta / getCardScaling(eventData);
+            }
         }
     }
 
@@ -61,13 +67,13 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        // when hovering a card, a placeholder is added to hand to keep card positioning
         restoreCardPropertiesToMouseClickState();
         layout.ignoreLayout = false;
         if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
+            handManager.resetHandPositions();
         } else if (transform.parent.name == "Player Field")
         {
             this.isDragging = false;
@@ -122,6 +128,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
         transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);
         transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        handManager.hoverCopyTopCard.handTransform.rotation = new Quaternion(0f, 0f, 0f, 0f);
     }
 
 }

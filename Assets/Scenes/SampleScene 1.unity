@@ -18381,6 +18381,9 @@ MonoBehaviour:
     type: 3}
   topOfHandArea: {fileID: 1214785668}
   cellXSize: 70
+  hoverCopyTopCard:
+    copyTransform: {fileID: 0}
+    handTransform: {fileID: 0}
 --- !u!1 &693921157
 GameObject:
   m_ObjectHideFlags: 0
@@ -37611,7 +37614,7 @@ MonoBehaviour:
   goblinCard: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81, type: 2}
   material: {fileID: 2100000, guid: 70e594f41c8c746459dbb58830057ee0, type: 2}
   playerDeckManager: {fileID: 779922666}
-  numCardsToDraw: 5
+  numCardsToDraw: 8
 --- !u!4 &1390871127
 Transform:
   m_ObjectHideFlags: 0
@@ -46277,8 +46280,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467041814}
   m_HandleRect: {fileID: 1467041813}
   m_Direction: 2
-  m_Value: 1.0000031
-  m_Size: 0.8126855
+  m_Value: 1.0000033
+  m_Size: 0.81268555
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

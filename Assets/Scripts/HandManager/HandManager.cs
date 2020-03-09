@@ -10,14 +10,14 @@ public class HandManager : MonoBehaviour
     public GameObject handPlacementGrid;
     public GameObject placeholderObj;
     public GameObject topOfHandArea;
-
     public float cellXSize;
+    public HoverCopyTopCard hoverCopyTopCard;
 
     private float centerOfHand;
     private float minMoveSpeed = 100f;
     private float hoverXPosMove = 15f;
     private float hoverMoveUp = 60f;
-    private HoverCopyTopCard hoverCopyTopCard;
+    
 
     public void Start()
     {
@@ -32,8 +32,9 @@ public class HandManager : MonoBehaviour
         {
             bool moveOccurred = moveTowardEndPoint(handCard);
             bool resizeOccurred = rescale(handCard);
-            
-            if(!moveOccurred && !resizeOccurred)
+            bool rotationOcurred = rotate(handCard);
+
+            if (!moveOccurred && !resizeOccurred && !rotationOcurred)
             {
                 cardsToRemove.Add(handCard);
             }
@@ -81,7 +82,7 @@ public class HandManager : MonoBehaviour
 
             cardTransform.GetComponent<ToggleVisibility>().makeVisible();
             setCardPosition(childCount, i, placeholderRectTransform);
-            setCardRotation(childCount, i, cardTransform);
+            setCardRotation(childCount, i, placeholderRectTransform);
             float speed = getCardSpeed(oldMovingHandCard, placeholderRectTransform, handRectTransform, resetSpeed);
 
             MovingHandCard newHandCard = new MovingHandCard(cardTransform, speed, placeholderTransform, new Vector3(.55f, .55f, 1));
@@ -140,6 +141,17 @@ public class HandManager : MonoBehaviour
         return false;
     }
 
+    // return if rotation change occurred
+    private bool rotate(MovingHandCard handCard)
+    {
+        if (!rotationsAreTheSame(handCard.transform.eulerAngles, handCard.endpointTransform.eulerAngles))
+        {
+            handCard.transform.rotation = Quaternion.RotateTowards(handCard.transform.rotation, handCard.endpointTransform.rotation, .4f);
+            return true;
+        }
+        return false;
+    }
+
     private void setCardPosition(int childCount, int idx, RectTransform placeholderRectTransform)
     {
         float diffFromCenter = 0f;
@@ -185,10 +197,10 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    private void setCardRotation(int childCount, int idx, Transform cardTransform)
+    private void setCardRotation(int childCount, int idx, Transform placeholderRectTransform)
     {
         float centerElementIdx = (float)(childCount - 1) / 2;
-        cardTransform.eulerAngles = new Vector3(0, 0, (float)(idx - centerElementIdx) * -1f * 5f);
+        placeholderRectTransform.eulerAngles = new Vector3(0, 0, (float)(idx - centerElementIdx) * -5f);
     }
 
     public void hoverCard(Transform card)
@@ -332,5 +344,9 @@ public class HandManager : MonoBehaviour
         // Vector2 scale1 = new Vector2(t1.x, t1.y);
         // Vector2 scale2 = new Vector2(t2.x, t2.y);
         // return scale1.Equals(scale2);
+    }
+    private bool rotationsAreTheSame(Vector3 t1, Vector3 t2)
+    {
+        return System.Math.Abs(t1.z - t2.z) < .01;
     }
 }
