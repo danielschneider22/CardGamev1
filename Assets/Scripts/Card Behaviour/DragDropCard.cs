@@ -62,7 +62,6 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         // when hovering a card, a placeholder is added to hand to keep card positioning
-        onHover.removePlaceHolder();
         restoreCardPropertiesToMouseClickState();
         layout.ignoreLayout = false;
         if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
