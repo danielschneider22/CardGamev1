@@ -108,7 +108,7 @@ public class HandManager : MonoBehaviour
         Vector2 handCardPos = new Vector2(handCardRectTransform.anchoredPosition.x, handCardRectTransform.anchoredPosition.y);
         if (!positionsAreTheSame(handCardRectTransform, endPointRectTransform))
         {
-            handCardRectTransform.anchoredPosition = Vector2.MoveTowards(handCardPos, endPointRectTransform.anchoredPosition, handCard.speed * Time.deltaTime);
+            handCardRectTransform.anchoredPosition = Vector2.Lerp(handCardPos, endPointRectTransform.anchoredPosition, .1f);
             return true;
         }
         return false;
