@@ -19,6 +19,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     private CardDisplay cardDisplay;
     private DraggableArrow draggableArrow;
     private HandManager handManager;
+    private float pauseBeforeResettingHand;
 
     public Canvas canvas;
     public bool isDragging;
@@ -34,6 +35,19 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         cardDisplay = GetComponent<CardDisplay>();
         cardGroup = GetComponentInParent<GridLayoutGroup>();
         handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
+    }
+
+    public void Update()
+    {
+        if(pauseBeforeResettingHand > 0f)
+        {
+            pauseBeforeResettingHand -= Time.deltaTime;
+            if(pauseBeforeResettingHand <= 0f)
+            {
+                pauseBeforeResettingHand = 0f;
+                handManager.resetHandPositions();
+            }
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -74,7 +88,8 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
-            handManager.resetHandPositions();
+            // give time for drop actions to be done before resetting hand positions
+            pauseBeforeResettingHand = .01f;
         } else if (transform.parent.name == "Player Field")
         {
             this.isDragging = false;

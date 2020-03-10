@@ -58,8 +58,8 @@ public class HandManager : MonoBehaviour
     public void removeCardFromHand(Transform cardTransform)
     {
         int removeCardIdx = getCardIdxInTransform(hand.transform, cardTransform);
-        Destroy(hand.transform.GetChild(removeCardIdx));
-        Destroy(handPlacementGrid.transform.GetChild(removeCardIdx));
+        DestroyImmediate(hand.transform.GetChild(removeCardIdx).gameObject);
+        DestroyImmediate(handPlacementGrid.transform.GetChild(removeCardIdx).gameObject);
         resetHandPositions();
     }
     public void clearTopCardFromMovingCards()

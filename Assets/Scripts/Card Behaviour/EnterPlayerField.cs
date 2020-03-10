@@ -70,13 +70,15 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
 
     private void placeCardInPlayerField(GameObject cardObj)
     {
-        cardObj.transform.localScale = new Vector3(1f, 1f, 1);
-        cardObj.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         setHealthBarToFlatRotation(cardObj);
         cardObj.GetComponent<DragDropCard>().canvas = worldCanvas;
+        cardObj.transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
         GameObject newChild = Instantiate(handManager.hoverCopyTopCard.handTransform.gameObject);
+        newChild.GetComponent<ToggleVisibility>().makeVisible();
         newChild.transform.SetParent(gridLayoutGroup.transform, false);
+        newChild.transform.localScale = new Vector3(1f, 1f, 1);
+        
         handManager.removeCardFromHand(handManager.hoverCopyTopCard.handTransform);
     }
 

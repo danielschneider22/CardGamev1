@@ -15,13 +15,12 @@ public class PlayerDeckManager : MonoBehaviour
     private List<Card> cards;
     void Start()
     {
-        Card copyNinja = Instantiate(ninjaCard);
-        Card copyGoblin = Instantiate(goblinCard);
-
         cards = new List<Card>();
 
         for (var i = 0; i < 10; i++)
         {
+            Card copyNinja = Instantiate(ninjaCard);
+            Card copyGoblin = Instantiate(goblinCard);
             cards.Add(Instantiate(copyNinja));
         }
     }
