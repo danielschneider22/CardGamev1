@@ -15,7 +15,8 @@ public class HandManager : MonoBehaviour
 
     private float centerOfHand;
     private float minMoveSpeed = 100f;
-    private float hoverXPosMove = 15f;
+    private float hoverXPosMove = 20f;
+    private float hoverYPosMove = 0f;
     private float hoverMoveUp = 60f;
     
 
@@ -49,6 +50,25 @@ public class HandManager : MonoBehaviour
         {
             movingCards.Remove(handCard);
         }   
+    }
+    public void clearMovingCards()
+    {
+        movingCards.Clear();
+    }
+    public void removeCardFromHand(Transform cardTransform)
+    {
+        int removeCardIdx = getCardIdxInTransform(hand.transform, cardTransform);
+        Destroy(hand.transform.GetChild(removeCardIdx));
+        Destroy(handPlacementGrid.transform.GetChild(removeCardIdx));
+        resetHandPositions();
+    }
+    public void clearTopCardFromMovingCards()
+    {
+        MovingHandCard removeMovingHandCard = findMovingHandCard(hoverCopyTopCard.handTransform);
+        if (removeMovingHandCard != null)
+        {
+            movingCards.Remove(removeMovingHandCard);
+        }
     }
 
     public void addCardToHand(GameObject card)
@@ -243,7 +263,7 @@ public class HandManager : MonoBehaviour
         MovingHandCard movingHandCard = findMovingHandCard(card.transform);
         int distFromHoverCard = System.Math.Abs(cardIdx - currcardIdx);
 
-        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x - hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x - hoverXPosMove, placeholderRectTransform.anchoredPosition.y - hoverYPosMove, 1f);
         movingHandCard.speed = 200;
         movingHandCard.endpointTransform = placeholderObj.transform;
 
@@ -273,7 +293,7 @@ public class HandManager : MonoBehaviour
         RectTransform placeholderRectTransform = placeholderObj.GetComponent<RectTransform>();
         MovingHandCard movingHandCard = findMovingHandCard(card.transform);
 
-        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x + hoverXPosMove, placeholderRectTransform.anchoredPosition.y - 5f, 1f);
+        placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x + hoverXPosMove, placeholderRectTransform.anchoredPosition.y - hoverYPosMove, 1f);
         movingHandCard.speed = 200;
         movingHandCard.endpointTransform = placeholderObj.transform;
 
@@ -335,7 +355,7 @@ public class HandManager : MonoBehaviour
     {
         Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);
         Vector2 pos2 = new Vector2(t2.anchoredPosition.x, t2.anchoredPosition.y);
-        return System.Math.Abs(pos1.x - pos2.x) < .001 && System.Math.Abs(pos1.y - pos2.y) < .001;
+        return System.Math.Abs(pos1.x - pos2.x) <= .002 && System.Math.Abs(pos1.y - pos2.y) <= .002;
         // return pos1.Equals(pos2);
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)

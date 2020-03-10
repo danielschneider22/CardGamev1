@@ -24,7 +24,7 @@ public class OnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         initBacklightColor = backgroundLighting.backlightingImage.color;
         backgroundLighting.hoverBacklighting();
 
-        if (parentObjName == "Hand" && !Input.GetMouseButton(0))
+        if (parentObjName == "Hand" && !Input.GetMouseButton(0) && !eventData.dragging)
         {
             handManager.hoverCard(gameObject.transform);
         }

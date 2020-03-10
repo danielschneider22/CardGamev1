@@ -31,6 +31,7 @@ public class PlayerDeckManager : MonoBehaviour
         GameObject newCard = Instantiate(card);
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
         newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 80f);
+        newCard.GetComponent<CardDisplay>().material = Instantiate(material);
         newCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
         return newCard;
     }

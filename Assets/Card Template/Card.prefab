@@ -1951,7 +1951,7 @@ GameObject:
   - component: {fileID: 1240478445165564745}
   m_Layer: 5
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2052,8 +2052,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragDropCard: {fileID: 4760673835591094996}
   canvas: {fileID: 0}
-  layout: {fileID: 0}
-  hoverYPositionIncrease: 0
 --- !u!114 &4128228592606986691
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     private Image playerFieldImage;
     private Canvas worldCanvas;
     private PlayerController playerController;
+    private HandManager handManager;
 
     public GridLayoutGroup gridLayoutGroup;
     private void Awake()
@@ -16,6 +17,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         playerFieldImage = GetComponent<Image>();
         worldCanvas = GameObject.FindGameObjectWithTag("World Canvas").GetComponent<Canvas>();
         playerController = GameObject.FindGameObjectWithTag("Player Controller").GetComponent<PlayerController>();
+        handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -69,11 +71,13 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     private void placeCardInPlayerField(GameObject cardObj)
     {
         cardObj.transform.localScale = new Vector3(1f, 1f, 1);
+        cardObj.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         setHealthBarToFlatRotation(cardObj);
         cardObj.GetComponent<DragDropCard>().canvas = worldCanvas;
-        GameObject newChild = Instantiate(cardObj);
+
+        GameObject newChild = Instantiate(handManager.hoverCopyTopCard.handTransform.gameObject);
         newChild.transform.SetParent(gridLayoutGroup.transform, false);
-        Destroy(cardObj);
+        handManager.removeCardFromHand(handManager.hoverCopyTopCard.handTransform);
     }
 
     private void setHealthBarToFlatRotation(GameObject cardObj)

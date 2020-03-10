@@ -56,6 +56,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             toggleCardDragProperites(true);
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
+            handManager.clearTopCardFromMovingCards();
         } else if (transform.parent.name == "Player Field")
         {
             Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
