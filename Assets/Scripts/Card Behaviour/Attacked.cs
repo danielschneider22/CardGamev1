@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +13,12 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Card defendingCard;
     private Animator animator;
     private bool validEnterTriggered;
+    private AttackDefenseChangeManager attackDefenseChangeManager;
 
     public HealthBar healthBar;
-    
+    public TextMeshProUGUI defense;
+    public GameObject damageTextContainer;
+
     private void Awake()
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
@@ -22,6 +26,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         defendingCard = GetComponent<CardDisplay>().card;
         animator = GetComponent<Animator>();
         validEnterTriggered = false;
+        attackDefenseChangeManager = GetComponent<AttackDefenseChangeManager>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -55,8 +60,16 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (validEnterTriggered && isValidAttack(attackingCardObj))
         {
+            Card attackingCard = attackingCardObj.GetComponent<CardDisplay>().card;
+
             backgroundLighting.nonselectableBacklighting();
+            attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
             bool shouldDestroy = healthBar.applyTempDecreaseHealth();
+            GameObject damageTextObj = Instantiate(damageTextContainer, transform);
+            RectTransform dmgTxtRectTransform = damageTextObj.GetComponent<RectTransform>();
+            dmgTxtRectTransform.anchoredPosition = new Vector2(0, 175f);
+            damageTextObj.GetComponentInChildren<TextMeshProUGUI>().text = healthBar.tempDamage.ToString();
+            damageTextObj.GetComponentInChildren<Animator>().enabled = true;
             if (shouldDestroy)
             {
                 animator.SetTrigger("CardDestroyedTrigger");
@@ -85,7 +98,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private int calculateDamage(Card attackingCard)
     {
-        int damage = attackingCard.attack - defendingCard.defense;
+        int damage = attackingCard.currAttack - defendingCard.currDefense;
         return damage > 0 ? damage : 0;
     }
 

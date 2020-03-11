@@ -21,7 +21,10 @@ MonoBehaviour:
     description: 
   artwork: {fileID: 21300000, guid: b16d493d42ff05947b47f578f6103839, type: 3}
   attack: 6
+  currAttack: 6
   defense: 2
+  currDefense: 2
   maxHealth: 12
   currHealth: 12
   cardCost: 1
+  isDestroyed: 0

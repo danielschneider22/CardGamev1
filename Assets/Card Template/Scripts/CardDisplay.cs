@@ -38,8 +38,8 @@ public class CardDisplay : MonoBehaviour
         {
             nameText.text = card.cardName;
             artworkImage.sprite = card.artwork;
-            attackText.text = card.attack.ToString();
-            defenseText.text = card.defense.ToString();
+            attackText.text = card.currAttack.ToString();
+            defenseText.text = card.currDefense.ToString();
             healthText.text = card.currHealth.ToString() + "/" + card.maxHealth.ToString();
             cardCostText.text = card.cardCost.ToString();
             effect1.text = card.effects[0].name;

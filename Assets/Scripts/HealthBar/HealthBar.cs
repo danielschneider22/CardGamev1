@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
 
     private float currHealthProportion;
     private int currHealth;
-    private int tempDamage;
+    public int tempDamage;
     public void tempDecreaseHealth(int damage)
     {
         tempDamage = damage;
@@ -43,6 +43,12 @@ public class HealthBar : MonoBehaviour
         healthFillRed.fillAmount = 1 - healthFillGreen.fillAmount;
         card.currHealth = card.currHealth - tempDamage;
         return card.currHealth <= 0;
+    }
+
+    public void moveHealthBarToFieldPosition()
+    {
+        RectTransform barRectTransform = gameObject.transform.GetComponent<RectTransform>();
+        barRectTransform.anchoredPosition = new Vector2(barRectTransform.anchoredPosition.x, -160f);
     }
 
     private void decreaseHealthText(int damage)

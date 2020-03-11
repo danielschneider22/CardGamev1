@@ -13,7 +13,9 @@ public class Card : ScriptableObject
     public Sprite artwork;
 
     public int attack;
+    public int currAttack;
     public int defense;
+    public int currDefense;
     public int maxHealth;
     public int currHealth;
     public int cardCost;

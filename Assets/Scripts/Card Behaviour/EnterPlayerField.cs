@@ -79,7 +79,9 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.SetParent(gridLayoutGroup.transform, false);
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
-        
+        newChild.GetComponentInChildren<HealthBar>().moveHealthBarToFieldPosition();
+
+
         handManager.removeCardFromHand(handManager.hoverCopyTopCard.handTransform);
     }
 

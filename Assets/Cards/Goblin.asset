@@ -20,7 +20,10 @@ MonoBehaviour:
       at the end of combat.
   artwork: {fileID: 21300000, guid: 4a6f84a22f0274d4a9d26b500e7a69da, type: 3}
   attack: 4
+  currAttack: 4
   defense: 1
+  currDefense: 1
   maxHealth: 10
   currHealth: 10
   cardCost: 0
+  isDestroyed: 0

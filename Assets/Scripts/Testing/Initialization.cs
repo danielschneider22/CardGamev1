@@ -75,6 +75,7 @@ public class Initialization : MonoBehaviour
             copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             copyCard.GetComponent<OnHover>().canvas = worldCanvas;
             copyCard.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+            copyCard.GetComponentInChildren<HealthBar>().moveHealthBarToFieldPosition();
             copyCard.SetActive(true);
 
 
