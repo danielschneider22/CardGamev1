@@ -20,6 +20,7 @@ public class CardDisplay : MonoBehaviour
     public Image[] effectSlots;
     public Image attackImage;
     public Image defenseImage;
+    public Image energyImage;
     public Image innerFrame;
     public Image backLighting;
     public Image healthRed;
@@ -53,6 +54,7 @@ public class CardDisplay : MonoBehaviour
             healthGreen.material = material;
             healthOrange.material = material;
             healthOutline.material = material;
+            energyImage.material = material;
             foreach (Image slot in effectSlots)
             {
                 slot.material = material;

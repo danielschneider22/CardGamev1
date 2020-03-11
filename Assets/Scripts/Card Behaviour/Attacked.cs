@@ -69,6 +69,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             RectTransform dmgTxtRectTransform = damageTextObj.GetComponent<RectTransform>();
             dmgTxtRectTransform.anchoredPosition = new Vector2(0, 175f);
             damageTextObj.GetComponentInChildren<Animator>().enabled = true;
+            damageTextObj.GetComponentInChildren<TextMeshProUGUI>().text = healthBar.tempDamage.ToString();
             if (shouldDestroy)
             {
                 animator.SetTrigger("CardDestroyedTrigger");
