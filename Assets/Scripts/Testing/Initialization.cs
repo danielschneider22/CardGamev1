@@ -20,7 +20,7 @@ public class Initialization : MonoBehaviour
 
     private float drawCardTimer;
     private int numCardsDrawn;
-    void Start()
+    void Awake()
     {
         // initializeHand();
         // drawCards();
@@ -48,14 +48,15 @@ public class Initialization : MonoBehaviour
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
-            card.GetComponent<CardDisplay>().card = copyNinja;
-            card.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
-            card.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
-            card.GetComponent<CardDisplay>().material = Instantiate(material);
-            card.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
-            card.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
-            card.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             GameObject copyCard = Instantiate(card, playerHand.transform, false);
+            copyCard.GetComponent<CardDisplay>().card = copyNinja;
+            copyCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
+            copyCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
+            copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+            copyCard.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
+            copyCard.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            
             copyCard.transform.SetParent(playerHand.transform, true);
             copyCard.GetComponent<Animator>().enabled = false;
         }
@@ -63,21 +64,26 @@ public class Initialization : MonoBehaviour
 
     private void initializeEnemyField()
     {
-        for(var i = 0; i < numEnemyFieldCards; i++)
+        card.SetActive(false);
+        for (var i = 0; i < numEnemyFieldCards; i++)
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
-            card.GetComponent<CardDisplay>().card = copyNinja;
-            card.GetComponent<CardDisplay>().material = Instantiate(material);
-            card.GetComponent<DragDropCard>().canvas = worldCanvas;
-            card.GetComponent<OnHover>().canvas = worldCanvas;
-            card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
             GameObject copyCard = Instantiate(card);
+            copyCard.GetComponent<CardDisplay>().card = copyNinja;
+            copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
+            copyCard.GetComponent<OnHover>().canvas = worldCanvas;
+            copyCard.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+            copyCard.SetActive(true);
+
+
             copyCard.transform.SetParent(enemyField.transform, false);
             var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
             rotationVector.x = -.2f;
             copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
+        card.SetActive(true);
     }
 
     private void drawCards()

@@ -100,6 +100,7 @@ public class HandManager : MonoBehaviour
 
             MovingHandCard oldMovingHandCard = getExistingMovingHandCard(oldMoveCards, cardTransform);
 
+            cardTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
             cardTransform.GetComponent<ToggleVisibility>().makeVisible();
             setCardPosition(childCount, i, placeholderRectTransform);
             setCardRotation(childCount, i, placeholderRectTransform);
@@ -234,6 +235,14 @@ public class HandManager : MonoBehaviour
             moveCardUp(cardIdx, card);
             moveCardsLeft(cardIdx);
             moveCardsRight(cardIdx);
+        }
+    }
+
+    public void stopHandBlockingRaycasts()
+    {
+        foreach(Transform card in hand.transform)
+        {
+            card.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
     }
 

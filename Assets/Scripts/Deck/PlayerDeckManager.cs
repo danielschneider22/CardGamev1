@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class PlayerDeckManager : MonoBehaviour
     public HandManager handManager;
 
     private List<Card> cards;
+    public TextMeshProUGUI playerDeckText;
     void Start()
     {
         cards = new List<Card>();
@@ -23,20 +25,30 @@ public class PlayerDeckManager : MonoBehaviour
             Card copyGoblin = Instantiate(goblinCard);
             cards.Add(Instantiate(copyNinja));
         }
+        playerDeckText.text = cards.Count.ToString();
     }
 
     private GameObject createCopyCard(Card cardObjToCopy)
     {
+        // card.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
+        // card.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
+        card.SetActive(false);
         GameObject newCard = Instantiate(card);
+        newCard.GetComponent<CardDisplay>().material = Instantiate(material);
+        newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
+        newCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
+        newCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
         newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 80f);
-        newCard.GetComponent<CardDisplay>().material = Instantiate(material);
         newCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+        newCard.SetActive(true);
+        card.SetActive(true);
         return newCard;
     }
     public void drawCard()
     {
         handManager.addCardToHand(createCopyCard(cards[0]));
         cards.Remove(cards[0]);
+        playerDeckText.text = cards.Count.ToString();
     }
 }

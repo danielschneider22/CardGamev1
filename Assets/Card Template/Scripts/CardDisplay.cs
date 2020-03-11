@@ -32,7 +32,7 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI effect1;
     public Material material;
 
-    private void Start()
+    private void Awake()
     {
         if(card != null)
         {

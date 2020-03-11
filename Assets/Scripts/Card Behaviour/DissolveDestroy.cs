@@ -16,6 +16,10 @@ public class DissolveDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(defendingCard == null)
+        {
+            int llama = 4;
+        }
         if (defendingCard.isDestroyed && dissolveAmount < 1)
         {
             dissolveAmount = Mathf.Clamp01(dissolveAmount + (Time.deltaTime));
