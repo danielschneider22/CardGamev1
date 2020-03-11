@@ -68,7 +68,6 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             GameObject damageTextObj = Instantiate(damageTextContainer, transform);
             RectTransform dmgTxtRectTransform = damageTextObj.GetComponent<RectTransform>();
             dmgTxtRectTransform.anchoredPosition = new Vector2(0, 175f);
-            damageTextObj.GetComponentInChildren<TextMeshProUGUI>().text = healthBar.tempDamage.ToString();
             damageTextObj.GetComponentInChildren<Animator>().enabled = true;
             if (shouldDestroy)
             {
