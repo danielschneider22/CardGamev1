@@ -238,6 +238,11 @@ public class HandManager : MonoBehaviour
         }
     }
 
+    public bool cardIsMoving(Transform card)
+    {
+        return findMovingHandCard(card) != null;
+    }
+
     public void stopHandBlockingRaycasts()
     {
         foreach(Transform card in hand.transform)

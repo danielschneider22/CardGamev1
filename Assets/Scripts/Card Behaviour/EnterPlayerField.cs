@@ -48,7 +48,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.greenBacklighting();
-            playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, .06f);
+            // playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, .06f);
         } else if(draggedObject != null && parentObjName == "TopOfHandArea" && !canDrop(draggedObject))
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
@@ -64,7 +64,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         {
             ChangeBackgroundLighting backgroundLighting = eventData.pointerDrag.GetComponent<ChangeBackgroundLighting>();
             backgroundLighting.whiteBacklighting();
-            playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, 0);
+            // playerFieldImage.color = new Color(playerFieldImage.color.r, playerFieldImage.color.g, playerFieldImage.color.b, 0);
         }
     }
 
@@ -76,6 +76,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
 
         GameObject newChild = Instantiate(handManager.hoverCopyTopCard.handTransform.gameObject);
         newChild.GetComponent<ToggleVisibility>().makeVisible();
+        newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.SetParent(gridLayoutGroup.transform, false);
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
         

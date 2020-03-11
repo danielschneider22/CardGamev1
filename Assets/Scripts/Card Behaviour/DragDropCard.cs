@@ -71,6 +71,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
             handManager.clearTopCardFromMovingCards();
+            handManager.stopHandBlockingRaycasts();
         } else if (transform.parent.name == "Player Field")
         {
             Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
@@ -89,7 +90,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
             // give time for drop actions to be done before resetting hand positions
-            pauseBeforeResettingHand = .01f;
+            pauseBeforeResettingHand = .001f;
         } else if (transform.parent.name == "Player Field")
         {
             this.isDragging = false;
