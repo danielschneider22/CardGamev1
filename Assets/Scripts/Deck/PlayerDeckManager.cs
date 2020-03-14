@@ -23,7 +23,7 @@ public class PlayerDeckManager : MonoBehaviour
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
-            cards.Add(Instantiate(copyNinja));
+            cards.Add(Instantiate(goblinCard));
         }
         playerDeckText.text = cards.Count.ToString();
     }
@@ -36,6 +36,7 @@ public class PlayerDeckManager : MonoBehaviour
         GameObject newCard = Instantiate(card);
         newCard.GetComponent<CardDisplay>().material = Instantiate(material);
         newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
+        newCard.GetComponent<CardDisplay>().location = "hand";
         newCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
         newCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);

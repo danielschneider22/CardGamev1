@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Initialization : MonoBehaviour
 {
     public GameObject card;
+    public GameObject creatureCardTemplate;
     public GridLayoutGroup playerHand;
     public GridLayoutGroup enemyField;
     public Canvas screenSpaceOverlayCanvas;
@@ -69,15 +70,16 @@ public class Initialization : MonoBehaviour
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
-            GameObject copyCard = Instantiate(card);
+            creatureCardTemplate.SetActive(false);
+            GameObject copyCard = Instantiate(creatureCardTemplate);
             copyCard.GetComponent<CardDisplay>().card = copyNinja;
             copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<CardDisplay>().location = "enemyField";
             copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             copyCard.GetComponent<OnHover>().canvas = worldCanvas;
             copyCard.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
-            copyCard.GetComponentInChildren<HealthBar>().moveHealthBarToFieldPosition();
             copyCard.SetActive(true);
-
+            creatureCardTemplate.SetActive(true);
 
             copyCard.transform.SetParent(enemyField.transform, false);
             var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;

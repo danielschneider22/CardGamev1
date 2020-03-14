@@ -5,11 +5,11 @@ using UnityEngine;
 public class DissolveDestroy : MonoBehaviour
 {
     private Material material;
-    private Card defendingCard;
+    private CreatureCard defendingCard;
     private float dissolveAmount;
     private void Awake()
     {
-        defendingCard = GetComponent<CardDisplay>().card;
+        defendingCard = (CreatureCard) GetComponent<CardDisplay>().card;
         material = GetComponent<CardDisplay>().material;
         dissolveAmount = 0;
     }

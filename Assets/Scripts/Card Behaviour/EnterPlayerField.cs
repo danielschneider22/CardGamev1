@@ -12,6 +12,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     private HandManager handManager;
 
     public GridLayoutGroup gridLayoutGroup;
+    public GameObject creatureCardTemplate;
     private void Awake()
     {
         playerFieldImage = GetComponent<Image>();
@@ -70,17 +71,20 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
 
     private void placeCardInPlayerField(GameObject cardObj)
     {
-        setHealthBarToFlatRotation(cardObj);
-        cardObj.GetComponent<DragDropCard>().canvas = worldCanvas;
-        cardObj.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-
-        GameObject newChild = Instantiate(handManager.hoverCopyTopCard.handTransform.gameObject);
+        creatureCardTemplate.SetActive(false);
+        GameObject newChild = Instantiate(creatureCardTemplate);
+        setHealthBarToFlatRotation(newChild);
+        newChild.GetComponent<DragDropCard>().canvas = worldCanvas;
+        newChild.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        newChild.GetComponent<CardDisplay>().card = cardObj.GetComponent<CardDisplay>().card;
+        newChild.GetComponent<CardDisplay>().material = cardObj.GetComponent<CardDisplay>().material;
+        newChild.GetComponent<CardDisplay>().location = "field";
         newChild.GetComponent<ToggleVisibility>().makeVisible();
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.SetParent(gridLayoutGroup.transform, false);
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
-        newChild.GetComponentInChildren<HealthBar>().moveHealthBarToFieldPosition();
-
+        newChild.SetActive(true);
+        creatureCardTemplate.SetActive(true);
 
         handManager.removeCardFromHand(handManager.hoverCopyTopCard.handTransform);
     }

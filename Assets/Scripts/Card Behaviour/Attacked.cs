@@ -10,7 +10,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
     private GameObject attackingCardObj;
-    private Card defendingCard;
+    private CreatureCard defendingCard;
     private Animator animator;
     private bool validEnterTriggered;
     private AttackDefenseChangeManager attackDefenseChangeManager;
@@ -23,7 +23,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
-        defendingCard = GetComponent<CardDisplay>().card;
+        defendingCard = (CreatureCard) GetComponent<CardDisplay>().card;
         animator = GetComponent<Animator>();
         validEnterTriggered = false;
         attackDefenseChangeManager = GetComponent<AttackDefenseChangeManager>();
@@ -39,7 +39,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             backgroundLighting.greenBacklighting();
 
-            Card attackingCard = attackingCardObj.GetComponent<CardDisplay>().card;
+            CreatureCard attackingCard = (CreatureCard)attackingCardObj.GetComponent<CardDisplay>().card;
             int damage = calculateDamage(attackingCard);
             healthBar.tempDecreaseHealth(damage);
         }
@@ -60,7 +60,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (validEnterTriggered && isValidAttack(attackingCardObj))
         {
-            Card attackingCard = attackingCardObj.GetComponent<CardDisplay>().card;
+            CreatureCard attackingCard = (CreatureCard) attackingCardObj.GetComponent<CardDisplay>().card;
 
             backgroundLighting.nonselectableBacklighting();
             attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
@@ -96,7 +96,7 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         return false;
     }
 
-    private int calculateDamage(Card attackingCard)
+    private int calculateDamage(CreatureCard attackingCard)
     {
         int damage = attackingCard.currAttack - defendingCard.currDefense;
         return damage > 0 ? damage : 0;

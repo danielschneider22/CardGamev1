@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class AttackDefenseChangeManager : MonoBehaviour
 {
-    private Card card;
+    private CreatureCard card;
     private bool validEnterTriggered;
 
     public TextMeshProUGUI defenseText;
 
     private void Awake()
     {
-        card = GetComponent<CardDisplay>().card;
+        card = (CreatureCard) GetComponent<CardDisplay>().card;
     }
     public void decreaseDefense(int amountToDecrease)
     {

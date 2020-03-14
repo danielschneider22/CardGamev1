@@ -17783,6 +17783,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridLayoutGroup: {fileID: 1048170471}
+  creatureCardTemplate: {fileID: 4290865966551162083, guid: a236280ba462219458ff60223b220e58,
+    type: 3}
 --- !u!114 &568261832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19631,8 +19633,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 4290865966551162083, guid: 83f0b528dcd64f64d9f8fe263c68b5ef, type: 3}
   screenSpaceOverlayCanvas: {fileID: 480585302}
-  ninjaCard: {fileID: 11400000, guid: a01cbe0c5ed877c4b9cab17f91d5e3fc, type: 2}
-  goblinCard: {fileID: 11400000, guid: a12ed3a5e08871745aef95bff677c1c0, type: 2}
+  ninjaCard: {fileID: 11400000, guid: ddbbe5f27e88f0e46bb5e8b0bb306c7f, type: 2}
+  goblinCard: {fileID: 11400000, guid: 42f70cce15c3a4041958a64feafcc38b, type: 2}
   material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   handManager: {fileID: 689015992}
   playerDeckText: {fileID: 87875981}
@@ -26343,7 +26345,7 @@ RectTransform:
   m_GameObject: {fileID: 1048170469}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 1.6}
-  m_LocalScale: {x: 0.38, y: 0.38, z: 0.38}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 89028974}
   - {fileID: 216766177}
@@ -37686,9 +37688,9 @@ MonoBehaviour:
   worldCanvas: {fileID: 687835448}
   numEnemyFieldCards: 3
   numPlayerHandCards: 4
-  ninjaCard: {fileID: 11400000, guid: a01cbe0c5ed877c4b9cab17f91d5e3fc, type: 2}
-  goblinCard: {fileID: 11400000, guid: a12ed3a5e08871745aef95bff677c1c0, type: 2}
-  material: {fileID: 2100000, guid: 70e594f41c8c746459dbb58830057ee0, type: 2}
+  ninjaCard: {fileID: 11400000, guid: ddbbe5f27e88f0e46bb5e8b0bb306c7f, type: 2}
+  goblinCard: {fileID: 11400000, guid: 42f70cce15c3a4041958a64feafcc38b, type: 2}
+  material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   playerDeckManager: {fileID: 779922666}
   numCardsToDraw: 7
 --- !u!4 &1390871127

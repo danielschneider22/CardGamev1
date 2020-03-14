@@ -1397,6 +1397,7 @@ MonoBehaviour:
   healthBar: {fileID: 6828555538386395866}
   effect1: {fileID: 0}
   material: {fileID: 0}
+  location: 
 --- !u!114 &4760673835591094996
 MonoBehaviour:
   m_ObjectHideFlags: 0

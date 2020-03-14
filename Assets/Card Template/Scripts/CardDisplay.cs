@@ -32,18 +32,20 @@ public class CardDisplay : MonoBehaviour
 
     public TextMeshProUGUI effect1;
     public Material material;
+    public string location;
 
     private void Awake()
     {
-        if(card != null)
+        if (card != null)
         {
-            nameText.text = card.cardName;
             artworkImage.sprite = card.artwork;
-            attackText.text = card.currAttack.ToString();
-            defenseText.text = card.currDefense.ToString();
-            healthText.text = card.currHealth.ToString() + "/" + card.maxHealth.ToString();
-            cardCostText.text = card.cardCost.ToString();
-            effect1.text = card.effects[0].name;
+            if (card is CreatureCard)
+            {
+                CreatureCard cardAsCreatureCard = (CreatureCard)card;
+                attackText.text = cardAsCreatureCard.currAttack.ToString();
+                defenseText.text = cardAsCreatureCard.currDefense.ToString();
+                healthText.text = cardAsCreatureCard.currHealth.ToString() + "/" + cardAsCreatureCard.maxHealth.ToString();
+            }
 
             front.material = material;
             attackImage.material = material;
@@ -54,16 +56,28 @@ public class CardDisplay : MonoBehaviour
             healthGreen.material = material;
             healthOrange.material = material;
             healthOutline.material = material;
+
+        }
+        else
+        {
+            nameText.text = "EMPTY";
+        }
+        if (location.ToLower().Contains("hand"))
+        {
+            artworkImage.sprite = card.artwork;
+            nameText.text = card.cardName;
+            cardCostText.text = card.cardCost.ToString();
             energyImage.material = material;
+            effect1.text = card.effects[0].name;
+
             foreach (Image slot in effectSlots)
             {
                 slot.material = material;
             }
-
-        } else
-        {
-            nameText.text = "EMPTY";
         }
-        
+        if (location.ToLower().Contains("field"))
+        {
+            artworkImage.sprite = ((CreatureCard) card).circleArtwork;
+        }
     }
 }

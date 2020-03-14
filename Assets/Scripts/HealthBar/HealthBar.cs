@@ -11,11 +11,11 @@ public class HealthBar : MonoBehaviour
     public TextMeshProUGUI healthText;
     public CardDisplay cardDisplay;
 
-    private Card card;
+    private CreatureCard card;
 
     public void Awake()
     {
-        card = cardDisplay.card;
+        card = (CreatureCard)cardDisplay.card;
     }
 
     private float currHealthProportion;
