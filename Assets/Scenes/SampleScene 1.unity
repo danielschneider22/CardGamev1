@@ -6495,7 +6495,7 @@ RectTransform:
   m_GameObject: {fileID: 262984659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.38, y: 0.38, z: 0.4}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 1707097300}
   - {fileID: 1088251350}
@@ -6527,7 +6527,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 238, y: 270}
+  m_CellSize: {x: 180, y: 270}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -26345,7 +26345,7 @@ RectTransform:
   m_GameObject: {fileID: 1048170469}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 1.6}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 89028974}
   - {fileID: 216766177}
@@ -37682,6 +37682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 4290865966551162083, guid: 83f0b528dcd64f64d9f8fe263c68b5ef, type: 3}
+  creatureCardTemplate: {fileID: 4290865966551162083, guid: a236280ba462219458ff60223b220e58,
+    type: 3}
   playerHand: {fileID: 1635327239}
   enemyField: {fileID: 262984661}
   screenSpaceOverlayCanvas: {fileID: 480585302}

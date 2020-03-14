@@ -82,9 +82,9 @@ public class Initialization : MonoBehaviour
             creatureCardTemplate.SetActive(true);
 
             copyCard.transform.SetParent(enemyField.transform, false);
-            var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
-            rotationVector.x = -.2f;
-            copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
+            // var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
+            // rotationVector.x = -.2f;
+            // copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
         card.SetActive(true);
     }

@@ -73,7 +73,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
     {
         creatureCardTemplate.SetActive(false);
         GameObject newChild = Instantiate(creatureCardTemplate);
-        setHealthBarToFlatRotation(newChild);
+        // setHealthBarToFlatRotation(newChild);
         newChild.GetComponent<DragDropCard>().canvas = worldCanvas;
         newChild.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         newChild.GetComponent<CardDisplay>().card = cardObj.GetComponent<CardDisplay>().card;
