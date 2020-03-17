@@ -84,12 +84,12 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool isValidAttack(GameObject attackingCard)
     {
-        GridLayoutGroup cardGroup = GetComponentInParent<GridLayoutGroup>();
-        GridLayoutGroup attackingCardGroup = attackingCard.GetComponentInParent<GridLayoutGroup>();
+        string cardGroup = transform.parent.name;
+        string attackingCardGroup = attackingCard.transform.parent.name;
         Card attackingCardStats = attackingCard.GetComponent<CardDisplay>().card;
-        if (((cardGroup.name == "Player Field" || cardGroup.name == "Enemy Field") &&
-           (attackingCardGroup.name == "Player Field" || attackingCardGroup.name == "Enemy Field") &&
-           cardGroup.name != attackingCardGroup.name) && !attackingCardStats.isDestroyed && !defendingCard.isDestroyed)
+        if (((cardGroup == "Player Field" || cardGroup == "Enemy Field") &&
+           (attackingCardGroup == "Player Field" || attackingCardGroup == "Enemy Field") &&
+           cardGroup != attackingCardGroup) && !attackingCardStats.isDestroyed && !defendingCard.isDestroyed)
         {
             return true;
         }
