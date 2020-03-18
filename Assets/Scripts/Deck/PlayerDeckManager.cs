@@ -10,6 +10,7 @@ public class PlayerDeckManager : MonoBehaviour
     public Canvas screenSpaceOverlayCanvas;
     public Card ninjaCard;
     public Card goblinCard;
+    public Card bashCard;
     public Material material;
     public HandManager handManager;
 
@@ -21,17 +22,20 @@ public class PlayerDeckManager : MonoBehaviour
 
         for (var i = 0; i < 10; i++)
         {
-            Card copyNinja = Instantiate(ninjaCard);
-            Card copyGoblin = Instantiate(goblinCard);
-            cards.Add(Instantiate(goblinCard));
+            if(i % 3 == 0)
+            {
+                cards.Add(Instantiate(goblinCard));
+            } else
+            {
+                cards.Add(Instantiate(bashCard));
+            }
+            
         }
         playerDeckText.text = cards.Count.ToString();
     }
 
     private GameObject createCopyCard(Card cardObjToCopy)
     {
-        // card.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
-        // card.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
         card.SetActive(false);
         GameObject newCard = Instantiate(card);
         newCard.GetComponent<CardDisplay>().material = Instantiate(material);

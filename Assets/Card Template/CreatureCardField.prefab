@@ -1616,8 +1616,12 @@ MonoBehaviour:
   healthGreen: {fileID: 5580363342950358855}
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
+  spellFrontSprite: {fileID: 0}
   healthBar: {fileID: 6828555538386395866}
+  attackTextGameObj: {fileID: 0}
   effect1: {fileID: 0}
+  cardType: {fileID: 0}
+  attackEffect: {fileID: 0}
   material: {fileID: 0}
   location: 
 --- !u!114 &4760673835591094996

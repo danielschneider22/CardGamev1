@@ -28,9 +28,15 @@ public class CardDisplay : MonoBehaviour
     public Image healthOrange;
     public Image healthOutline;
 
+    public Sprite spellFrontSprite;
+
     public GameObject healthBar;
+    public GameObject attackTextGameObj;
 
     public TextMeshProUGUI effect1;
+    public TextMeshProUGUI cardType;
+    public TextMeshProUGUI attackEffect;
+
     public Material material;
     public string location;
 
@@ -45,17 +51,38 @@ public class CardDisplay : MonoBehaviour
                 attackText.text = cardAsCreatureCard.currAttack.ToString();
                 defenseText.text = cardAsCreatureCard.currDefense.ToString();
                 healthText.text = cardAsCreatureCard.currHealth.ToString() + "/" + cardAsCreatureCard.maxHealth.ToString();
+                attackImage.material = material;
+                defenseImage.material = material;
+                healthRed.material = material;
+                healthGreen.material = material;
+                healthOrange.material = material;
+                healthOutline.material = material;
+            } else if (card is AttackCard)
+            {
+                attackText.enabled = false;
+                defenseText.enabled = false;
+                healthText.enabled = false;
+                attackImage.enabled = false;
+                defenseImage.enabled = false;
+                healthRed.enabled = false;
+                healthGreen.enabled = false;
+                healthOrange.enabled = false;
+                healthOutline.enabled = false;
+                front.sprite = spellFrontSprite;
+                effect1.enabled = false;
+                attackTextGameObj.SetActive(true);
+                attackEffect.text = ((AttackCard) card).attackText;
+                foreach (Image slot in effectSlots)
+                {
+                    slot.enabled = false;
+                }
+                cardType.text = "ATTACK";
             }
 
             front.material = material;
-            attackImage.material = material;
-            defenseImage.material = material;
             innerFrame.material = material;
             backLighting.material = material;
-            healthRed.material = material;
-            healthGreen.material = material;
-            healthOrange.material = material;
-            healthOutline.material = material;
+            
 
         }
         else
@@ -80,4 +107,5 @@ public class CardDisplay : MonoBehaviour
             artworkImage.sprite = ((CreatureCard) card).circleArtwork;
         }
     }
+
 }

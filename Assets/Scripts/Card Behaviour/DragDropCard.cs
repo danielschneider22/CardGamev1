@@ -72,7 +72,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             togglePlayerFieldInteractable(true);
             handManager.clearTopCardFromMovingCards();
             handManager.stopHandBlockingRaycasts();
-        } else if (transform.parent.name == "Player Field")
+        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Attack"))
         {
             Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
             this.isDragging = true;
@@ -91,11 +91,12 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             togglePlayerFieldInteractable(false);
             // give time for drop actions to be done before resetting hand positions
             pauseBeforeResettingHand = .001f;
-        } else if (transform.parent.name == "Player Field")
+        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Attack"))
         {
             this.isDragging = false;
             draggableArrow.drawArrow = false;
             backgroundLighting.selectableBacklighting();
+            handManager.resetHandPositions();
         }
     }
 

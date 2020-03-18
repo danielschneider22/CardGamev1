@@ -432,8 +432,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 1ac2d5c3e630dec408e660573f777767,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6452821187826400430, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_Color.r
@@ -1011,7 +1010,7 @@ RectTransform:
   - {fileID: 1214785669}
   - {fileID: 689015991}
   m_Father: {fileID: 480585303}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11319,7 +11318,7 @@ RectTransform:
   - {fileID: 1995389966}
   - {fileID: 1574971579}
   m_Father: {fileID: 480585303}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16882,11 +16881,11 @@ RectTransform:
   - {fileID: 1181275341}
   - {fileID: 1706688037}
   - {fileID: 1916490268}
-  - {fileID: 1841793525}
   - {fileID: 360262596}
   - {fileID: 1816641094}
   - {fileID: 172068376}
   - {fileID: 6880082981137937092}
+  - {fileID: 1841793525}
   - {fileID: 1399839019}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -17943,8 +17942,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 1ac2d5c3e630dec408e660573f777767,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6452821187826400430, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: m_Color.r
@@ -18796,8 +18794,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8861385970924611986, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: canvas
@@ -19302,6 +19299,7 @@ MonoBehaviour:
   screenSpaceOverlayCanvas: {fileID: 480585302}
   ninjaCard: {fileID: 11400000, guid: ddbbe5f27e88f0e46bb5e8b0bb306c7f, type: 2}
   goblinCard: {fileID: 11400000, guid: 42f70cce15c3a4041958a64feafcc38b, type: 2}
+  bashCard: {fileID: 11400000, guid: f5f29019315b98147a8daa80fe069565, type: 2}
   material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   handManager: {fileID: 689015992}
   playerDeckText: {fileID: 87875981}
@@ -20204,8 +20202,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8861385970924611986, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: canvas
@@ -26196,8 +26193,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 05caacc54a885cc43ac44fbf47d11a81,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8861385970924611986, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: canvas
@@ -44515,7 +44511,7 @@ RectTransform:
   - {fileID: 779922665}
   - {fileID: 116928493}
   m_Father: {fileID: 480585303}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -44779,7 +44775,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 480585303}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45843,8 +45839,7 @@ PrefabInstance:
         type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 1ac2d5c3e630dec408e660573f777767,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8861385970924611986, guid: 83f0b528dcd64f64d9f8fe263c68b5ef,
         type: 3}
       propertyPath: canvas
@@ -46006,7 +46001,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467041814}
   m_HandleRect: {fileID: 1467041813}
   m_Direction: 2
-  m_Value: 1.0000036
+  m_Value: 1.0000033
   m_Size: 0.81268555
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -51404,7 +51399,7 @@ RectTransform:
   - {fileID: 1293308439767883212}
   - {fileID: 1518927383}
   m_Father: {fileID: 480585303}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
