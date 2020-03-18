@@ -67,9 +67,10 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             bool shouldDestroy = healthBar.applyTempDecreaseHealth();
             GameObject damageTextObj = Instantiate(damageTextContainer, transform);
             RectTransform dmgTxtRectTransform = damageTextObj.GetComponent<RectTransform>();
-            dmgTxtRectTransform.anchoredPosition = new Vector2(0, 175f);
+            dmgTxtRectTransform.anchoredPosition = new Vector2(0, 30f);
             damageTextObj.GetComponentInChildren<Animator>().enabled = true;
             damageTextObj.GetComponentInChildren<TextMeshProUGUI>().text = healthBar.tempDamage.ToString();
+            damageTextObj.GetComponentInChildren<TextMeshProUGUI>().fontSize = 32f;
             if (shouldDestroy)
             {
                 animator.SetTrigger("CardDestroyedTrigger");
