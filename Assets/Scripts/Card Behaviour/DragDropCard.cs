@@ -74,11 +74,18 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             handManager.stopHandBlockingRaycasts();
         } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Attack"))
         {
-            Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? transform.position : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
+            // Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? new Vector3(transform.position.x + rectTransform.rect.center.x, transform.position.y + rectTransform.rect.center.y, 1) : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
+            Vector3 cardPosition = Input.mousePosition;
             this.isDragging = true;
             draggableArrow.startPos = cardPosition;
             draggableArrow.drawArrow = true;
             draggableArrow.draggedCard = gameObject;
+            CardDisplay hoverCardDisplay = handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CardDisplay>();
+            handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<Animator>().enabled = false;
+            handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            hoverCardDisplay.front.material = null;
+            hoverCardDisplay.front.color = new Color(1, 1, 1, .5f);
+            hoverCardDisplay.artworkImage.color = new Color(1, 1, 1, .5f);
         }
     }
     public void OnPointerUp(PointerEventData eventData)
