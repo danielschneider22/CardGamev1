@@ -80,12 +80,15 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             draggableArrow.startPos = cardPosition;
             draggableArrow.drawArrow = true;
             draggableArrow.draggedCard = gameObject;
-            CardDisplay hoverCardDisplay = handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CardDisplay>();
-            handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<Animator>().enabled = false;
-            handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            hoverCardDisplay.front.material = null;
-            hoverCardDisplay.front.color = new Color(1, 1, 1, .5f);
-            hoverCardDisplay.artworkImage.color = new Color(1, 1, 1, .5f);
+            if(handManager.hoverCopyTopCard != null)
+            {
+                CardDisplay hoverCardDisplay = handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CardDisplay>();
+                handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<Animator>().enabled = false;
+                handManager.hoverCopyTopCard.copyTransform.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                hoverCardDisplay.front.material = null;
+                hoverCardDisplay.front.color = new Color(1, 1, 1, .5f);
+                hoverCardDisplay.artworkImage.color = new Color(1, 1, 1, .5f);
+            }
         }
     }
     public void OnPointerUp(PointerEventData eventData)

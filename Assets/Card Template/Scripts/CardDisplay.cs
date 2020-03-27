@@ -57,6 +57,8 @@ public class CardDisplay : MonoBehaviour
                 healthGreen.material = material;
                 healthOrange.material = material;
                 healthOutline.material = material;
+                gameObject.AddComponent(typeof(AttackDefenseChangeManager));
+                gameObject.GetComponent<AttackDefenseChangeManager>().defenseText = defenseText;
             } else if (card is AttackCard)
             {
                 attackText.enabled = false;
@@ -77,6 +79,7 @@ public class CardDisplay : MonoBehaviour
                     slot.enabled = false;
                 }
                 cardType.text = "ATTACK";
+                healthBar.SetActive(false);
             }
 
             front.material = material;
@@ -95,7 +98,10 @@ public class CardDisplay : MonoBehaviour
             nameText.text = card.cardName;
             cardCostText.text = card.cardCost.ToString();
             energyImage.material = material;
-            effect1.text = card.effects[0].name;
+            if (card is CreatureCard)
+            {
+                effect1.text = card.effects[0].name;
+            }
 
             foreach (Image slot in effectSlots)
             {
