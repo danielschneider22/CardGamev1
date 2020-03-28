@@ -182,8 +182,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.77999, y: -68.729996}
-  m_SizeDelta: {x: 50.89, y: 44.55}
+  m_AnchoredPosition: {x: 67.37, y: -66.5}
+  m_SizeDelta: {x: 49.54, y: 46.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2691062639667893517
 CanvasRenderer:
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.35
+  m_fontSize: 31.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1566,6 +1566,11 @@ MonoBehaviour:
   defense: {fileID: 2691062639667893516}
   damageTextContainer: {fileID: 4276231543945294890, guid: c42878a013b6d3940b85621a5384a449,
     type: 3}
+  greyedAttack: {fileID: -3921882402560749106, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
+  activeAttack: {fileID: -4212007216552210721, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
+  attackImage: {fileID: 2691062640178592689}
 --- !u!114 &1512876185934911904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1649,7 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60e3a37b1fb3cc4f96eeb218981cc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAttackImage: {fileID: 2691062640178592689}
+  attackImage: {fileID: 2691062640178592689}
   greyedAttack: {fileID: -3921882402560749106, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
   activeAttack: {fileID: -4212007216552210721, guid: 5f1e064348bdea74bbe661f15b975187,

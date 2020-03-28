@@ -92,7 +92,7 @@ public class CardDisplay : MonoBehaviour
         {
             nameText.text = "EMPTY";
         }
-        if (location.ToLower().Contains("hand"))
+        if (location.ToLower().Contains("hand") || location == "enemyIntent")
         {
             artworkImage.sprite = card.artwork;
             nameText.text = card.cardName;

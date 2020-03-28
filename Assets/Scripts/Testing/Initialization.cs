@@ -15,9 +15,12 @@ public class Initialization : MonoBehaviour
     public int numPlayerHandCards;
     public Card ninjaCard;
     public Card goblinCard;
+    public Card bashCard;
     public Material material;
     public PlayerDeckManager playerDeckManager;
     public int numCardsToDraw;
+    public int numIntentCards = 3;
+    public Transform enemyIntentArea;
 
     private float drawCardTimer;
     private int numCardsDrawn;
@@ -26,6 +29,7 @@ public class Initialization : MonoBehaviour
         // initializeHand();
         // drawCards();
         initializeEnemyField();
+        initializeEnemyIntent();
         drawCardTimer = 0f;
         numCardsDrawn = 0;
     }
@@ -85,6 +89,36 @@ public class Initialization : MonoBehaviour
             // var rotationVector = copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation.eulerAngles;
             // rotationVector.x = -.2f;
             // copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
+        }
+        card.SetActive(true);
+    }
+
+    private void initializeEnemyIntent()
+    {
+        card.SetActive(false);
+        Card cardObjToCopy = null;
+        for (var i = 0; i < numIntentCards; i++)
+        {
+            switch(i % 3)
+            {
+                case 0:
+                    cardObjToCopy = Instantiate(ninjaCard);
+                    break;
+                case 1:
+                    cardObjToCopy = Instantiate(goblinCard);
+                    break;
+                case 2:
+                    cardObjToCopy = Instantiate(bashCard);
+                    break;
+            }
+            GameObject newCard = Instantiate(card);
+            newCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
+            newCard.GetComponent<CardDisplay>().location = "enemyIntent";
+            newCard.GetComponent<DragDropCard>().canvas = worldCanvas;
+            newCard.GetComponent<OnHover>().canvas = worldCanvas;
+            newCard.transform.SetParent(enemyIntentArea, false);
+            newCard.SetActive(true);
         }
         card.SetActive(true);
     }

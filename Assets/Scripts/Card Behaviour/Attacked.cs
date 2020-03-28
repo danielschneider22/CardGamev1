@@ -18,6 +18,9 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public HealthBar healthBar;
     public TextMeshProUGUI defense;
     public GameObject damageTextContainer;
+    public Sprite greyedAttack;
+    public Sprite activeAttack;
+    public Image attackImage;
 
     private void Awake()
     {
@@ -42,6 +45,9 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             CreatureCard attackingCard = (CreatureCard)attackingCardObj.GetComponent<CardDisplay>().card;
             int damage = calculateDamage(attackingCard);
             healthBar.tempDecreaseHealth(damage);
+        } else if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && !isValidAttack(draggableArrow.draggedCard))
+        {
+            backgroundLighting.redBacklighting();
         }
     }
 
@@ -61,6 +67,8 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (validEnterTriggered && isValidAttack(attackingCardObj))
         {
             CreatureCard attackingCard = (CreatureCard) attackingCardObj.GetComponent<CardDisplay>().card;
+            attackingCard.canAttack = false;
+            attackingCardObj.GetComponent<CardDisplay>().attackImage.sprite = greyedAttack;
 
             backgroundLighting.nonselectableBacklighting();
             attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
@@ -85,10 +93,12 @@ public class Attacked : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool isValidAttack(GameObject attackingCard)
     {
+        if(!(attackingCard.GetComponent<CardDisplay>().card is CreatureCard)) { return false; }
         string cardGroup = transform.parent.name;
         string attackingCardGroup = attackingCard.transform.parent.name;
-        Card attackingCardStats = attackingCard.GetComponent<CardDisplay>().card;
+        CreatureCard attackingCardStats = (CreatureCard) attackingCard.GetComponent<CardDisplay>().card;
         if (((cardGroup == "Player Field" || cardGroup == "Enemy Field") &&
+            attackingCardStats.canAttack &&
            (attackingCardGroup == "Player Field" || attackingCardGroup == "Enemy Field") &&
            cardGroup != attackingCardGroup) && !attackingCardStats.isDestroyed && !defendingCard.isDestroyed)
         {

@@ -15,4 +15,6 @@ public class CreatureCard : Card
     public int currHealth;
 
     public Sprite circleArtwork;
+
+    public bool canAttack;
 }

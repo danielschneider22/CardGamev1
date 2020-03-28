@@ -44,7 +44,7 @@ public class PlayerDeckManager : MonoBehaviour
         newCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
         newCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);
-        newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 80f);
+        newCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350f, 100f);
         newCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
         newCard.SetActive(true);
         card.SetActive(true);
