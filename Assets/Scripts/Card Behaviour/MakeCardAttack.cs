@@ -10,9 +10,11 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     private Color initBacklightColor;
     private HandManager handManager;
     private DraggableArrow draggableArrow;
-    private AttackCard attackCard;
+    private GameObject attackCardGameObj;
 
     public Image canAttackImage;
+    public Sprite greyedAttack;
+    public Sprite activeAttack;
 
     private void Awake()
     {
@@ -28,22 +30,24 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
 
         if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack")
         {
-            attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+            attackCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
             backgroundLighting.greenBacklighting();
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        attackCard = null;
+        attackCardGameObj = null;
     }
     public void OnDrop(PointerEventData eventData)
     {
         string parentObjName = gameObject.transform.parent.name;
+        // AttackCard attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
-        if (parentObjName == "Player Field" && attackCard)
+        if (parentObjName == "Player Field" && attackCardGameObj)
         {
-            canAttackImage.color = Color.green;
+            canAttackImage.sprite = activeAttack;
+            handManager.discardCard(attackCardGameObj);
         }
     }
 }

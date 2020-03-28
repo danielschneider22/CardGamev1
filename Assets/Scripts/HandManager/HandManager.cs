@@ -83,6 +83,28 @@ public class HandManager : MonoBehaviour
         resetHandPositions();
     }
 
+    public void discardCard(GameObject card)
+    {
+        removeCardFromHand(card.transform);
+        // int removeCardIdx = getCardIdxInTransform(hand.transform, cardTransform);
+        /*Transform cardTransform = card.transform;
+        Transform placeholderTransform = handPlacementGrid.transform.GetChild(i);
+
+        RectTransform placeholderRectTransform = placeholderTransform.GetComponent<RectTransform>();
+        RectTransform handRectTransform = cardTransform.GetComponent<RectTransform>();
+
+        MovingCard oldMovingHandCard = getExistingMovingHandCard(oldMoveCards, cardTransform);
+
+        cardTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        cardTransform.GetComponent<ToggleVisibility>().makeVisible();
+        setCardPosition(childCount, i, placeholderRectTransform);
+        setCardRotation(childCount, i, placeholderRectTransform);
+        float speed = getCardSpeed(oldMovingHandCard, placeholderRectTransform, handRectTransform, resetSpeed);
+
+        MovingCard newHandCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.55f, .55f, 1));
+        movingCards.Add(newHandCard);*/
+    }
+
     public void resetHandPositions(float resetSpeed = -1f)
     {
         List<MovingCard> oldMoveCards = new List<MovingCard>(movingCards);
