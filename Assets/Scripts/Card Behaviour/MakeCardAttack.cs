@@ -12,6 +12,7 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     private DraggableArrow draggableArrow;
     private GameObject attackCardGameObj;
     private CreatureCard hoveredCard;
+    private PlayerController playerController;
 
     public Image attackImage;
     public Sprite greyedAttack;
@@ -23,6 +24,7 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
         hoveredCard = (CreatureCard)GetComponent<CardDisplay>().card;
+        playerController = GameObject.FindGameObjectWithTag("Player Controller").GetComponent<PlayerController>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -44,12 +46,14 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     public void OnDrop(PointerEventData eventData)
     {
         string parentObjName = gameObject.transform.parent.name;
-        // AttackCard attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
         if (parentObjName == "Player Field" && attackCardGameObj)
         {
+            AttackCard attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+
             attackImage.sprite = activeAttack;
             hoveredCard.canAttack = true;
+            playerController.decreaseCurrEnergy(attackCard.cardCost);
             handManager.discardCard(attackCardGameObj);
         }
     }

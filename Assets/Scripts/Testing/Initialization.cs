@@ -82,6 +82,7 @@ public class Initialization : MonoBehaviour
             copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             copyCard.GetComponent<OnHover>().canvas = worldCanvas;
             copyCard.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+            copyCard.GetComponent<Animator>().enabled = false;
             copyCard.SetActive(true);
             creatureCardTemplate.SetActive(true);
 

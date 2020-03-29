@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     public int maxEnergy;
     public ToggleEnergyGlow toggleEnergyGlow;
 
+    public void Awake()
+    {
+        energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
+
     public void decreaseCurrEnergy(int energyUsed)
     {
         currEnergy = currEnergy - energyUsed;

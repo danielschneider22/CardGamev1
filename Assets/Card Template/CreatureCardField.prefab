@@ -1642,6 +1642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defenseText: {fileID: 2691062639667893516}
+  animator: {fileID: 3920896626565391877}
+  greyedAttack: {fileID: -3921882402560749106, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
 --- !u!114 &4632428608532815763
 MonoBehaviour:
   m_ObjectHideFlags: 0

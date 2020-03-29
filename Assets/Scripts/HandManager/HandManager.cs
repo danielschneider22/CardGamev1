@@ -17,7 +17,7 @@ public class HandManager : MonoBehaviour
     private float minMoveSpeed = 100f;
     private float hoverXPosMove = 20f;
     private float hoverYPosMove = 0f;
-    private float hoverMoveUp = 70f;
+    private float hoverMoveUp = 50f;
     
 
     public void Start()

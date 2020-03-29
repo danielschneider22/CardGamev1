@@ -57,8 +57,8 @@ public class CardDisplay : MonoBehaviour
                 healthGreen.material = material;
                 healthOrange.material = material;
                 healthOutline.material = material;
-                gameObject.AddComponent(typeof(AttackDefenseChangeManager));
-                gameObject.GetComponent<AttackDefenseChangeManager>().defenseText = defenseText;
+                gameObject.AddComponent(typeof(AttackDefenseManager));
+                gameObject.GetComponent<AttackDefenseManager>().defenseText = defenseText;
             } else if (card is AttackCard)
             {
                 attackText.enabled = false;
