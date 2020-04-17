@@ -11,6 +11,7 @@ public class PlayerDeckManager : MonoBehaviour
     public Card ninjaCard;
     public Card goblinCard;
     public Card bashCard;
+    public Card shortShieldCard;
     public Material material;
     public HandManager handManager;
 
@@ -25,11 +26,15 @@ public class PlayerDeckManager : MonoBehaviour
             if(i % 3 == 0)
             {
                 cards.Add(Instantiate(goblinCard));
-            } else
+            } else if (i % 3 == 1)
             {
                 cards.Add(Instantiate(bashCard));
             }
-            
+            else if (i % 3 == 2)
+            {
+                cards.Add(Instantiate(shortShieldCard));
+            }
+
         }
         playerDeckText.text = cards.Count.ToString();
     }

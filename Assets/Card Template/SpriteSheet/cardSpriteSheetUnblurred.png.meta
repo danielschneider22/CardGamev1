@@ -80,6 +80,9 @@ TextureImporter:
   - first:
       213: -8847867921163812955
     second: cardSpriteSheetUnblurred_15
+  - first:
+      213: 7342689105993438177
+    second: cardSpriteSheetUnblurred_16
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -401,7 +404,7 @@ TextureImporter:
         x: 3885
         y: 19
         width: 1061
-        height: 1452
+        height: 1457
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -487,7 +490,7 @@ TextureImporter:
         width: 241
         height: 232
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -495,6 +498,27 @@ TextureImporter:
       bones: []
       spriteID: 5aff473f00f063580800000000000000
       internalID: -8847867921163812955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cardSpriteSheetUnblurred_16
+      rect:
+        serializedVersion: 2
+        x: 5821
+        y: 3
+        width: 1061
+        height: 1457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e39ed2b6d876e560800000000000000
+      internalID: 7342689105993438177
       vertices: []
       indices: 
       edges: []

@@ -2011,7 +2011,9 @@ MonoBehaviour:
   healthGreen: {fileID: 5580363342950358855}
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
-  spellFrontSprite: {fileID: -8789170865316149833, guid: 5f1e064348bdea74bbe661f15b975187,
+  attackFrontSprite: {fileID: -8789170865316149833, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
+  defenseFrontSprite: {fileID: 7342689105993438177, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
   healthBar: {fileID: 6828555538386395866}
   attackTextGameObj: {fileID: 8655260338302285700}

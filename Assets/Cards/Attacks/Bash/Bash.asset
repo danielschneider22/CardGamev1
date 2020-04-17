@@ -18,5 +18,5 @@ MonoBehaviour:
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: 8ff0a0b1b3a182f489c24fd53bf73830, type: 3}
   cardCost: 1
-  attackModifier: 1
+  attackModifier: 0
   attackText: Target creature can attack this turn.

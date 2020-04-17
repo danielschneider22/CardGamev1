@@ -1408,6 +1408,7 @@ GameObject:
   - component: {fileID: 1240478445165564745}
   - component: {fileID: 3468645321534588873}
   - component: {fileID: 4632428608532815763}
+  - component: {fileID: 5090527146264838695}
   m_Layer: 5
   m_Name: CreatureCardField
   m_TagString: Card
@@ -1469,7 +1470,8 @@ MonoBehaviour:
   healthGreen: {fileID: 5580363342950358855}
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
-  spellFrontSprite: {fileID: 0}
+  attackFrontSprite: {fileID: 0}
+  defenseFrontSprite: {fileID: 0}
   healthBar: {fileID: 6828555538386395866}
   attackTextGameObj: {fileID: 0}
   effect1: {fileID: 0}
@@ -1661,6 +1663,23 @@ MonoBehaviour:
   greyedAttack: {fileID: -3921882402560749106, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
   activeAttack: {fileID: -4212007216552210721, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
+--- !u!114 &5090527146264838695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290865966551162083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a781497bf460c4fb0f28623b8e4ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defendImage: {fileID: 2691062641457386564}
+  greyedDefend: {fileID: -1485935263984946788, guid: 5f1e064348bdea74bbe661f15b975187,
+    type: 3}
+  activeDefend: {fileID: -5260524384068091180, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
 --- !u!1 &4322101762876848578
 GameObject:

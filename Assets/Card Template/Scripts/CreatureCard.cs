@@ -17,4 +17,5 @@ public class CreatureCard : Card
     public Sprite circleArtwork;
 
     public bool canAttack;
+    public bool isDefending;
 }

@@ -28,7 +28,8 @@ public class CardDisplay : MonoBehaviour
     public Image healthOrange;
     public Image healthOutline;
 
-    public Sprite spellFrontSprite;
+    public Sprite attackFrontSprite;
+    public Sprite defenseFrontSprite;
 
     public GameObject healthBar;
     public GameObject attackTextGameObj;
@@ -70,7 +71,7 @@ public class CardDisplay : MonoBehaviour
                 healthGreen.enabled = false;
                 healthOrange.enabled = false;
                 healthOutline.enabled = false;
-                front.sprite = spellFrontSprite;
+                front.sprite = attackFrontSprite;
                 effect1.enabled = false;
                 attackTextGameObj.SetActive(true);
                 attackEffect.text = ((AttackCard) card).attackText;
@@ -79,6 +80,28 @@ public class CardDisplay : MonoBehaviour
                     slot.enabled = false;
                 }
                 cardType.text = "ATTACK";
+                healthBar.SetActive(false);
+            }
+            else if (card is DefendCard)
+            {
+                attackText.enabled = false;
+                defenseText.enabled = false;
+                healthText.enabled = false;
+                attackImage.enabled = false;
+                defenseImage.enabled = false;
+                healthRed.enabled = false;
+                healthGreen.enabled = false;
+                healthOrange.enabled = false;
+                healthOutline.enabled = false;
+                front.sprite = defenseFrontSprite;
+                effect1.enabled = false;
+                attackTextGameObj.SetActive(true);
+                attackEffect.text = ((DefendCard)card).defendText;
+                foreach (Image slot in effectSlots)
+                {
+                    slot.enabled = false;
+                }
+                cardType.text = "DEFEND";
                 healthBar.SetActive(false);
             }
 
