@@ -30,11 +30,13 @@ public class EnemyIntentionManager : MonoBehaviour
         if(enemyActions.Count > 0 && enemyActionTimer <= 0f)
         {
             EnemyAction enemyAction = enemyActions[0];
-            if (enemyAction.actionType == EnemyActionType.playCreature && !enemyAction.showingAction)
+            if(!enemyAction.showingHover && !enemyAction.showingArrow)
+            {
+                showHover(enemyAction);
+            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
             {
                 drawIntentArrow(enemyAction, cam.WorldToScreenPoint(enemyField.transform.position));
-                showPauseBeforeAction(enemyAction);
-            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingAction)
+            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
             {
                 placeCardInEnemyField(enemyAction.card);
                 removeAction(enemyAction);
@@ -49,13 +51,15 @@ public class EnemyIntentionManager : MonoBehaviour
         draggableArrow.startPos = cam.WorldToScreenPoint(new Vector3(enemyAction.card.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z));
         draggableArrow.staticEndPos = endPoint;
         draggableArrow.drawStaticArrow = true;
+        enemyActionTimer = 2f;
+        enemyActions[0].showingArrow = true;
     }
 
-    private void showPauseBeforeAction(EnemyAction enemyAction)
+    private void showHover(EnemyAction enemyAction)
     {
         enemyAction.card.GetComponent<ChangeBackgroundLighting>().whiteBacklighting();
-        enemyActionTimer = 2f;
-        enemyActions[0].showingAction = true;
+        enemyActionTimer = 1f;
+        enemyActions[0].showingHover = true;
     }
 
     private void removeAction(EnemyAction enemyAction)
@@ -90,6 +94,13 @@ public class EnemyIntentionManager : MonoBehaviour
         // playerFieldManager.addCardToField(newChild);
         creatureCardTemplate.SetActive(true);
         enemyController.decreaseCurrEnergy(newChild.GetComponent<CardDisplay>().card.cardCost);
+        foreach(EnemyAction enemyAction in enemyActions)
+        {
+            if(enemyAction.card == cardObj)
+            {
+                enemyAction.card = newChild;
+            }
+        }
         Destroy(cardObj);
     }
 
