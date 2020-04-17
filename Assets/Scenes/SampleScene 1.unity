@@ -19013,7 +19013,7 @@ MonoBehaviour:
   ninjaCard: {fileID: 11400000, guid: ddbbe5f27e88f0e46bb5e8b0bb306c7f, type: 2}
   goblinCard: {fileID: 11400000, guid: 42f70cce15c3a4041958a64feafcc38b, type: 2}
   bashCard: {fileID: 11400000, guid: f5f29019315b98147a8daa80fe069565, type: 2}
-  shortShieldCard: {fileID: 11400000, guid: 6d63b2c2a04eebb4f8963737e044f771, type: 2}
+  shortShieldCard: {fileID: 11400000, guid: ced081097401d1947a305d257b7120c6, type: 2}
   material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   handManager: {fileID: 689015992}
   playerDeckText: {fileID: 87875981}
@@ -25643,6 +25643,7 @@ GameObject:
   - component: {fileID: 1145225157}
   - component: {fileID: 1145225159}
   - component: {fileID: 1145225158}
+  - component: {fileID: 1145225160}
   m_Layer: 5
   m_Name: Enemy Intention
   m_TagString: Untagged
@@ -25714,6 +25715,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1145225160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145225156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22696d692dbd2d4fb1b44e8e78ffdda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards: []
+  creatureCardTemplate: {fileID: 4290865966551162083, guid: a236280ba462219458ff60223b220e58,
+    type: 3}
+  enemyField: {fileID: 262984661}
 --- !u!1 &1145820878
 GameObject:
   m_ObjectHideFlags: 0
@@ -36542,6 +36559,7 @@ MonoBehaviour:
   bashCard: {fileID: 11400000, guid: f5f29019315b98147a8daa80fe069565, type: 2}
   material: {fileID: 2100000, guid: d5b3630fe1ff36c46aac30b22efa0fe4, type: 2}
   playerDeckManager: {fileID: 779922666}
+  enemyIntentionManager: {fileID: 1145225160}
   numCardsToDraw: 3
   numIntentCards: 3
   enemyIntentArea: {fileID: 399571235}
@@ -45405,7 +45423,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 36.64, y: 74.19}
-  m_SizeDelta: {x: 4.62, y: 366.54}
+  m_SizeDelta: {x: 4.62, y: 514.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015242968
 MonoBehaviour:

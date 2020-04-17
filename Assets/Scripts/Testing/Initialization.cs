@@ -18,6 +18,7 @@ public class Initialization : MonoBehaviour
     public Card bashCard;
     public Material material;
     public PlayerDeckManager playerDeckManager;
+    public EnemyIntentionManager enemyIntentionManager;
     public int numCardsToDraw;
     public int numIntentCards = 3;
     public Transform enemyIntentArea;
@@ -120,8 +121,10 @@ public class Initialization : MonoBehaviour
             newCard.GetComponent<OnHover>().canvas = worldCanvas;
             newCard.transform.SetParent(enemyIntentArea, false);
             newCard.SetActive(true);
+            enemyIntentionManager.addCard(newCard);
         }
         card.SetActive(true);
+        enemyIntentionManager.enactEnemyIntent();
     }
 
     private void drawCards()
