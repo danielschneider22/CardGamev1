@@ -11,6 +11,7 @@ public class DraggableArrow : MonoBehaviour
     public Canvas canvas;
 
     public Vector3 startPos;
+    public Vector3? staticEndPos;
 
     private GameObject[] drawnLineObjects;
     private GameObject arrow;
@@ -18,6 +19,7 @@ public class DraggableArrow : MonoBehaviour
     public int numCircles;
     public bool drawArrow;
     public GameObject draggedCard;
+    public bool drawStaticArrow;
 
     public void Start()
     {
@@ -39,15 +41,25 @@ public class DraggableArrow : MonoBehaviour
         controlPoints = new Vector3[4];
     }
 
+    public void clearArrow()
+    {
+        foreach (GameObject obj in drawnLineObjects)
+        {
+            obj.SetActive(false);
+        }
+        arrow.SetActive(false);
+    }
+
     public void Update()
     {
         /*if (Input.GetMouseButtonDown(0))
         {
             startPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
         }*/
-        if (Input.GetMouseButton(0) && drawArrow)
+        if ((Input.GetMouseButton(0) && drawArrow) || drawStaticArrow)
         {
-            Vector3 endPos = Input.mousePosition;
+            Vector3 endPos = staticEndPos != null ? (Vector3)staticEndPos : Input.mousePosition;
+            // Vector3 endPos = Input.mousePosition;
 
             controlPoints[0] = startPos;
             controlPoints[1] = new Vector3(startPos.x, (endPos.y - startPos.y) / 2 + startPos.y);
@@ -76,11 +88,7 @@ public class DraggableArrow : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            foreach (GameObject obj in drawnLineObjects)
-            {
-                obj.SetActive(false);
-            }
-            arrow.SetActive(false);
+            clearArrow();
         }
     }
 }

@@ -6,24 +6,69 @@ using UnityEngine.UI;
 public class EnemyIntentionManager : MonoBehaviour
 {
     public List<GameObject> cards;
+    public List<EnemyAction> enemyActions;
     public GameObject creatureCardTemplate;
     public GridLayoutGroup enemyField;
+    public PlayerController enemyController;
+    public DraggableArrow draggableArrow;
+    public Camera cam;
+
+    private float enemyActionTimer;
+    private void Awake()
+    {
+        enemyActionTimer = 0f;
+        enemyActions = new List<EnemyAction>{ };
+    }
 
     public void addCard(GameObject card)
     {
         cards.Add(card);
     }
 
-    public void enactEnemyIntent()
+    public void Update()
     {
-        EnemyAction[] enemyActions = getEnemyActions();
-        foreach(EnemyAction enemyAction in enemyActions)
+        if(enemyActions.Count > 0 && enemyActionTimer <= 0f)
         {
-            if(enemyAction.actionType == EnemyActionType.playCreature)
+            EnemyAction enemyAction = enemyActions[0];
+            if (enemyAction.actionType == EnemyActionType.playCreature && !enemyAction.showingAction)
+            {
+                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(enemyField.transform.position));
+                showPauseBeforeAction(enemyAction);
+            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingAction)
             {
                 placeCardInEnemyField(enemyAction.card);
+                removeAction(enemyAction);
             }
+        } else if (enemyActions.Count> 0)
+        {
+            enemyActionTimer -= Time.deltaTime;
         }
+    }
+    private void drawIntentArrow(EnemyAction enemyAction, Vector3 endPoint)
+    {
+        draggableArrow.startPos = cam.WorldToScreenPoint(new Vector3(enemyAction.card.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z));
+        draggableArrow.staticEndPos = endPoint;
+        draggableArrow.drawStaticArrow = true;
+    }
+
+    private void showPauseBeforeAction(EnemyAction enemyAction)
+    {
+        enemyAction.card.GetComponent<ChangeBackgroundLighting>().whiteBacklighting();
+        enemyActionTimer = 2f;
+        enemyActions[0].showingAction = true;
+    }
+
+    private void removeAction(EnemyAction enemyAction)
+    {
+        enemyActions.Remove(enemyAction);
+        draggableArrow.drawStaticArrow = false;
+        draggableArrow.staticEndPos = null;
+        draggableArrow.clearArrow();
+    }
+
+    public void enactEnemyIntent()
+    {
+        enemyActions = getEnemyActions();
     }
 
     private void placeCardInEnemyField(GameObject cardObj)
@@ -44,14 +89,16 @@ public class EnemyIntentionManager : MonoBehaviour
         // newChild.transform.position = playerFieldImage.transform.position;// Camera.main.ScreenToWorldPoint(cardObj.transform.position); // new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);
         // playerFieldManager.addCardToField(newChild);
         creatureCardTemplate.SetActive(true);
+        enemyController.decreaseCurrEnergy(newChild.GetComponent<CardDisplay>().card.cardCost);
         Destroy(cardObj);
     }
 
-    private EnemyAction[] getEnemyActions()
+    private List<EnemyAction> getEnemyActions()
     {
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
+        EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
 
-        EnemyAction[] actions = new EnemyAction[] { playCreature };
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2 };
 
         return (actions);
     }

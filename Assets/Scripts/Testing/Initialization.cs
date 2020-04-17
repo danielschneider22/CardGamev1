@@ -23,6 +23,8 @@ public class Initialization : MonoBehaviour
     public int numIntentCards = 3;
     public Transform enemyIntentArea;
 
+    private float enemyIntentStartTimer;
+    private bool enemyTurnStarted;
     private float drawCardTimer;
     private int numCardsDrawn;
     void Awake()
@@ -33,6 +35,8 @@ public class Initialization : MonoBehaviour
         initializeEnemyIntent();
         drawCardTimer = 0f;
         numCardsDrawn = 0;
+        enemyIntentStartTimer = 1f;
+        enemyTurnStarted = false;
     }
 
     private void Update()
@@ -45,6 +49,14 @@ public class Initialization : MonoBehaviour
         } else if (numCardsDrawn < numCardsToDraw)
         {
             drawCardTimer -= Time.deltaTime;
+        }
+        if(enemyIntentStartTimer >= 0f && !enemyTurnStarted)
+        {
+            enemyIntentStartTimer -= Time.deltaTime;
+        } else if (!enemyTurnStarted)
+        {
+            enemyIntentionManager.enactEnemyIntent();
+            enemyTurnStarted = true;
         }
     }
 
@@ -70,7 +82,7 @@ public class Initialization : MonoBehaviour
 
     private void initializeEnemyField()
     {
-        card.SetActive(false);
+        /* card.SetActive(false);
         for (var i = 0; i < numEnemyFieldCards; i++)
         {
             Card copyNinja = Instantiate(ninjaCard);
@@ -92,7 +104,7 @@ public class Initialization : MonoBehaviour
             // rotationVector.x = -.2f;
             // copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
-        card.SetActive(true);
+        card.SetActive(true);*/
     }
 
     private void initializeEnemyIntent()
@@ -124,7 +136,6 @@ public class Initialization : MonoBehaviour
             enemyIntentionManager.addCard(newCard);
         }
         card.SetActive(true);
-        enemyIntentionManager.enactEnemyIntent();
     }
 
     private void drawCards()

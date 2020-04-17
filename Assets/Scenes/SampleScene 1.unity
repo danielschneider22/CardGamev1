@@ -19315,6 +19315,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &905861224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905861226}
+  - component: {fileID: 905861225}
+  m_Layer: 0
+  m_Name: EnemyController
+  m_TagString: Player Controller
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &905861225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905861224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88186a8b26ab954d904184566f27af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyText: {fileID: 1520386463}
+  currEnergy: 4
+  maxEnergy: 4
+  toggleEnergyGlow: {fileID: 1238265144}
+--- !u!4 &905861226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905861224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.49221262, y: -2.2595482, z: -1.2955873}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &907143547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25731,6 +25778,9 @@ MonoBehaviour:
   creatureCardTemplate: {fileID: 4290865966551162083, guid: a236280ba462219458ff60223b220e58,
     type: 3}
   enemyField: {fileID: 262984661}
+  enemyController: {fileID: 905861225}
+  draggableArrow: {fileID: 1841793526}
+  cam: {fileID: 519420031}
 --- !u!1 &1145820878
 GameObject:
   m_ObjectHideFlags: 0
@@ -44253,11 +44303,13 @@ MonoBehaviour:
   circle: {fileID: 6322906518764560395, guid: 272ea649181a11f4191a7a042825a1ad, type: 3}
   canvas: {fileID: 480585302}
   startPos: {x: 0, y: 0, z: 0}
+  staticEndPos: {x: 0, y: 0, z: 0}
   arrowPrefab: {fileID: 5167438042653226438, guid: fd0ef83d6876d914187c01fc73342515,
     type: 3}
   numCircles: 20
   drawArrow: 0
   draggedCard: {fileID: 0}
+  drawStaticArrow: 0
 --- !u!1 &1844569294
 GameObject:
   m_ObjectHideFlags: 0

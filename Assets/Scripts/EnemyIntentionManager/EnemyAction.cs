@@ -6,6 +6,7 @@ public class EnemyAction
 {
     public GameObject card;
     public GameObject cardTarget;
+    public bool showingAction;
 
     public EnemyAction(GameObject card, GameObject cardTarget, EnemyActionType actionType)
     {
