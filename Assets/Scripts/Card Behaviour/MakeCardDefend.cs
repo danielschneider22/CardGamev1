@@ -51,10 +51,15 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         {
             DefendCard defendCard = (DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
-            defendImage.sprite = activeDefend;
-            hoveredCard.canAttack = true;
+            activateDefend(defendCard);
             playerController.decreaseCurrEnergy(defendCard.cardCost);
             handManager.discardCard(defendCardGameObj);
         }
+    }
+
+    public void activateDefend(DefendCard defendCard)
+    {
+        defendImage.sprite = activeDefend;
+        hoveredCard.canAttack = true;
     }
 }

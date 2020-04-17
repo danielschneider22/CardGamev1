@@ -51,10 +51,15 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         {
             AttackCard attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
-            attackImage.sprite = activeAttack;
-            hoveredCard.canAttack = true;
+            activateAttack(attackCard);
             playerController.decreaseCurrEnergy(attackCard.cardCost);
             handManager.discardCard(attackCardGameObj);
         }
+    }
+
+    public void activateAttack(AttackCard attackCard)
+    {
+        attackImage.sprite = activeAttack;
+        hoveredCard.canAttack = true;
     }
 }

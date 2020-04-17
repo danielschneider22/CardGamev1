@@ -33,13 +33,37 @@ public class EnemyIntentionManager : MonoBehaviour
             if(!enemyAction.showingHover && !enemyAction.showingArrow)
             {
                 showHover(enemyAction);
-            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
+            }
+            // playing creature
+            else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
             {
                 drawIntentArrow(enemyAction, cam.WorldToScreenPoint(enemyField.transform.position));
             } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
             {
                 placeCardInEnemyField(enemyAction.card);
                 removeAction(enemyAction);
+            }
+            // playing attack or defend card
+            else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
+            {
+                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
+                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
+            }
+            else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
+            {
+                Card enemyCard = enemyAction.card.GetComponent<CardDisplay>().card;
+                if(enemyAction.actionType == EnemyActionType.playAttack)
+                {
+                    enemyAction.cardTarget.GetComponent<MakeCardAttack>().activateAttack((AttackCard)enemyCard);
+                } else
+                {
+                    enemyAction.cardTarget.GetComponent<MakeCardDefend>().activateDefend((DefendCard)enemyCard);
+                }
+                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+
+                enemyController.decreaseCurrEnergy(enemyCard.cardCost);
+                removeAction(enemyAction);
+                Destroy(enemyAction.card);
             }
         } else if (enemyActions.Count> 0)
         {
@@ -99,6 +123,9 @@ public class EnemyIntentionManager : MonoBehaviour
             if(enemyAction.card == cardObj)
             {
                 enemyAction.card = newChild;
+            } else if(enemyAction.cardTarget == cardObj)
+            {
+                enemyAction.cardTarget = newChild;
             }
         }
         Destroy(cardObj);
@@ -108,8 +135,10 @@ public class EnemyIntentionManager : MonoBehaviour
     {
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
+        EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
 
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2 };
+
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2, activateAttack };
 
         return (actions);
     }
