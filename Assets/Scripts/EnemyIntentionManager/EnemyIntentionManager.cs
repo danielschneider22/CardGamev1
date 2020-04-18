@@ -11,6 +11,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public GridLayoutGroup enemyField;
     public PlayerController enemyController;
     public DraggableArrow draggableArrow;
+    public GameObject enemyFieldBackground;
     public Camera cam;
 
     private float enemyActionTimer;
@@ -38,10 +39,12 @@ public class EnemyIntentionManager : MonoBehaviour
             else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
             {
                 drawIntentArrow(enemyAction, cam.WorldToScreenPoint(enemyField.transform.position));
+                enemyFieldBackground.SetActive(true);
             } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
             {
                 placeCardInEnemyField(enemyAction.card);
                 removeAction(enemyAction);
+                enemyFieldBackground.SetActive(false);
             }
             // playing attack or defend card
             else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
@@ -92,6 +95,7 @@ public class EnemyIntentionManager : MonoBehaviour
         draggableArrow.drawStaticArrow = false;
         draggableArrow.staticEndPos = null;
         draggableArrow.clearArrow();
+        enemyActionTimer = 1f;
     }
 
     public void enactEnemyIntent()

@@ -25780,6 +25780,7 @@ MonoBehaviour:
   enemyField: {fileID: 262984661}
   enemyController: {fileID: 905861225}
   draggableArrow: {fileID: 1841793526}
+  enemyFieldBackground: {fileID: 519343907}
   cam: {fileID: 519420031}
 --- !u!1 &1145820878
 GameObject:
@@ -44303,7 +44304,6 @@ MonoBehaviour:
   circle: {fileID: 6322906518764560395, guid: 272ea649181a11f4191a7a042825a1ad, type: 3}
   canvas: {fileID: 480585302}
   startPos: {x: 0, y: 0, z: 0}
-  staticEndPos: {x: 0, y: 0, z: 0}
   arrowPrefab: {fileID: 5167438042653226438, guid: fd0ef83d6876d914187c01fc73342515,
     type: 3}
   numCircles: 20
