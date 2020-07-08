@@ -32,10 +32,12 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         string parentObjName = gameObject.transform.parent.name;
         initBacklightColor = backgroundLighting.backlightingImage.color;
 
-        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack")
+        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack" && canAttack((AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
         {
             attackCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
             backgroundLighting.greenBacklighting();
+        } else if(parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack" && !canAttack((AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card)) {
+            backgroundLighting.redBacklighting();
         }
     }
 
@@ -61,5 +63,14 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     {
         attackImage.sprite = activeAttack;
         hoveredCard.canAttack = true;
+    }
+
+    private bool canAttack(AttackCard attackCard)
+    {
+        if(playerController.currEnergy >= attackCard.cardCost && hoveredCard.canAttack == false)
+        {
+            return true;
+        }
+        return false;
     }
 }

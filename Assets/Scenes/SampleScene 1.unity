@@ -16999,14 +16999,14 @@ RectTransform:
   m_GameObject: {fileID: 519343907}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 33.5}
-  m_LocalScale: {x: 1, y: 1, z: 0.9998898}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1893319134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 28.7, y: 57.699997}
+  m_AnchoredPosition: {x: 37.7, y: 41.800003}
   m_SizeDelta: {x: 467.2, y: 139.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &519343909
@@ -19327,7 +19327,7 @@ GameObject:
   - component: {fileID: 905861225}
   m_Layer: 0
   m_Name: EnemyController
-  m_TagString: Player Controller
+  m_TagString: EnemyController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19347,7 +19347,7 @@ MonoBehaviour:
   energyText: {fileID: 1520386463}
   currEnergy: 4
   maxEnergy: 4
-  toggleEnergyGlow: {fileID: 1238265144}
+  toggleEnergyGlow: {fileID: 949053580}
 --- !u!4 &905861226
 Transform:
   m_ObjectHideFlags: 0
@@ -25781,6 +25781,7 @@ MonoBehaviour:
   enemyController: {fileID: 905861225}
   draggableArrow: {fileID: 1841793526}
   enemyFieldBackground: {fileID: 519343907}
+  playerFieldManager: {fileID: 1181721269}
   cam: {fileID: 519420031}
 --- !u!1 &1145820878
 GameObject:
@@ -36614,6 +36615,8 @@ MonoBehaviour:
   numCardsToDraw: 3
   numIntentCards: 3
   enemyIntentArea: {fileID: 399571235}
+  playerFieldManager: {fileID: 1181721269}
+  numPlayerFieldCards: 2
 --- !u!4 &1390871127
 Transform:
   m_ObjectHideFlags: 0

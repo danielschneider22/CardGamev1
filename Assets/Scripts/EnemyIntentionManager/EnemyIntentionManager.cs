@@ -12,6 +12,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public PlayerController enemyController;
     public DraggableArrow draggableArrow;
     public GameObject enemyFieldBackground;
+    public FieldManager playerFieldManager;
     public Camera cam;
 
     private float enemyActionTimer;
@@ -49,7 +50,7 @@ public class EnemyIntentionManager : MonoBehaviour
             // playing attack or defend card
             else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
             {
-                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
+                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z)));
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
             }
             else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
@@ -64,9 +65,30 @@ public class EnemyIntentionManager : MonoBehaviour
                 }
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
 
-                enemyController.decreaseCurrEnergy(enemyCard.cardCost);
                 removeAction(enemyAction);
                 Destroy(enemyAction.card);
+            }
+            // attacking with a creature
+            else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingHover && !enemyAction.showingArrow)
+            {
+                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
+                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
+                CreatureCard enemyCard = (CreatureCard)enemyAction.cardTarget.GetComponent<CardDisplay>().card;
+                enemyAction.cardTarget.GetComponent<AttackedManager>().tempReduceHealth(enemyCard);
+            }
+            else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingArrow)
+            {
+                CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                enemyAction.cardTarget.GetComponent<AttackedManager>().applyTempAttack(enemyCard);
+
+                AttackDefenseManager atckDefManager = enemyAction.card.GetComponent<AttackDefenseManager>();
+                atckDefManager.cantAttack();
+
+                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+                enemyAction.card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+
+                enemyController.decreaseCurrEnergy(enemyCard.cardCost);
+                removeAction(enemyAction);
             }
         } else if (enemyActions.Count> 0)
         {
@@ -140,9 +162,9 @@ public class EnemyIntentionManager : MonoBehaviour
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
         EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
+        EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
 
-
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2, activateAttack };
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature, activateAttack, attackCreature };
 
         return (actions);
     }

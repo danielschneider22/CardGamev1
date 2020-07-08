@@ -32,10 +32,13 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         string parentObjName = gameObject.transform.parent.name;
         initBacklightColor = backgroundLighting.backlightingImage.color;
 
-        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Defend")
+        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Defend" && canDefend((DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
         {
             defendCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
             backgroundLighting.greenBacklighting();
+        } else if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Defend" && !canDefend((DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
+        {
+            backgroundLighting.redBacklighting();
         }
     }
 
@@ -61,5 +64,14 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     {
         defendImage.sprite = activeDefend;
         hoveredCard.canAttack = true;
+    }
+
+    private bool canDefend(DefendCard attackCard)
+    {
+        if (playerController.currEnergy >= attackCard.cardCost && hoveredCard.isDefending == false)
+        {
+            return true;
+        }
+        return false;
     }
 }

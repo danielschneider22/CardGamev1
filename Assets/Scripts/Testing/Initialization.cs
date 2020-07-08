@@ -22,6 +22,8 @@ public class Initialization : MonoBehaviour
     public int numCardsToDraw;
     public int numIntentCards = 3;
     public Transform enemyIntentArea;
+    public FieldManager playerFieldManager;
+    public int numPlayerFieldCards;
 
     private float enemyIntentStartTimer;
     private bool enemyTurnStarted;
@@ -33,9 +35,10 @@ public class Initialization : MonoBehaviour
         // drawCards();
         initializeEnemyField();
         initializeEnemyIntent();
+        // initializePlayerField();
         drawCardTimer = 0f;
         numCardsDrawn = 0;
-        enemyIntentStartTimer = 1f;
+        enemyIntentStartTimer = 3f;
         enemyTurnStarted = false;
     }
 
@@ -50,14 +53,14 @@ public class Initialization : MonoBehaviour
         {
             drawCardTimer -= Time.deltaTime;
         }
-        if(enemyIntentStartTimer >= 0f && !enemyTurnStarted)
+        /* if(enemyIntentStartTimer >= 0f && !enemyTurnStarted)
         {
             enemyIntentStartTimer -= Time.deltaTime;
         } else if (!enemyTurnStarted)
         {
             enemyIntentionManager.enactEnemyIntent();
             enemyTurnStarted = true;
-        }
+        }*/
     }
 
     private void initializeHand()
@@ -80,9 +83,34 @@ public class Initialization : MonoBehaviour
         }
     }
 
+    private void initializePlayerField()
+    {
+        card.SetActive(false);
+        for (var i = 0; i < numPlayerFieldCards; i++)
+        {
+            Card copyNinja = Instantiate(ninjaCard);
+            Card copyGoblin = Instantiate(goblinCard);
+            creatureCardTemplate.SetActive(false);
+            GameObject copyCard = Instantiate(creatureCardTemplate);
+            copyCard.GetComponent<CardDisplay>().card = copyNinja;
+            copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<CardDisplay>().location = "field";
+            copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
+            copyCard.GetComponent<OnHover>().canvas = worldCanvas;
+            copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+            copyCard.GetComponent<Animator>().enabled = false;
+            copyCard.SetActive(true);
+            creatureCardTemplate.SetActive(true);
+
+            playerFieldManager.addCardToField(copyCard);
+        }
+        card.SetActive(true);
+        playerFieldManager.resetFieldPositions();
+    }
+
     private void initializeEnemyField()
     {
-        /* card.SetActive(false);
+        card.SetActive(false);
         for (var i = 0; i < numEnemyFieldCards; i++)
         {
             Card copyNinja = Instantiate(ninjaCard);
@@ -104,7 +132,7 @@ public class Initialization : MonoBehaviour
             // rotationVector.x = -.2f;
             // copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
-        card.SetActive(true);*/
+        card.SetActive(true);
     }
 
     private void initializeEnemyIntent()
@@ -133,7 +161,7 @@ public class Initialization : MonoBehaviour
             newCard.GetComponent<OnHover>().canvas = worldCanvas;
             newCard.transform.SetParent(enemyIntentArea, false);
             newCard.SetActive(true);
-            enemyIntentionManager.addCard(newCard);
+            // enemyIntentionManager.addCard(newCard);
         }
         card.SetActive(true);
     }

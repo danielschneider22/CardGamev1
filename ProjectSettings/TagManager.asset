@@ -11,6 +11,7 @@ TagManager:
   - Card
   - Hand Manager
   - Player Field Manager
+  - EnemyController
   layers:
   - Default
   - TransparentFX

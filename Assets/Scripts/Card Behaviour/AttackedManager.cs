@@ -39,12 +39,17 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
             attackingCardObj = draggableArrow.draggedCard;
             CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
 
-            int damage = calculateDamage(attackingCard);
-            healthBar.tempDecreaseHealth(damage);
+            tempReduceHealth(attackingCard);
         } else if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && !isValidAttack(draggableArrow.draggedCard))
         {
             backgroundLighting.redBacklighting();
         }
+    }
+
+    public void tempReduceHealth(CreatureCard attackingCard)
+    {
+        int damage = calculateDamage(attackingCard);
+        healthBar.tempDecreaseHealth(damage);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -66,15 +71,20 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
             attackingCardCantAttack();
 
-            attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
-            bool shouldDestroy = healthBar.applyTempDecreaseHealth();
-
-            makeDamageTextAnimation();
-            animator.enabled = true;
-            string animationTrigger = shouldDestroy ? "CardDestroyedTrigger" : "CardDamagedTrigger";
-            animator.SetTrigger(animationTrigger);
-            attackingCardObj = null;
+            applyTempAttack(attackingCard);
         }
+    }
+
+    public void applyTempAttack(CreatureCard attackingCard)
+    {
+        attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
+        bool shouldDestroy = healthBar.applyTempDecreaseHealth();
+
+        makeDamageTextAnimation();
+        animator.enabled = true;
+        string animationTrigger = shouldDestroy ? "CardDestroyedTrigger" : "CardDamagedTrigger";
+        animator.SetTrigger(animationTrigger);
+        attackingCardObj = null;
     }
     private void makeDamageTextAnimation()
     {
