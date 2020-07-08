@@ -27,6 +27,7 @@ public class CardDisplay : MonoBehaviour
     public Image healthGreen;
     public Image healthOrange;
     public Image healthOutline;
+    public Image transparentOverlay;
 
     public Sprite attackFrontSprite;
     public Sprite defenseFrontSprite;

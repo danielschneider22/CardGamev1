@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class CantPlayRecolor : MonoBehaviour
 {
     public CardDisplay cardDisplay;
+    public Sprite noEnergyImage;
+    public Sprite energyImage;
     private PlayerController playerController;
     private void Awake()
     {
@@ -18,9 +20,17 @@ public class CantPlayRecolor : MonoBehaviour
     {
         GridLayoutGroup parentGroup = cardDisplay.GetComponentInParent<GridLayoutGroup>();
         Card droppingCard = cardDisplay.card;
-        if (droppingCard.cardCost > playerController.currEnergy && parentGroup != null && parentGroup.name == "Hand")
+        if (droppingCard.cardCost > playerController.currEnergy && cardDisplay.location == "hand" && cardDisplay.energyImage != noEnergyImage)
         {
-            cardDisplay.cardCostText.color = Color.red;
+            cardDisplay.front.color = Color.grey;
+            cardDisplay.energyImage.sprite = noEnergyImage;
+            cardDisplay.transparentOverlay.enabled = true;
+        }
+        else if (droppingCard.cardCost <= playerController.currEnergy && cardDisplay.location == "hand" && cardDisplay.energyImage != energyImage)
+        {
+            cardDisplay.front.color = Color.white;
+            cardDisplay.energyImage.sprite = energyImage;
+            cardDisplay.transparentOverlay.enabled = false;
         }
     }
 }

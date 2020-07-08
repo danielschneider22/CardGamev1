@@ -24,4 +24,20 @@ public class PlayerController : MonoBehaviour
             toggleEnergyGlow.stopGlow();
         }
     }
+
+    public void increaseCurrEnergy(int energyAdded)
+    {
+        if(currEnergy == 0 && energyAdded > 0)
+        {
+            toggleEnergyGlow.startGlow();
+        }
+        if (currEnergy + 1 <= maxEnergy)
+        {
+            currEnergy = currEnergy + 1;
+        } else
+        {
+            currEnergy = maxEnergy;
+        }
+        energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
 }

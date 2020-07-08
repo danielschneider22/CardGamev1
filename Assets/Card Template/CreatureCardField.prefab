@@ -1470,6 +1470,7 @@ MonoBehaviour:
   healthGreen: {fileID: 5580363342950358855}
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
+  transparentOverlay: {fileID: 0}
   attackFrontSprite: {fileID: 0}
   defenseFrontSprite: {fileID: 0}
   healthBar: {fileID: 6828555538386395866}
@@ -1617,6 +1618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDisplay: {fileID: 6161537157606756943}
+  noEnergyImage: {fileID: 0}
+  energyImage: {fileID: 0}
 --- !u!114 &1240478445165564745
 MonoBehaviour:
   m_ObjectHideFlags: 0
