@@ -17,6 +17,7 @@ public class Initialization : MonoBehaviour
     public Card goblinCard;
     public Card bashCard;
     public Material material;
+    public Material fireBackMaterial;
     public PlayerDeckManager playerDeckManager;
     public EnemyIntentionManager enemyIntentionManager;
     public int numCardsToDraw;
@@ -74,6 +75,7 @@ public class Initialization : MonoBehaviour
             copyCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
             copyCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
             copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<CardDisplay>().fireBackMaterial = Instantiate(fireBackMaterial);
             copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
             copyCard.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
             copyCard.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

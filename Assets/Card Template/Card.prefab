@@ -2013,6 +2013,7 @@ MonoBehaviour:
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
   transparentOverlay: {fileID: 5570111589982746149}
+  fireBack: {fileID: 0}
   attackFrontSprite: {fileID: -8789170865316149833, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
   defenseFrontSprite: {fileID: 7342689105993438177, guid: 5f1e064348bdea74bbe661f15b975187,
@@ -2023,6 +2024,7 @@ MonoBehaviour:
   cardType: {fileID: 2691062640684328583}
   attackEffect: {fileID: 8551933055270749884}
   material: {fileID: 0}
+  fireBackMaterial: {fileID: 0}
   location: 
 --- !u!114 &4760673835591094996
 MonoBehaviour:

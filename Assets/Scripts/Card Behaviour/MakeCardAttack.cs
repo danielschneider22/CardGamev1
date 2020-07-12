@@ -14,9 +14,9 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     private CreatureCard hoveredCard;
     private PlayerController playerController;
 
-    public Image attackImage;
+    public Image fireBack;
     public Sprite greyedAttack;
-    public Sprite activeAttack;
+    // public Sprite activeAttack;
 
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         handManager = GameObject.FindGameObjectWithTag("Hand Manager").GetComponent<HandManager>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
         hoveredCard = (CreatureCard)GetComponent<CardDisplay>().card;
+        fireBack = GetComponent<CardDisplay>().fireBack;
         playerController = GameObject.FindGameObjectWithTag("Player Controller").GetComponent<PlayerController>();
     }
 
@@ -61,7 +62,8 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
 
     public void activateAttack(AttackCard attackCard)
     {
-        attackImage.sprite = activeAttack;
+        // attackImage.sprite = activeAttack;
+        fireBack.enabled = true;
         hoveredCard.canAttack = true;
     }
 

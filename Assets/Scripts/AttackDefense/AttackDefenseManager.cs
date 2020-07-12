@@ -12,7 +12,7 @@ public class AttackDefenseManager : MonoBehaviour
 
     public TextMeshProUGUI defenseText;
     public Animator animator;
-    public Sprite greyedAttack;
+    // public Sprite greyedAttack;
 
     private void Awake()
     {
@@ -35,6 +35,7 @@ public class AttackDefenseManager : MonoBehaviour
     public void cantAttack()
     {
         card.canAttack = false;
-        cardDisplay.attackImage.sprite = greyedAttack;
+        cardDisplay.fireBack.enabled = false;
+        // cardDisplay.attackImage.sprite = greyedAttack;
     }
 }

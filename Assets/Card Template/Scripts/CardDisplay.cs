@@ -29,6 +29,8 @@ public class CardDisplay : MonoBehaviour
     public Image healthOutline;
     public Image transparentOverlay;
 
+    public Image fireBack;
+
     public Sprite attackFrontSprite;
     public Sprite defenseFrontSprite;
 
@@ -40,6 +42,7 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI attackEffect;
 
     public Material material;
+    public Material fireBackMaterial;
     public string location;
 
     private void Awake()
@@ -135,6 +138,7 @@ public class CardDisplay : MonoBehaviour
         if (location.ToLower().Contains("field"))
         {
             artworkImage.sprite = ((CreatureCard) card).circleArtwork;
+            fireBack.material = Instantiate(fireBackMaterial);
         }
     }
 
