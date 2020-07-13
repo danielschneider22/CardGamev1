@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using static NonCreatureCard;
 
 public class CardDisplay : MonoBehaviour
 {
@@ -35,11 +36,11 @@ public class CardDisplay : MonoBehaviour
     public Sprite defenseFrontSprite;
 
     public GameObject healthBar;
-    public GameObject attackTextGameObj;
+    public GameObject nonCreatureTextGameObj;
 
     public TextMeshProUGUI effect1;
     public TextMeshProUGUI cardType;
-    public TextMeshProUGUI attackEffect;
+    public TextMeshProUGUI nonCreatureEffect;
 
     public Material material;
     public Material fireBackMaterial;
@@ -64,8 +65,9 @@ public class CardDisplay : MonoBehaviour
                 healthOutline.material = material;
                 gameObject.AddComponent(typeof(AttackDefenseManager));
                 gameObject.GetComponent<AttackDefenseManager>().defenseText = defenseText;
-            } else if (card is AttackCard)
+            } else if (card is NonCreatureCard)
             {
+                NonCreatureCard cardAsNonCreatureCard = (NonCreatureCard)card;
                 attackText.enabled = false;
                 defenseText.enabled = false;
                 healthText.enabled = false;
@@ -75,37 +77,23 @@ public class CardDisplay : MonoBehaviour
                 healthGreen.enabled = false;
                 healthOrange.enabled = false;
                 healthOutline.enabled = false;
-                front.sprite = attackFrontSprite;
+                switch (cardAsNonCreatureCard.borderColorType)
+                {
+                    case (BorderColorType.attack):
+                        front.sprite = attackFrontSprite;
+                        break;
+                    case (BorderColorType.defend):
+                        front.sprite = defenseFrontSprite;
+                        break;
+                }
                 effect1.enabled = false;
-                attackTextGameObj.SetActive(true);
-                attackEffect.text = ((AttackCard) card).attackText;
+                nonCreatureTextGameObj.SetActive(true);
+                nonCreatureEffect.text = cardAsNonCreatureCard.text;
                 foreach (Image slot in effectSlots)
                 {
                     slot.enabled = false;
                 }
-                cardType.text = "ATTACK";
-                healthBar.SetActive(false);
-            }
-            else if (card is DefendCard)
-            {
-                attackText.enabled = false;
-                defenseText.enabled = false;
-                healthText.enabled = false;
-                attackImage.enabled = false;
-                defenseImage.enabled = false;
-                healthRed.enabled = false;
-                healthGreen.enabled = false;
-                healthOrange.enabled = false;
-                healthOutline.enabled = false;
-                front.sprite = defenseFrontSprite;
-                effect1.enabled = false;
-                attackTextGameObj.SetActive(true);
-                attackEffect.text = ((DefendCard)card).defendText;
-                foreach (Image slot in effectSlots)
-                {
-                    slot.enabled = false;
-                }
-                cardType.text = "DEFEND";
+                cardType.text = cardAsNonCreatureCard.frameText;
                 healthBar.SetActive(false);
             }
 

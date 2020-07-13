@@ -32,13 +32,18 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         string parentObjName = gameObject.transform.parent.name;
         initBacklightColor = backgroundLighting.backlightingImage.color;
 
-        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Defend" && canDefend((DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
+        if (draggableArrow.drawArrow)
         {
-            defendCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
-            backgroundLighting.greenBacklighting();
-        } else if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Defend" && !canDefend((DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
-        {
-            backgroundLighting.redBacklighting();
+            Card card = draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+            if (parentObjName == "Player Field" && card is NonCreatureCard && ((NonCreatureCard)card).borderColorType == NonCreatureCard.BorderColorType.defend && canDefend(card))
+            {
+                defendCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
+                backgroundLighting.greenBacklighting();
+            }
+            else if (parentObjName == "Player Field" && ((NonCreatureCard)card).borderColorType == NonCreatureCard.BorderColorType.defend && !canDefend(card))
+            {
+                backgroundLighting.redBacklighting();
+            }
         }
     }
 
@@ -52,7 +57,7 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
 
         if (parentObjName == "Player Field" && defendCardGameObj)
         {
-            DefendCard defendCard = (DefendCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+            Card defendCard = draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
             activateDefend(defendCard);
             playerController.decreaseCurrEnergy(defendCard.cardCost);
@@ -60,13 +65,13 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         }
     }
 
-    public void activateDefend(DefendCard defendCard)
+    public void activateDefend(Card defendCard)
     {
         defendImage.sprite = activeDefend;
         hoveredCard.isDefending = true;
     }
 
-    private bool canDefend(DefendCard attackCard)
+    private bool canDefend(Card attackCard)
     {
         if (playerController.currEnergy >= attackCard.cardCost && hoveredCard.isDefending == false)
         {

@@ -58,10 +58,10 @@ public class EnemyIntentionManager : MonoBehaviour
                 Card enemyCard = enemyAction.card.GetComponent<CardDisplay>().card;
                 if(enemyAction.actionType == EnemyActionType.playAttack)
                 {
-                    enemyAction.cardTarget.GetComponent<MakeCardAttack>().activateAttack((AttackCard)enemyCard);
+                    enemyAction.cardTarget.GetComponent<MakeCardAttack>().activateAttack(enemyCard);
                 } else
                 {
-                    enemyAction.cardTarget.GetComponent<MakeCardDefend>().activateDefend((DefendCard)enemyCard);
+                    enemyAction.cardTarget.GetComponent<MakeCardDefend>().activateDefend(enemyCard);
                 }
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
 

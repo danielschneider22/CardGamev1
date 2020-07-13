@@ -33,13 +33,21 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         string parentObjName = gameObject.transform.parent.name;
         initBacklightColor = backgroundLighting.backlightingImage.color;
 
-        if (parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack" && canAttack((AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card))
+        if (draggableArrow.drawArrow)
         {
-            attackCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
-            backgroundLighting.greenBacklighting();
-        } else if(parentObjName == "Player Field" && draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card.cardType == "Attack" && !canAttack((AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card)) {
-            backgroundLighting.redBacklighting();
+            Card card = draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+            if (parentObjName == "Player Field" && card is NonCreatureCard && ((NonCreatureCard)card).borderColorType == NonCreatureCard.BorderColorType.attack && canAttack(card))
+            {
+                attackCardGameObj = handManager.hoverCopyTopCard.handTransform.gameObject;
+                backgroundLighting.greenBacklighting();
+            }
+            else if (parentObjName == "Player Field" && ((NonCreatureCard)card).borderColorType == NonCreatureCard.BorderColorType.attack && !canAttack(card))
+            {
+                backgroundLighting.redBacklighting();
+            }
         }
+
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -52,7 +60,7 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
 
         if (parentObjName == "Player Field" && attackCardGameObj)
         {
-            AttackCard attackCard = (AttackCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
+            Card attackCard = draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
             activateAttack(attackCard);
             playerController.decreaseCurrEnergy(attackCard.cardCost);
@@ -60,14 +68,14 @@ public class MakeCardAttack : MonoBehaviour, IPointerEnterHandler, IDropHandler,
         }
     }
 
-    public void activateAttack(AttackCard attackCard)
+    public void activateAttack(Card attackCard)
     {
         // attackImage.sprite = activeAttack;
         fireBack.enabled = true;
         hoveredCard.canAttack = true;
     }
 
-    private bool canAttack(AttackCard attackCard)
+    private bool canAttack(Card attackCard)
     {
         if(playerController.currEnergy >= attackCard.cardCost && hoveredCard.canAttack == false)
         {

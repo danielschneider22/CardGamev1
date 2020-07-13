@@ -65,14 +65,14 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         storeCardPropertiesAtMouseClick();
-        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
+        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card is CreatureCard)
         {
             toggleCardDragProperites(true);
             setCardPositionToMousePointer();
             togglePlayerFieldInteractable(true);
             handManager.clearTopCardFromMovingCards();
             handManager.stopHandBlockingRaycasts();
-        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && (cardDisplay.card.cardType == "Attack" || cardDisplay.card.cardType == "Defend")))
+        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && (cardDisplay.card is NonCreatureCard)))
         {
             // Vector3 cardPosition = transform.parent.name == "TopOfHandArea" ? new Vector3(transform.position.x + rectTransform.rect.center.x, transform.position.y + rectTransform.rect.center.y, 1) : Input.mousePosition; // canvas.worldCamera.WorldToScreenPoint(transform.position);
             Vector3 cardPosition = Input.mousePosition;
@@ -95,13 +95,13 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     {
         restoreCardPropertiesToMouseClickState();
         layout.ignoreLayout = false;
-        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card.cardType == "Creature")
+        if (transform.parent.name == "TopOfHandArea" && cardDisplay.card is CreatureCard)
         {
             toggleCardDragProperites(false);
             togglePlayerFieldInteractable(false);
             // give time for drop actions to be done before resetting hand positions
             pauseBeforeResettingHand = .001f;
-        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && (cardDisplay.card.cardType == "Attack") || cardDisplay.card.cardType == "Defend"))
+        } else if (transform.parent.name == "Player Field" || (transform.parent.name == "TopOfHandArea" && (cardDisplay.card is NonCreatureCard)))
         {
             this.isDragging = false;
             draggableArrow.drawArrow = false;

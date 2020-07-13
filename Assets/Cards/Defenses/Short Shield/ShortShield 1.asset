@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fdf2c991e13ccf458b79880acedd18d, type: 3}
-  m_Name: ShortShield
+  m_Script: {fileID: 11500000, guid: aff1ce66587928b4ea1ca4e64cc2bfcc, type: 3}
+  m_Name: ShortShield 1
   m_EditorClassIdentifier: 
   cardName: Short Shield
-  cardType: Defend
   effects: []
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: d0b7881d55ff23e469406dc6bf15ddb4, type: 3}
   cardCost: 1
-  defendModifier: 0
-  defendText: Target creature can defend this turn.
+  borderColorType: 1
+  text: Target creature can defend this turn.
+  frameText: DEFEND

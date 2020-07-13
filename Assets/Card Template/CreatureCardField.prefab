@@ -1324,10 +1324,10 @@ MonoBehaviour:
   attackFrontSprite: {fileID: 0}
   defenseFrontSprite: {fileID: 0}
   healthBar: {fileID: 6828555538386395866}
-  attackTextGameObj: {fileID: 0}
+  nonCreatureTextGameObj: {fileID: 0}
   effect1: {fileID: 0}
   cardType: {fileID: 0}
-  attackEffect: {fileID: 0}
+  nonCreatureEffect: {fileID: 0}
   material: {fileID: 0}
   fireBackMaterial: {fileID: 2100000, guid: a23f3d89410c93f4fa5bc541eb574277, type: 2}
   location: 
