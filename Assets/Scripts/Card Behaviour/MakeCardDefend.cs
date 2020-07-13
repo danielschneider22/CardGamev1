@@ -63,7 +63,7 @@ public class MakeCardDefend : MonoBehaviour, IPointerEnterHandler, IDropHandler,
     public void activateDefend(DefendCard defendCard)
     {
         defendImage.sprite = activeDefend;
-        hoveredCard.canAttack = true;
+        hoveredCard.isDefending = true;
     }
 
     private bool canDefend(DefendCard attackCard)

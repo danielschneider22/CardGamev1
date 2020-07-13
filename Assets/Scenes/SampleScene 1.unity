@@ -1144,6 +1144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fixedTime: 1
+  use3dRotation: 0
 --- !u!222 &209411103
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6471,6 +6472,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fixedTime: 1
+  use3dRotation: 0
 --- !u!222 &322209990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20018,6 +20020,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fixedTime: 1
+  use3dRotation: 0
 --- !u!199 &949053582
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -26412,6 +26415,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fixedTime: 1
+  use3dRotation: 0
 --- !u!199 &1200058119
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -31273,6 +31277,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fixedTime: 1
+  use3dRotation: 0
 --- !u!199 &1238265141
 ParticleSystemRenderer:
   serializedVersion: 6
