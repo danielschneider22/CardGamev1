@@ -46,6 +46,24 @@ public class CardDisplay : MonoBehaviour
     public Material fireBackMaterial;
     public string location;
 
+    public void makeAttack(GameObject targetGameObject)
+    {
+        CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
+        cardDisplay.fireBack.enabled = true;
+        ((CreatureCard)cardDisplay.card).canAttack = true;
+    }
+    public bool canPlay(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    {
+        CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
+        string parentObjName = targetGameObject.transform.parent.name;
+        CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
+        return parentObjName == "Player Field" &&
+            cardBeingPlayed is NonCreatureCard &&
+            ((NonCreatureCard)cardBeingPlayed).borderColorType == NonCreatureCard.BorderColorType.attack &&
+            playerController.currEnergy >= cardBeingPlayed.cardCost &&
+            targetCardAsCreature.canAttack == false;
+    }
+
     private void Awake()
     {
         if (card != null)
@@ -95,13 +113,13 @@ public class CardDisplay : MonoBehaviour
                 }
                 cardType.text = cardAsNonCreatureCard.frameText;
                 healthBar.SetActive(false);
+                cardAsNonCreatureCard.enactEffect = makeAttack;
+                cardAsNonCreatureCard.canPlay = canPlay;
             }
 
             front.material = material;
             innerFrame.material = material;
             backLighting.material = material;
-            
-
         }
         else
         {

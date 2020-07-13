@@ -1256,8 +1256,7 @@ GameObject:
   - component: {fileID: 2849815290874230422}
   - component: {fileID: 1240478445165564745}
   - component: {fileID: 3468645321534588873}
-  - component: {fileID: 4632428608532815763}
-  - component: {fileID: 5090527146264838695}
+  - component: {fileID: 3581381314955738024}
   m_Layer: 5
   m_Name: CreatureCardField
   m_TagString: Card
@@ -1499,7 +1498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defenseText: {fileID: 2691062639667893516}
   animator: {fileID: 3920896626565391877}
---- !u!114 &4632428608532815763
+--- !u!114 &3581381314955738024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1508,29 +1507,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4290865966551162083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60e3a37b1fb3cc4f96eeb218981cc39, type: 3}
+  m_Script: {fileID: 11500000, guid: a067992a54f216e4894494466fdbb138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireBack: {fileID: 0}
-  greyedAttack: {fileID: -3921882402560749106, guid: 5f1e064348bdea74bbe661f15b975187,
-    type: 3}
---- !u!114 &5090527146264838695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290865966551162083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a781497bf460c4fb0f28623b8e4ed1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defendImage: {fileID: 2691062641457386564}
-  greyedDefend: {fileID: -1485935263984946788, guid: 5f1e064348bdea74bbe661f15b975187,
-    type: 3}
-  activeDefend: {fileID: -5260524384068091180, guid: 5f1e064348bdea74bbe661f15b975187,
-    type: 3}
 --- !u!1 &4322101762876848578
 GameObject:
   m_ObjectHideFlags: 0
