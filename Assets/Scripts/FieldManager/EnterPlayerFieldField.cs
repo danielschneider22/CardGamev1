@@ -78,7 +78,7 @@ public class EnterPlayerField : MonoBehaviour, IDropHandler, IPointerEnterHandle
         newChild.GetComponent<CardDisplay>().location = "field";
         newChild.GetComponent<ToggleVisibility>().makeVisible();
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        newChild.transform.localScale = new Vector3(.65f, .65f, 1);
+        newChild.transform.localScale = new Vector3(.8f, .8f, 1);
         newChild.SetActive(true);
 
         float halfHeight = newChild.GetComponent<RectTransform>().rect.height / 2;

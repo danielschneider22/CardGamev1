@@ -84,7 +84,7 @@ public class FieldManager : MonoBehaviour
             setCardPosition(childCount, i, placeholderRectTransform);
             float speed = getCardSpeed(oldMovingFieldCard, placeholderRectTransform, fieldRectTransform, resetSpeed);
 
-            MovingCard newMovingCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.6f, .6f, 1));
+            MovingCard newMovingCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.65f, .65f, 1));
             movingCards.Add(newMovingCard);
         }
     }

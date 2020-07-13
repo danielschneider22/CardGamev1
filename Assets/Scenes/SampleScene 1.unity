@@ -6232,7 +6232,7 @@ RectTransform:
   m_GameObject: {fileID: 262984659}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_Children:
   - {fileID: 1707097300}
   - {fileID: 1088251350}
@@ -17581,7 +17581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34.9, y: -23.9}
+  m_AnchoredPosition: {x: 34.9, y: -91.09}
   m_SizeDelta: {x: 526, y: 99.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568261831
@@ -24916,7 +24916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34.9, y: -104.24}
+  m_AnchoredPosition: {x: 34.9, y: -124}
   m_SizeDelta: {x: 526, y: 99.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1004088362
@@ -25301,7 +25301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34.9, y: -104.24}
+  m_AnchoredPosition: {x: 34.9, y: -124}
   m_SizeDelta: {x: 526, y: 99.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1060839859
@@ -36359,8 +36359,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Add Energy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f7323a02a854c3c4d8ef1d0c9bae3e8e, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: f7323a02a854c3c4d8ef1d0c9bae3e8e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -36384,7 +36384,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.25
+  m_fontSize: 11.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -43881,8 +43881,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Draw Card
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f7323a02a854c3c4d8ef1d0c9bae3e8e, type: 2}
-  m_sharedMaterial: {fileID: 2147374, guid: f7323a02a854c3c4d8ef1d0c9bae3e8e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -43906,7 +43906,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.15
+  m_fontSize: 13
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
