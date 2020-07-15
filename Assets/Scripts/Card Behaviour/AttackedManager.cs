@@ -40,6 +40,7 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
             CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
 
             tempReduceHealth(attackingCard);
+            attackDefenseChangeManager.tempDecreaseDefense(attackingCard.currAttack);
         } else if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && !isValidAttack(draggableArrow.draggedCard))
         {
             backgroundLighting.redBacklighting();
@@ -56,8 +57,10 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && attackingCardObj != null)
         {
+            CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
             backgroundLighting.nonselectableBacklighting();
             healthBar.restoreTempHealth();
+            attackDefenseChangeManager.restoreTempDefense();
             attackingCardObj = null;
         }
     }
@@ -77,7 +80,7 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void applyTempAttack(CreatureCard attackingCard)
     {
-        attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
+        // attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
         bool shouldDestroy = healthBar.applyTempDecreaseHealth();
 
         makeDamageTextAnimation();

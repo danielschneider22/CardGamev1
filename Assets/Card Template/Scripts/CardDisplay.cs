@@ -58,8 +58,6 @@ public class CardDisplay : MonoBehaviour
         string parentObjName = targetGameObject.transform.parent.name;
         CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
         return parentObjName == "Player Field" &&
-            cardBeingPlayed is NonCreatureCard &&
-            ((NonCreatureCard)cardBeingPlayed).borderColorType == NonCreatureCard.BorderColorType.attack &&
             playerController.currEnergy >= cardBeingPlayed.cardCost &&
             targetCardAsCreature.canAttack == false;
     }
