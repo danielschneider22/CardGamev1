@@ -13,17 +13,24 @@ MonoBehaviour:
   m_Name: CunningNinja 1
   m_EditorClassIdentifier: 
   cardName: Cunning Ninja
-  cardType: Creature
-  effects:
-  - name: Shadow Strike
-    description: Can attack twice per turn
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: b16d493d42ff05947b47f578f6103839, type: 3}
   cardCost: 1
+  canPlayRequirements:
+  - requirementName: 0
+    requirementNumber: 0
   attack: 6
   currAttack: 6
+  thisTurnAttack: 0
   defense: 2
   currDefense: 2
+  thisTurnDefense: 0
   maxHealth: 12
   currHealth: 12
+  isExhausted: 0
   circleArtwork: {fileID: 21300000, guid: 9cacd94224f23d344b56af15a8db106e, type: 3}
+  canAttack: 0
+  isDefending: 0
+  effects:
+  - name: Shadow Strike
+    description: Can attack twice per turn

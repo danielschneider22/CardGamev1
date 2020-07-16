@@ -13,20 +13,25 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   cardName: Goblin Trailmaker
-  cardType: Creature
+  isDestroyed: 0
+  artwork: {fileID: 21300000, guid: 4a6f84a22f0274d4a9d26b500e7a69da, type: 3}
+  cardCost: 2
+  canPlayRequirements:
+  - requirementName: 0
+    requirementNumber: 0
+  attack: 6
+  currAttack: 6
+  thisTurnAttack: 0
+  defense: 1
+  currDefense: 1
+  thisTurnDefense: 0
+  maxHealth: 10
+  currHealth: 10
+  isExhausted: 0
+  circleArtwork: {fileID: 21300000, guid: 7dafd097680e6ee439a37f36b8a53131, type: 3}
+  canAttack: 0
+  isDefending: 0
   effects:
   - name: Foul Stench
     description: When attacking or defending a creature, deal two damage to that
       creature at the end of combat.
-  isDestroyed: 0
-  artwork: {fileID: 21300000, guid: 4a6f84a22f0274d4a9d26b500e7a69da, type: 3}
-  cardCost: 2
-  attack: 6
-  currAttack: 6
-  defense: 1
-  currDefense: 1
-  maxHealth: 10
-  currHealth: 10
-  circleArtwork: {fileID: 21300000, guid: 7dafd097680e6ee439a37f36b8a53131, type: 3}
-  canAttack: 0
-  isDefending: 0
