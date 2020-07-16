@@ -7,11 +7,19 @@ public class Card : ScriptableObject
 {
     public string cardName;
 
-    public CardSlotEffect[] effects;
-
     public bool isDestroyed;
 
     public Sprite artwork;
 
     public int cardCost;
+    [System.Serializable]
+    public class CanPlayRequirement
+    {
+        public CanPlayRequirementName requirementName;
+        public int requirementNumber;
+    }
+    public List<CanPlayRequirement> canPlayRequirements;
+
+    public delegate bool CanPlay(ref bool canPlayTracker, GameObject targetGameObject, Card card, PlayerController playerController);
+    public CanPlay canPlay;
 }

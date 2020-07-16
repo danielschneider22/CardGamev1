@@ -18,4 +18,6 @@ public class CreatureCard : Card
 
     public bool canAttack;
     public bool isDefending;
+
+    public CardSlotEffect[] effects;
 }

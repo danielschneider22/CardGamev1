@@ -31,14 +31,16 @@ public class PlayNonCreatureCard : MonoBehaviour, IPointerEnterHandler, IDropHan
         if (draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card is NonCreatureCard && parentObjName == "Player Field")
         {
             NonCreatureCard card = (NonCreatureCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
-            bool playable = card.canPlay(gameObject, card, playerController);
+            bool isPlayable = true;
+            card.canPlay(ref isPlayable, gameObject, card, playerController);
 
-            if (playable)
+            if (isPlayable)
             {
+
                 draggingGameObject = handManager.hoverCopyTopCard.handTransform.gameObject;
                 backgroundLighting.greenBacklighting();
             }
-            else if (!playable)
+            else if (!isPlayable)
             {
                 backgroundLighting.redBacklighting();
             }

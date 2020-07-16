@@ -12,17 +12,18 @@ public class NonCreatureCard : Card
         other = 2,
     };
     public BorderColorType borderColorType;
-    public enum target
-    {
-        playerCreature = 0,
-        enemyCreature = 1,
-        player = 2,
-        enemy = 3
-    }
-    public delegate bool CanPlay(GameObject targetGameObject, Card card, PlayerController playerController);
-    public CanPlay canPlay;
+    public enum Target{ playerCreature, enemyCreature, playerCreatureOrEnemyCreature, player, enemy }
+    public Target target;
+
     public delegate void EnactEffect(GameObject targetGameObject);
     public EnactEffect enactEffect;
+    [System.Serializable]
+    public class NonCreatureEffect
+    {
+        public NonCreatureEffectName effectName;
+        public int effectNumber;
+    }
+    public List<NonCreatureEffect> effects; 
     public string text;
     public string frameText;
 }

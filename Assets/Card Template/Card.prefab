@@ -1863,6 +1863,8 @@ GameObject:
   - component: {fileID: 3920896626565391877}
   - component: {fileID: 2849815290874230422}
   - component: {fileID: 1240478445165564745}
+  - component: {fileID: 1765859625115459801}
+  - component: {fileID: 4074040832816180418}
   m_Layer: 5
   m_Name: Card
   m_TagString: Card
@@ -2073,6 +2075,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawnComponents: {fileID: 2691062641496635815}
   textComponents: {fileID: 2691062640393702480}
+--- !u!114 &1765859625115459801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290865966551162083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4d7d3a398cd6d4dbbfe1e7ac716eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4074040832816180418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290865966551162083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39817cf8634ae6d4491d932581171968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4463940955766555011
 GameObject:
   m_ObjectHideFlags: 0
