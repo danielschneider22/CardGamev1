@@ -37446,7 +37446,7 @@ MonoBehaviour:
   fireBackMaterial: {fileID: 2100000, guid: a23f3d89410c93f4fa5bc541eb574277, type: 2}
   playerDeckManager: {fileID: 779922666}
   enemyIntentionManager: {fileID: 1145225160}
-  numCardsToDraw: 3
+  numCardsToDraw: 5
   numIntentCards: 3
   enemyIntentArea: {fileID: 399571235}
   playerFieldManager: {fileID: 1181721269}

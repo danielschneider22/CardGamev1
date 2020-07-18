@@ -115,7 +115,7 @@ public class Initialization : MonoBehaviour
     private void initializeEnemyField()
     {
         card.SetActive(false);
-        for (var i = 0; i < numPlayerFieldCards; i++)
+        for (var i = 0; i < numEnemyFieldCards; i++)
         {
             Card copyNinja = Instantiate(ninjaCard);
             Card copyGoblin = Instantiate(goblinCard);
@@ -129,7 +129,10 @@ public class Initialization : MonoBehaviour
             copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
             copyCard.GetComponent<Animator>().enabled = false;
             copyCard.SetActive(true);
-            copyCard.GetComponent<AttackDefenseManager>().setIsDefending();
+            if(i % 2 == 1)
+            {
+                copyCard.GetComponent<AttackDefenseManager>().setIsDefending();
+            }
             creatureCardTemplate.SetActive(true);
 
             enemyFieldManager.addCardToField(copyCard);
