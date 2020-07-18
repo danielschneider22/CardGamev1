@@ -31,6 +31,18 @@ public class CanPlayManager
         canPlayTracker = canPlayTracker && targetCardAsCreature.canAttack == false;
         return canPlayTracker;
     }
+    static bool CreatureIsntTapped(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    {
+        CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
+        if (!(targetCardDisplay.card is CreatureCard))
+        {
+            canPlayTracker = false;
+            return canPlayTracker;
+        }
+        CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
+        canPlayTracker = canPlayTracker && targetCardAsCreature.isTapped == false;
+        return canPlayTracker;
+    }
     static bool CreatureIsntDefending(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();

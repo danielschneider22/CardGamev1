@@ -10,7 +10,6 @@ public class AttackDefenseManager : MonoBehaviour
     private Color zeroStatColor = new Color(0.6415094f, 0.2935208f, 0.2935208f);
 
     public TextMeshProUGUI defenseText;
-    public Animator animator;
     public int defenseBeforeChange;
     public bool isDefendingBeforeChange;
     public Sprite brokenShieldSprite;

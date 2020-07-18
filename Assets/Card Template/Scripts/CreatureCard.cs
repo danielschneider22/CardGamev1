@@ -22,6 +22,7 @@ public class CreatureCard : Card
 
     public bool canAttack;
     public bool isDefending;
+    public bool isTapped;
 
     public CardSlotEffect[] effects;
 }

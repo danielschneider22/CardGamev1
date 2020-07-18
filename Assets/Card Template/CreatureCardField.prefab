@@ -1344,6 +1344,7 @@ GameObject:
   - component: {fileID: 1240478445165564745}
   - component: {fileID: 3468645321534588873}
   - component: {fileID: 3581381314955738024}
+  - component: {fileID: 3009728903106759781}
   m_Layer: 5
   m_Name: CreatureCardField
   m_TagString: Card
@@ -1526,7 +1527,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4290865966551162083}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c26b625fbd4d1df469240cc77c9f1503, type: 2}
   m_CullingMode: 0
@@ -1579,7 +1580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defenseText: {fileID: 2691062639667893516}
-  animator: {fileID: 3920896626565391877}
   defenseBeforeChange: 0
   isDefendingBeforeChange: 0
   brokenShieldSprite: {fileID: 21300000, guid: c27435100acbb264ba8dd6816ce74fe8, type: 3}
@@ -1596,6 +1596,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a067992a54f216e4894494466fdbb138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3009728903106759781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290865966551162083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d2a8d670140544fbc2d3e41edcf59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3920896626565391877}
 --- !u!1 &4322101762876848578
 GameObject:
   m_ObjectHideFlags: 0
