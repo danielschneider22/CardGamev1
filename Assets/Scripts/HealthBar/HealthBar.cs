@@ -41,7 +41,7 @@ public class HealthBar : MonoBehaviour
     public bool applyTempDecreaseHealth()
     {
         healthFillRed.fillAmount = 1 - healthFillGreen.fillAmount;
-        card.currHealth = card.currHealth - tempDamage;
+        card.currHealth = Mathf.Max(card.currHealth - tempDamage, 0);
         return card.currHealth <= 0;
     }
 
@@ -53,8 +53,8 @@ public class HealthBar : MonoBehaviour
 
     private void decreaseHealthText(int damage)
     {
-        int newHealth = currHealth - damage;
         if (damage < 0) { damage = 0; }
+        int newHealth = Mathf.Max(currHealth - damage, 0);
         healthText.text = newHealth.ToString() + "/" + card.maxHealth;
     }
 
