@@ -26627,7 +26627,7 @@ MonoBehaviour:
   cards: []
   creatureCardTemplate: {fileID: 4290865966551162083, guid: a236280ba462219458ff60223b220e58,
     type: 3}
-  enemyFieldManager: {fileID: 0}
+  enemyFieldManager: {fileID: 541465761}
   fieldPosition: {fileID: 564382222}
   enemyController: {fileID: 905861225}
   draggableArrow: {fileID: 1841793526}
