@@ -240,6 +240,17 @@ public class FieldManager : MonoBehaviour
         return false;
     }
 
+    public List<CreatureCard> getFieldCards()
+    {
+        List<CreatureCard> cards = new List<CreatureCard>();
+        foreach (Transform child in field.transform)
+        {
+            CreatureCard card = (CreatureCard)child.GetComponent<CardDisplay>().card;
+            cards.Add(card);
+        }
+        return cards;
+    }
+
     private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
     {
         Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);

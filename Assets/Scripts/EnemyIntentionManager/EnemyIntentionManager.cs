@@ -9,12 +9,13 @@ public class EnemyIntentionManager : MonoBehaviour
     public List<GameObject> cards;
     public List<EnemyAction> enemyActions;
     public GameObject creatureCardTemplate;
-    public FieldManager fieldManager;
+    public FieldManager enemyFieldManager;
     public GameObject fieldPosition;
     public PlayerController enemyController;
     public DraggableArrow draggableArrow;
     public GameObject enemyFieldBackground;
     public FieldManager playerFieldManager;
+    public PlayerController playerController;
     public Camera cam;
 
     private float enemyActionTimer;
@@ -133,7 +134,7 @@ public class EnemyIntentionManager : MonoBehaviour
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
         newChild.SetActive(true);
-        fieldManager.addCardToField(newChild);
+        enemyFieldManager.addCardToField(newChild);
 
         // float halfHeight = newChild.GetComponent<RectTransform>().rect.height / 2;
         // newChild.transform.position = playerFieldImage.transform.position;// Camera.main.ScreenToWorldPoint(cardObj.transform.position); // new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);
@@ -155,12 +156,16 @@ public class EnemyIntentionManager : MonoBehaviour
 
     private List<EnemyAction> getEnemyActions()
     {
-        EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
+        /*EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
         EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
         EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
-
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature, activateAttack, attackCreature };
+        */
+        List<EnemyAction> actions = new List<EnemyAction> { };
+        List <CreatureCard> playerFieldCards = playerFieldManager.getFieldCards();
+        List<CreatureCard> enemyFieldCards = enemyFieldManager.getFieldCards();
+        Debug.Log(playerController.currHealth);
+        Debug.Log(enemyController.currHealth);
 
         return (actions);
     }
