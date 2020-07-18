@@ -9,7 +9,8 @@ public class EnemyIntentionManager : MonoBehaviour
     public List<GameObject> cards;
     public List<EnemyAction> enemyActions;
     public GameObject creatureCardTemplate;
-    public GridLayoutGroup enemyField;
+    public FieldManager fieldManager;
+    public GameObject fieldPosition;
     public PlayerController enemyController;
     public DraggableArrow draggableArrow;
     public GameObject enemyFieldBackground;
@@ -40,7 +41,7 @@ public class EnemyIntentionManager : MonoBehaviour
             // playing creature
             else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
             {
-                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(enemyField.transform.position));
+                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(fieldPosition.transform.position));
                 enemyFieldBackground.SetActive(true);
             } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
             {
@@ -101,14 +102,14 @@ public class EnemyIntentionManager : MonoBehaviour
         draggableArrow.startPos = cam.WorldToScreenPoint(new Vector3(enemyAction.card.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z));
         draggableArrow.staticEndPos = endPoint;
         draggableArrow.drawStaticArrow = true;
-        enemyActionTimer = 2f;
+        enemyActionTimer = .5f;
         enemyActions[0].showingArrow = true;
     }
 
     private void showHover(EnemyAction enemyAction)
     {
         enemyAction.card.GetComponent<ChangeBackgroundLighting>().whiteBacklighting();
-        enemyActionTimer = 1f;
+        enemyActionTimer = .5f;
         enemyActions[0].showingHover = true;
     }
 
@@ -138,7 +139,7 @@ public class EnemyIntentionManager : MonoBehaviour
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
         newChild.SetActive(true);
-        newChild.transform.SetParent(enemyField.transform, false);
+        fieldManager.addCardToField(newChild);
 
         // float halfHeight = newChild.GetComponent<RectTransform>().rect.height / 2;
         // newChild.transform.position = playerFieldImage.transform.position;// Camera.main.ScreenToWorldPoint(cardObj.transform.position); // new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);
@@ -163,9 +164,9 @@ public class EnemyIntentionManager : MonoBehaviour
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
         EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
-        EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
+        // EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
 
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature, activateAttack, attackCreature };
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature };
 
         return (actions);
     }

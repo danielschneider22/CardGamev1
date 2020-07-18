@@ -194,7 +194,7 @@ public class Initialization : MonoBehaviour
             newCard.GetComponent<OnHover>().canvas = worldCanvas;
             newCard.transform.SetParent(enemyIntentArea, false);
             newCard.SetActive(true);
-            // enemyIntentionManager.addCard(newCard);
+            enemyIntentionManager.addCard(newCard);
         }
         card.SetActive(true);
     }
