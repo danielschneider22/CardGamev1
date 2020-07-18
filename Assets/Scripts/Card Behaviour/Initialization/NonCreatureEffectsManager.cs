@@ -8,15 +8,13 @@ public class NonCreatureEffectsManager
     static void EmptyEffect(GameObject targetGameObject){ }
     static void MakeAttack(GameObject targetGameObject)
     {
-        CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
-        cardDisplay.fireBack.enabled = true;
-        ((CreatureCard)cardDisplay.card).canAttack = true;
+        AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
+        attackDefenseManager.canAttack();
     }
     static void MakeDefend(GameObject targetGameObject)
     {
-        CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
-        ((CreatureCard)cardDisplay.card).isDefending = true;
-        Debug.Log("Defend");
+        AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
+        attackDefenseManager.setIsDefending();
     }
     static void IncreaseAttack(GameObject targetGameObject)
     {

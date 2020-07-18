@@ -12,6 +12,11 @@ public class ChangeBackgroundLighting : MonoBehaviour
         backlightingImage.color = Color.green;
     }
 
+    public void transparentBacklighting()
+    {
+        backlightingImage.color = Color.clear;
+    }
+
     public void nonselectableBacklighting()
     {
         backlightingImage.color = Color.black;

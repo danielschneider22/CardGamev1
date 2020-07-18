@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI energyText;
     public int currEnergy;
     public int maxEnergy;
+    public int currHealth;
+    public int maxHealth;
     public ToggleEnergyGlow toggleEnergyGlow;
+    public FieldManager fieldManager;
 
     public void Awake()
     {
@@ -39,5 +42,10 @@ public class PlayerController : MonoBehaviour
             currEnergy = maxEnergy;
         }
         energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
+    public bool isDefended()
+    {
+
+        return true;
     }
 }

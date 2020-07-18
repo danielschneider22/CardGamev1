@@ -1927,6 +1927,7 @@ MonoBehaviour:
   healthOrange: {fileID: 1865210224177255411}
   healthOutline: {fileID: 2701077619863609614}
   transparentOverlay: {fileID: 5570111589982746149}
+  shield: {fileID: 0}
   fireBack: {fileID: 0}
   attackFrontSprite: {fileID: -8789170865316149833, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
@@ -2175,8 +2176,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1, y: -56.48}
-  m_SizeDelta: {x: 135.32, y: 67.31}
+  m_AnchoredPosition: {x: -1.33, y: -57.7}
+  m_SizeDelta: {x: 145.13, y: 70.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1443055894981164390
 CanvasRenderer:
@@ -2235,7 +2236,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 4
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2

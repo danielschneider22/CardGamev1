@@ -16,6 +16,13 @@ MonoBehaviour:
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: d0b7881d55ff23e469406dc6bf15ddb4, type: 3}
   cardCost: 1
+  canPlayRequirements:
+  - requirementName: 0
+    requirementNumber: 0
+  - requirementName: 2
+    requirementNumber: 0
+  - requirementName: 4
+    requirementNumber: 0
   borderColorType: 1
   target: 0
   effects:

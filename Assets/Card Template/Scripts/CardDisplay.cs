@@ -29,8 +29,10 @@ public class CardDisplay : MonoBehaviour
     public Image healthOrange;
     public Image healthOutline;
     public Image transparentOverlay;
+    public Image shield;
 
     public Image fireBack;
+    // public Image shieldBack;
 
     public Sprite attackFrontSprite;
     public Sprite defenseFrontSprite;
@@ -65,7 +67,8 @@ public class CardDisplay : MonoBehaviour
                 healthOutline.material = material;
                 gameObject.AddComponent(typeof(AttackDefenseManager));
                 gameObject.GetComponent<AttackDefenseManager>().defenseText = defenseText;
-            } else if (card is NonCreatureCard)
+            }
+            else if (card is NonCreatureCard)
             {
                 NonCreatureCard cardAsNonCreatureCard = (NonCreatureCard)card;
                 attackText.enabled = false;
@@ -124,7 +127,13 @@ public class CardDisplay : MonoBehaviour
         if (location.ToLower().Contains("field"))
         {
             artworkImage.sprite = ((CreatureCard) card).circleArtwork;
+            Color fireColor = Color.red;
             fireBack.material = Instantiate(fireBackMaterial);
+            fireBack.material.SetColor("_Color", fireColor);
+            // shieldBack.material = Instantiate(fireBackMaterial);
+            // Color shieldColor = Color.blue;
+            // shieldBack.material.SetColor("_Color", shieldColor);
+            // shieldBack.material.SetFloat("_DistortionAmount", .05f);
         }
     }
 

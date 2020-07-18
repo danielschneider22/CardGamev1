@@ -16,12 +16,17 @@ MonoBehaviour:
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: 8ff0a0b1b3a182f489c24fd53bf73830, type: 3}
   cardCost: 1
+  canPlayRequirements:
+  - requirementName: 0
+    requirementNumber: 0
+  - requirementName: 2
+    requirementNumber: 0
+  - requirementName: 3
+    requirementNumber: 0
   borderColorType: 0
   target: 0
   effects:
   - effectName: 0
     effectNumber: 0
-  - effectName: 2
-    effectNumber: 2
-  text: Target creature can attack this turn.
+  text: Target untapped creature can attack this turn.
   frameText: ATTACK

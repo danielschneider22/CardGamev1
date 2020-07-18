@@ -5,34 +5,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
     private ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
     private GameObject attackingCardObj;
-    private CreatureCard defendingCard;
-    private Animator animator;
-    private AttackDefenseManager attackDefenseChangeManager;
+    private PlayerController playerController;
 
-    public HealthBar healthBar;
-    public TextMeshProUGUI defense;
+    public HealthBarPlayer healthBar;
     public GameObject damageTextContainer;
-    public Sprite greyedAttack;
-    public Sprite activeAttack;
-    public Image attackImage;
 
     private void Awake()
     {
         backgroundLighting = GetComponent<ChangeBackgroundLighting>();
         draggableArrow = GameObject.FindGameObjectWithTag("Draggable Arrow").GetComponent<DraggableArrow>();
-        defendingCard = (CreatureCard) GetComponent<CardDisplay>().card;
-        animator = GetComponent<Animator>();
-        attackDefenseChangeManager = GetComponent<AttackDefenseManager>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && isValidAttack(draggableArrow.draggedCard))
+        if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && isValidAttack(draggableArrow.draggedCard))
         {
             backgroundLighting.greenBacklighting();
 
@@ -40,8 +31,8 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
             CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
 
             tempReduceHealth(attackingCard);
-            attackDefenseChangeManager.tempDecreaseDefense(attackingCard.currAttack);
-        } else if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && !isValidAttack(draggableArrow.draggedCard))
+        }
+        else if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && !isValidAttack(draggableArrow.draggedCard))
         {
             backgroundLighting.redBacklighting();
         }
@@ -55,19 +46,19 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        backgroundLighting.transparentBacklighting();
         if (draggableArrow.drawArrow && draggableArrow.draggedCard != gameObject && attackingCardObj != null)
         {
             CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
-            backgroundLighting.nonselectableBacklighting();
+       
             healthBar.restoreTempHealth();
-            attackDefenseChangeManager.restoreTempDefense();
             attackingCardObj = null;
         }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        backgroundLighting.nonselectableBacklighting();
+        backgroundLighting.transparentBacklighting();
         if (attackingCardObj != null && isValidAttack(attackingCardObj))
         {
             CreatureCard attackingCard = getCardAsCreatureCard(attackingCardObj);
@@ -84,9 +75,6 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
         bool shouldDestroy = healthBar.applyTempDecreaseHealth();
 
         makeDamageTextAnimation();
-        animator.enabled = true;
-        string animationTrigger = shouldDestroy ? "CardDestroyedTrigger" : "CardDamagedTrigger";
-        animator.SetTrigger(animationTrigger);
         attackingCardObj = null;
     }
     private void makeDamageTextAnimation()
@@ -110,21 +98,21 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private CreatureCard getCardAsCreatureCard(GameObject cardObj)
     {
-        return (CreatureCard) cardObj.GetComponent<CardDisplay>().card;
+        return (CreatureCard)cardObj.GetComponent<CardDisplay>().card;
     }
 
     private bool isValidAttack(GameObject attackingCard)
     {
-        if(!(isCreatureCard(attackingCard))) { return false; }
+        if (!(isCreatureCard(attackingCard))) { return false; }
 
         string cardParent = transform.parent.name;
         string attackingCardParent = attackingCard.transform.parent.name;
 
-        CreatureCard attackingCardStats = (CreatureCard) attackingCard.GetComponent<CardDisplay>().card;
+        CreatureCard attackingCardStats = (CreatureCard)attackingCard.GetComponent<CardDisplay>().card;
 
         if ((attackingCardStats.canAttack &&
            (attackingCardParent == "Player Field" || attackingCardParent == "Enemy Field") &&
-           cardParent != attackingCardParent) && !attackingCardStats.isDestroyed && !defendingCard.isDestroyed)
+           cardParent != attackingCardParent) && !attackingCardStats.isDestroyed)
         {
             return true;
         }
@@ -133,12 +121,7 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private int calculateDamage(CreatureCard attackingCard)
     {
-        int damage = attackingCard.currAttack - defendingCard.currDefense;
+        int damage = attackingCard.currAttack;
         return damage > 0 ? damage : 0;
-    }
-
-    public void destroyCard()
-    {
-        defendingCard.isDestroyed = true;
     }
 }

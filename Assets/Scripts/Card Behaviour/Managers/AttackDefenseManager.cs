@@ -7,13 +7,11 @@ public class AttackDefenseManager : MonoBehaviour
 {
     private CreatureCard card;
     private CardDisplay cardDisplay;
-    private bool validEnterTriggered;
     private Color zeroStatColor = new Color(0.6415094f, 0.2935208f, 0.2935208f);
 
     public TextMeshProUGUI defenseText;
     public Animator animator;
     public int defenseBeforeChange;
-    // public Sprite greyedAttack;
 
     private void Awake()
     {
@@ -52,6 +50,20 @@ public class AttackDefenseManager : MonoBehaviour
     {
         card.canAttack = false;
         cardDisplay.fireBack.enabled = false;
-        // cardDisplay.attackImage.sprite = greyedAttack;
+    }
+    public void canAttack()
+    {
+        card.canAttack = true;
+        cardDisplay.fireBack.enabled = true;
+    }
+    public void setIsDefending()
+    {
+        card.isDefending = true;
+        cardDisplay.shield.enabled = true;
+    }
+    public void setIsNotDefending()
+    {
+        card.canAttack = true;
+        cardDisplay.shield.enabled = false;
     }
 }

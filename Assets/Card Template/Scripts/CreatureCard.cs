@@ -16,7 +16,7 @@ public class CreatureCard : Card
     public int maxHealth;
     public int currHealth;
 
-    public bool isExhausted;
+    public bool tapped;
 
     public Sprite circleArtwork;
 
