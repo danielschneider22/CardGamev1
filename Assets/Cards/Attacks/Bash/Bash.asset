@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff1ce66587928b4ea1ca4e64cc2bfcc, type: 3}
   m_Name: Bash
   m_EditorClassIdentifier: 
-  cardName: Bash
+  cardName: Weak Attack
   isDestroyed: 0
   artwork: {fileID: 21300000, guid: 8ff0a0b1b3a182f489c24fd53bf73830, type: 3}
   cardCost: 1

@@ -1940,7 +1940,7 @@ MonoBehaviour:
   nonCreatureEffect: {fileID: 8551933055270749884}
   material: {fileID: 0}
   fireBackMaterial: {fileID: 2100000, guid: a23f3d89410c93f4fa5bc541eb574277, type: 2}
-  location: 
+  location: 0
 --- !u!114 &4760673835591094996
 MonoBehaviour:
   m_ObjectHideFlags: 0

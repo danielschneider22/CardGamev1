@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static CardDisplay;
 
 public class PlayerDeckManager : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class PlayerDeckManager : MonoBehaviour
         GameObject newCard = Instantiate(card);
         newCard.GetComponent<CardDisplay>().material = Instantiate(material);
         newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
-        newCard.GetComponent<CardDisplay>().location = "hand";
+        newCard.GetComponent<CardDisplay>().location = Location.hand;
         newCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;
         newCard.GetComponent<OnHover>().canvas = screenSpaceOverlayCanvas;
         newCard.transform.localScale = new Vector3(.01f, .01f, 1.0f);

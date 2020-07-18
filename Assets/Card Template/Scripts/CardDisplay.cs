@@ -46,7 +46,8 @@ public class CardDisplay : MonoBehaviour
 
     public Material material;
     public Material fireBackMaterial;
-    public string location;
+    public enum Location { field, enemyField, hand, enemyIntent }
+    public Location location;
 
     private void Awake()
     {
@@ -108,7 +109,7 @@ public class CardDisplay : MonoBehaviour
         {
             nameText.text = "EMPTY";
         }
-        if (location.ToLower().Contains("hand") || location == "enemyIntent")
+        if (location == Location.hand || location == Location.enemyIntent)
         {
             artworkImage.sprite = card.artwork;
             nameText.text = card.cardName;
@@ -124,7 +125,7 @@ public class CardDisplay : MonoBehaviour
                 slot.material = material;
             }
         }
-        if (location.ToLower().Contains("field"))
+        if (location == Location.field || location == Location.enemyField)
         {
             artworkImage.sprite = ((CreatureCard) card).circleArtwork;
             Color fireColor = Color.red;

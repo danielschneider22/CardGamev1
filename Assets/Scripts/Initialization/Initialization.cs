@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static CardDisplay;
 
 public class Initialization : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Initialization : MonoBehaviour
     public int numIntentCards = 3;
     public Transform enemyIntentArea;
     public FieldManager playerFieldManager;
+    public FieldManager enemyFieldManager;
     public int numPlayerFieldCards;
 
     private float enemyIntentStartTimer;
@@ -96,7 +98,7 @@ public class Initialization : MonoBehaviour
             GameObject copyCard = Instantiate(creatureCardTemplate);
             copyCard.GetComponent<CardDisplay>().card = copyNinja;
             copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
-            copyCard.GetComponent<CardDisplay>().location = "field";
+            copyCard.GetComponent<CardDisplay>().location = Location.field;
             copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             copyCard.GetComponent<OnHover>().canvas = worldCanvas;
             copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
@@ -111,6 +113,32 @@ public class Initialization : MonoBehaviour
     }
 
     private void initializeEnemyField()
+    {
+        card.SetActive(false);
+        for (var i = 0; i < numPlayerFieldCards; i++)
+        {
+            Card copyNinja = Instantiate(ninjaCard);
+            Card copyGoblin = Instantiate(goblinCard);
+            creatureCardTemplate.SetActive(false);
+            GameObject copyCard = Instantiate(creatureCardTemplate);
+            copyCard.GetComponent<CardDisplay>().card = copyNinja;
+            copyCard.GetComponent<CardDisplay>().material = Instantiate(material);
+            copyCard.GetComponent<CardDisplay>().location = Location.enemyField;
+            copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
+            copyCard.GetComponent<OnHover>().canvas = worldCanvas;
+            copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+            copyCard.GetComponent<Animator>().enabled = false;
+            copyCard.SetActive(true);
+            copyCard.GetComponent<AttackDefenseManager>().setIsDefending();
+            creatureCardTemplate.SetActive(true);
+
+            enemyFieldManager.addCardToField(copyCard);
+        }
+        card.SetActive(true);
+        enemyFieldManager.resetFieldPositions();
+    }
+
+    /* private void initializeEnemyField()
     {
         card.SetActive(false);
         for (var i = 0; i < numEnemyFieldCards; i++)
@@ -135,7 +163,7 @@ public class Initialization : MonoBehaviour
             // copyCard.GetComponent<CardDisplay>().healthBar.GetComponent<RectTransform>().rotation = Quaternion.Euler(rotationVector);
         }
         card.SetActive(true);
-    }
+    } */
 
     private void initializeEnemyIntent()
     {
@@ -158,7 +186,7 @@ public class Initialization : MonoBehaviour
             GameObject newCard = Instantiate(card);
             newCard.GetComponent<CardDisplay>().material = Instantiate(material);
             newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
-            newCard.GetComponent<CardDisplay>().location = "enemyIntent";
+            newCard.GetComponent<CardDisplay>().location = Location.enemyIntent;
             newCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             newCard.GetComponent<OnHover>().canvas = worldCanvas;
             newCard.transform.SetParent(enemyIntentArea, false);

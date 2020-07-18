@@ -12,6 +12,7 @@ public class AttackDefenseManager : MonoBehaviour
     public TextMeshProUGUI defenseText;
     public Animator animator;
     public int defenseBeforeChange;
+    public bool isDefendingBeforeChange;
 
     private void Awake()
     {
@@ -21,9 +22,10 @@ public class AttackDefenseManager : MonoBehaviour
     public void decreaseDefense(int amountToDecrease)
     {
         card.currDefense = card.currDefense - amountToDecrease;
-        if(card.currDefense < 0)
+        if(card.currDefense <= 0)
         {
             card.currDefense = 0;
+            setIsNotDefending();
         }
         defenseText.text = card.currDefense.ToString();
     }
@@ -31,12 +33,20 @@ public class AttackDefenseManager : MonoBehaviour
     public void tempDecreaseDefense(int amountToDecrease)
     {
         defenseBeforeChange = card.currDefense;
+        isDefendingBeforeChange = card.isDefending;
         decreaseDefense(amountToDecrease);
     }
 
     public void restoreTempDefense()
     {
         card.currDefense = defenseBeforeChange;
+        if(isDefendingBeforeChange)
+        {
+            setIsDefending();
+        } else
+        {
+            setIsNotDefending();
+        }
         defenseText.text = card.currDefense.ToString();
     }
 
@@ -63,7 +73,7 @@ public class AttackDefenseManager : MonoBehaviour
     }
     public void setIsNotDefending()
     {
-        card.canAttack = true;
+        card.isDefending = false;
         cardDisplay.shield.enabled = false;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,10 +13,32 @@ public class PlayerController : MonoBehaviour
     public int maxHealth;
     public ToggleEnergyGlow toggleEnergyGlow;
     public FieldManager fieldManager;
+    public Image playerShield;
+    public Sprite shieldSprite;
+    public Sprite brokenShieldSprite;
+    public enum DefendingStatus { defended, notDefended, shieldsBroken }
+    public DefendingStatus defendingStatus;
 
     public void Awake()
     {
         energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
+        defendingStatus = DefendingStatus.notDefended;
+    }
+
+    public void Update()
+    {
+        if(isDefended() && defendingStatus == DefendingStatus.notDefended || defendingStatus == DefendingStatus.shieldsBroken)
+        {
+            playerShield.enabled = true;
+            playerShield.sprite = shieldSprite;
+            defendingStatus = DefendingStatus.defended;
+        }
+        else if (!isDefended() && defendingStatus == DefendingStatus.defended)
+        {
+            playerShield.enabled = true;
+            playerShield.sprite = brokenShieldSprite;
+            defendingStatus = DefendingStatus.shieldsBroken;
+        }
     }
 
     public void decreaseCurrEnergy(int energyUsed)
@@ -46,6 +69,6 @@ public class PlayerController : MonoBehaviour
     public bool isDefended()
     {
 
-        return true;
+        return fieldManager.fieldHasDefendingCard();
     }
 }

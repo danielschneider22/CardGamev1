@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FieldManager : MonoBehaviour
 {
-    public List<MovingCard> movingCards;
+    private List<MovingCard> movingCards = new List<MovingCard>();
     public GameObject field;
     public GameObject fieldPlacementGrid;
     public GameObject placeholderObj;
@@ -15,9 +15,8 @@ public class FieldManager : MonoBehaviour
     private float minMoveSpeed = 100f;
 
 
-    public void Start()
+    public void Awake()
     {
-        movingCards = new List<MovingCard>();
         centerOfField = field.transform.GetComponent<RectTransform>().rect.center.x;
     }
 
@@ -226,6 +225,19 @@ public class FieldManager : MonoBehaviour
             counter++;
         }
         return -1;
+    }
+
+    public bool fieldHasDefendingCard()
+    {
+        foreach (Transform child in field.transform)
+        {
+            CreatureCard card = (CreatureCard)child.GetComponent<CardDisplay>().card;
+            if (card.isDefending)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
