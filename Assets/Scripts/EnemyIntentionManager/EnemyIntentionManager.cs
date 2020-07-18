@@ -57,14 +57,8 @@ public class EnemyIntentionManager : MonoBehaviour
             }
             else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
             {
-                Card enemyCard = enemyAction.card.GetComponent<CardDisplay>().card;
-                if(enemyAction.actionType == EnemyActionType.playAttack)
-                {
-                    enemyAction.cardTarget.GetComponent<MakeCardAttack>().activateAttack(enemyCard);
-                } else
-                {
-                    enemyAction.cardTarget.GetComponent<MakeCardDefend>().activateDefend(enemyCard);
-                }
+                NonCreatureCard enemyCard = (NonCreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                enemyCard.enactEffect(enemyAction.cardTarget);
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
 
                 removeAction(enemyAction);
@@ -164,9 +158,9 @@ public class EnemyIntentionManager : MonoBehaviour
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
         EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
-        // EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
+        EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
 
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature };
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature2, playCreature, activateAttack, attackCreature };
 
         return (actions);
     }
