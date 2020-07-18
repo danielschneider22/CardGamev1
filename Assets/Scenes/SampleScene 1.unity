@@ -44447,6 +44447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68792eb7299c8d4d918bb20d5d4ada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 905861225}
   healthBar: {fileID: 1504440307}
   damageTextContainer: {fileID: 4276231543945294890, guid: c42878a013b6d3940b85621a5384a449,
     type: 3}

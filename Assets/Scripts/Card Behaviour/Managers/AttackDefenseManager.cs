@@ -13,6 +13,8 @@ public class AttackDefenseManager : MonoBehaviour
     public Animator animator;
     public int defenseBeforeChange;
     public bool isDefendingBeforeChange;
+    public Sprite brokenShieldSprite;
+    public Sprite shieldSprite;
 
     private void Awake()
     {
@@ -25,7 +27,7 @@ public class AttackDefenseManager : MonoBehaviour
         if(card.currDefense <= 0)
         {
             card.currDefense = 0;
-            setIsNotDefending();
+            setShieldBroken();
         }
         defenseText.text = card.currDefense.ToString();
     }
@@ -43,9 +45,6 @@ public class AttackDefenseManager : MonoBehaviour
         if(isDefendingBeforeChange)
         {
             setIsDefending();
-        } else
-        {
-            setIsNotDefending();
         }
         defenseText.text = card.currDefense.ToString();
     }
@@ -70,10 +69,16 @@ public class AttackDefenseManager : MonoBehaviour
     {
         card.isDefending = true;
         cardDisplay.shield.enabled = true;
+        cardDisplay.shield.sprite = shieldSprite;
     }
     public void setIsNotDefending()
     {
         card.isDefending = false;
         cardDisplay.shield.enabled = false;
+    }
+    public void setShieldBroken()
+    {
+        card.isDefending = false;
+        cardDisplay.shield.sprite = brokenShieldSprite;
     }
 }

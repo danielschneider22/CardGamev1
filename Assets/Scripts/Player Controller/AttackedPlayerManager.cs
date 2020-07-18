@@ -10,7 +10,7 @@ public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPoint
     private ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
     private GameObject attackingCardObj;
-    private PlayerController playerController;
+    public PlayerController playerController;
 
     public HealthBarPlayer healthBar;
     public GameObject damageTextContainer;
@@ -112,7 +112,8 @@ public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPoint
 
         if ((attackingCardStats.canAttack &&
            (attackingCardParent == "Player Field" || attackingCardParent == "Enemy Field") &&
-           cardParent != attackingCardParent) && !attackingCardStats.isDestroyed)
+           cardParent != attackingCardParent) && !attackingCardStats.isDestroyed &&
+           !playerController.isDefended())
         {
             return true;
         }

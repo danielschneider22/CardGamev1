@@ -27,7 +27,7 @@ MonoBehaviour:
   thisTurnDefense: 0
   maxHealth: 12
   currHealth: 12
-  isExhausted: 0
+  tapped: 0
   circleArtwork: {fileID: 21300000, guid: 9cacd94224f23d344b56af15a8db106e, type: 3}
   canAttack: 0
   isDefending: 0

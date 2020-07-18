@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        if(isDefended() && defendingStatus == DefendingStatus.notDefended || defendingStatus == DefendingStatus.shieldsBroken)
+        if(isDefended() && (defendingStatus == DefendingStatus.notDefended || defendingStatus == DefendingStatus.shieldsBroken))
         {
             playerShield.enabled = true;
             playerShield.sprite = shieldSprite;

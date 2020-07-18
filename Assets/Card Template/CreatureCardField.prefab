@@ -1568,6 +1568,9 @@ MonoBehaviour:
   defenseText: {fileID: 2691062639667893516}
   animator: {fileID: 3920896626565391877}
   defenseBeforeChange: 0
+  isDefendingBeforeChange: 0
+  brokenShieldSprite: {fileID: 21300000, guid: c27435100acbb264ba8dd6816ce74fe8, type: 3}
+  shieldSprite: {fileID: 21300000, guid: 7180008beb7b52547a4ef064e0c18050, type: 3}
 --- !u!114 &3581381314955738024
 MonoBehaviour:
   m_ObjectHideFlags: 0
