@@ -66,6 +66,16 @@ public class PlayerController : MonoBehaviour
         }
         energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
     }
+
+    public void resetEnergy()
+    {
+        if (currEnergy == 0)
+        {
+            toggleEnergyGlow.startGlow();
+        }
+        currEnergy = maxEnergy;
+        energyText.text = currEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
     public bool isDefended()
     {
 

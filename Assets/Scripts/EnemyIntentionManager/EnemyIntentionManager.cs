@@ -17,6 +17,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public FieldManager playerFieldManager;
     public PlayerController playerController;
     public Camera cam;
+    public TurnManager turnManager;
 
     private float enemyActionTimer;
     private void Awake()
@@ -72,6 +73,7 @@ public class EnemyIntentionManager : MonoBehaviour
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
                 CreatureCard enemyCard = (CreatureCard)enemyAction.cardTarget.GetComponent<CardDisplay>().card;
                 enemyAction.cardTarget.GetComponent<AttackedManager>().tempReduceHealth(enemyCard);
+                enemyAction.cardTarget.GetComponent<AttackDefenseManager>().decreaseDefense(enemyCard.currAttack);
             }
             else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingArrow)
             {
@@ -88,7 +90,12 @@ public class EnemyIntentionManager : MonoBehaviour
                 enemyController.decreaseCurrEnergy(enemyCard.cardCost);
                 removeAction(enemyAction);
             }
-        } else if (enemyActions.Count> 0)
+
+            if(enemyActions.Count == 0)
+            {
+                turnManager.startPlayerTurn();
+            }
+        } else if (enemyActions.Count > 0)
         {
             enemyActionTimer -= Time.deltaTime;
         }

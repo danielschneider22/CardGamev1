@@ -27,6 +27,7 @@ public class Initialization : MonoBehaviour
     public FieldManager playerFieldManager;
     public FieldManager enemyFieldManager;
     public int numPlayerFieldCards;
+    public TurnManager turnManager;
 
     private float enemyIntentStartTimer;
     private bool enemyTurnStarted;
@@ -43,6 +44,11 @@ public class Initialization : MonoBehaviour
         numCardsDrawn = 0;
         enemyIntentStartTimer = 3f;
         enemyTurnStarted = false;
+    }
+
+    private void Start()
+    {
+        turnManager.startPlayerTurn();
     }
 
     private void Update()
