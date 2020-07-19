@@ -15,7 +15,7 @@ public class NonCreatureCard : Card
     public enum Target{ playerCreature, enemyCreature, playerCreatureOrEnemyCreature, player, enemy }
     public Target target;
 
-    public delegate void EnactEffect(GameObject targetGameObject);
+    public delegate void EnactEffect(GameObject targetGameObject, PlayerController targetController);
     public EnactEffect enactEffect;
     [System.Serializable]
     public class NonCreatureEffect

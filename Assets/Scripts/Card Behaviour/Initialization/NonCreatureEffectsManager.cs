@@ -5,18 +5,18 @@ using static NonCreatureCard;
 
 public class NonCreatureEffectsManager
 {
-    static void EmptyEffect(GameObject targetGameObject){ }
-    static void MakeAttack(GameObject targetGameObject)
+    static void EmptyEffect(GameObject targetGameObject, PlayerController cardOwnerController){ }
+    static void MakeAttack(GameObject targetGameObject, PlayerController cardOwnerController)
     {
         AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
         attackDefenseManager.canAttack();
     }
-    static void MakeDefend(GameObject targetGameObject)
+    static void MakeDefend(GameObject targetGameObject, PlayerController cardOwnerController)
     {
         AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
         attackDefenseManager.setIsDefending();
     }
-    static void IncreaseAttack(GameObject targetGameObject)
+    static void IncreaseAttack(GameObject targetGameObject, PlayerController cardOwnerController)
     {
         CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
         ((CreatureCard)cardDisplay.card).currAttack = ((CreatureCard)cardDisplay.card).currAttack + 1;

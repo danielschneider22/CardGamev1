@@ -59,7 +59,7 @@ public class EnemyIntentionManager : MonoBehaviour
             else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
             {
                 NonCreatureCard enemyCard = (NonCreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
-                enemyCard.enactEffect(enemyAction.cardTarget);
+                enemyCard.enactEffect(enemyAction.cardTarget, enemyController);
                 enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
 
                 removeAction(enemyAction);

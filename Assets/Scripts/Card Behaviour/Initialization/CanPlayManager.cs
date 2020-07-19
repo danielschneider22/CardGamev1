@@ -70,7 +70,7 @@ public class CanPlayManager
                 }
                 case (CanPlayRequirementName.canPlayNonCreature):
                 {
-                        CanPlay canPlay = CanPlayNonCreature;
+                    CanPlay canPlay = CanPlayNonCreature;
                     combinedCanPlay += canPlay;
                     break;
                 }
@@ -84,6 +84,35 @@ public class CanPlayManager
                 {
                     CanPlay canPlay = CreatureIsntDefending;
                     combinedCanPlay += canPlay;
+                    break;
+                }
+                case (CanPlayRequirementName.creatureIsntTapped):
+                {
+                    CanPlay canPlay = CreatureIsntTapped;
+                    combinedCanPlay += canPlay;
+                    break;
+                }
+                case (CanPlayRequirementName.genericCanPlayCreature):
+                {
+                    CanPlay canPlay = PayEnergyCost;
+                    combinedCanPlay += canPlay;
+                    break;
+                }
+                case (CanPlayRequirementName.genericCanPlayAttackCard):
+                {
+                    CanPlay energyCost = PayEnergyCost;
+                    CanPlay canPlayNonCreature = CanPlayNonCreature;
+                    CanPlay isntAttacking = CreatureIsntAttacking;
+                    CanPlay isntTapped = CreatureIsntTapped;
+                    combinedCanPlay = combinedCanPlay + energyCost + canPlayNonCreature + isntAttacking + isntTapped;
+                    break;
+                }
+                case (CanPlayRequirementName.genericCanPlayDefendCard):
+                {
+                    CanPlay energyCost = PayEnergyCost;
+                    CanPlay canPlayNonCreature = CanPlayNonCreature;
+                    CanPlay isntDefending = CreatureIsntDefending;
+                    combinedCanPlay = combinedCanPlay + energyCost + canPlayNonCreature + isntDefending;
                     break;
                 }
             }

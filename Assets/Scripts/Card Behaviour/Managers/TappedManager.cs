@@ -21,7 +21,7 @@ public class TappedManager : MonoBehaviour
         animator.enabled = false;
         // string animationTrigger = "TapCard";
         // animator.SetTrigger(animationTrigger);
-        gameObject.transform.eulerAngles = new Vector3(0, 0, -10f);
+        gameObject.transform.eulerAngles = new Vector3(0, 0, -5f);
         card.isTapped = true;
     }
 }

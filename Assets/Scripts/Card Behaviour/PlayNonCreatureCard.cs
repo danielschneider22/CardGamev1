@@ -59,8 +59,8 @@ public class PlayNonCreatureCard : MonoBehaviour, IPointerEnterHandler, IDropHan
         {
             NonCreatureCard card = (NonCreatureCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
 
-            card.enactEffect(gameObject);
-            // playerController.decreaseCurrEnergy(attackCard.cardCost);
+            card.enactEffect(gameObject, playerController);
+            playerController.decreaseCurrEnergy(card.cardCost);
             handManager.discardCard(draggingGameObject);
         }
     }
