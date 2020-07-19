@@ -18,7 +18,7 @@ public class TappedManager : MonoBehaviour
 
     public void tapCard()
     {
-        // animator.enabled = true;
+        animator.enabled = false;
         // string animationTrigger = "TapCard";
         // animator.SetTrigger(animationTrigger);
         gameObject.transform.eulerAngles = new Vector3(0, 0, -10f);

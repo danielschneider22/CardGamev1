@@ -76,6 +76,7 @@ public class EnemyIntentionManager : MonoBehaviour
             else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingArrow)
             {
                 CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                enemyAction.cardTarget.GetComponent<AttackedManager>().attackingCardObj = enemyAction.card;
                 enemyAction.cardTarget.GetComponent<AttackedManager>().applyTempAttack(enemyCard);
 
                 AttackDefenseManager atckDefManager = enemyAction.card.GetComponent<AttackDefenseManager>();
@@ -156,16 +157,17 @@ public class EnemyIntentionManager : MonoBehaviour
 
     private List<EnemyAction> getEnemyActions()
     {
-        /*EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
+        EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
         EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
         EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
         EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
-        */
-        List<EnemyAction> actions = new List<EnemyAction> { };
-        List <CreatureCard> playerFieldCards = playerFieldManager.getFieldCards();
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2, activateAttack, attackCreature };
+        
+        /* List <CreatureCard> playerFieldCards = playerFieldManager.getFieldCards();
         List<CreatureCard> enemyFieldCards = enemyFieldManager.getFieldCards();
         Debug.Log(playerController.currHealth);
         Debug.Log(enemyController.currHealth);
+        List<EnemyAction> actions = new List<EnemyAction> { }; */
 
         return (actions);
     }

@@ -9,7 +9,7 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     private ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
-    private GameObject attackingCardObj;
+    public GameObject attackingCardObj;
     private CreatureCard defendingCard;
     private Animator animator;
     private AttackDefenseManager attackDefenseChangeManager;
