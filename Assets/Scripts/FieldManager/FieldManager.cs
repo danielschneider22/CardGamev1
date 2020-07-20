@@ -276,6 +276,40 @@ public class FieldManager : MonoBehaviour
         return false;
     }
 
+    public bool toggleAllDefending(bool allDefend)
+    {
+        foreach (Transform child in field.transform)
+        {
+            if (allDefend)
+            {
+                child.GetComponent<AttackDefenseManager>().setIsDefending();
+            }
+            else
+            {
+                child.GetComponent<AttackDefenseManager>().setIsNotDefending();
+            }
+
+        }
+        return false;
+    }
+
+    public bool toggleAllCanAttack(bool allAttack)
+    {
+        foreach (Transform child in field.transform)
+        {
+            if (allAttack)
+            {
+                child.GetComponent<AttackDefenseManager>().canAttack();
+            }
+            else
+            {
+                child.GetComponent<AttackDefenseManager>().cantAttack();
+            }
+
+        }
+        return false;
+    }
+
     public List<CreatureCard> getFieldCards()
     {
         List<CreatureCard> cards = new List<CreatureCard>();

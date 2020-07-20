@@ -52462,6 +52462,7 @@ MonoBehaviour:
   turnText: {fileID: 1946114738}
   turnPopupImage: {fileID: 17877657}
   playerController: {fileID: 1362549041}
+  enemyController: {fileID: 905861225}
   playerFieldManager: {fileID: 1181721269}
   enemyFieldManager: {fileID: 541465761}
 --- !u!1 &2133563009
