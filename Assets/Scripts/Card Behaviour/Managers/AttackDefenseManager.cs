@@ -57,12 +57,12 @@ public class AttackDefenseManager : MonoBehaviour
     public void cantAttack()
     {
         card.canAttack = false;
-        cardDisplay.fireBack.enabled = false;
+        cardDisplay.sword.enabled = false;
     }
     public void canAttack()
     {
         card.canAttack = true;
-        cardDisplay.fireBack.enabled = true;
+        cardDisplay.sword.enabled = true;
     }
     public void setIsDefending()
     {

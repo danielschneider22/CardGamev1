@@ -18,12 +18,14 @@ public class EnemyIntentionManager : MonoBehaviour
     public PlayerController playerController;
     public Camera cam;
     public TurnManager turnManager;
+    private bool enemyTurnOver;
 
     private float enemyActionTimer;
     private void Awake()
     {
         enemyActionTimer = 0f;
         enemyActions = new List<EnemyAction>{ };
+        enemyTurnOver = true;
     }
 
     public void addCard(GameObject card)
@@ -33,69 +35,78 @@ public class EnemyIntentionManager : MonoBehaviour
 
     public void Update()
     {
-        if(enemyActions.Count > 0 && enemyActionTimer <= 0f)
+        if(enemyActionTimer <= 0f)
         {
-            EnemyAction enemyAction = enemyActions[0];
-            if(!enemyAction.showingHover && !enemyAction.showingArrow)
+            if(enemyActions.Count > 0)
             {
-                showHover(enemyAction);
-            }
-            // playing creature
-            else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
-            {
-                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(fieldPosition.transform.position));
-                enemyFieldBackground.SetActive(true);
-            } else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
-            {
-                placeCardInEnemyField(enemyAction.card);
-                removeAction(enemyAction);
-                enemyFieldBackground.SetActive(false);
-            }
-            // playing attack or defend card
-            else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
-            {
-                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z)));
-                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
-            }
-            else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
-            {
-                NonCreatureCard enemyCard = (NonCreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
-                enemyCard.enactEffect(enemyAction.cardTarget, enemyController);
-                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+                EnemyAction enemyAction = enemyActions[0];
+                if (!enemyAction.showingHover && !enemyAction.showingArrow)
+                {
+                    showHover(enemyAction);
+                }
+                // playing creature
+                else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingHover && !enemyAction.showingArrow)
+                {
+                    drawIntentArrow(enemyAction, cam.WorldToScreenPoint(fieldPosition.transform.position));
+                    enemyFieldBackground.SetActive(true);
+                }
+                else if (enemyAction.actionType == EnemyActionType.playCreature && enemyAction.showingArrow)
+                {
+                    placeCardInEnemyField(enemyAction.card);
+                    removeAction(enemyAction);
+                    enemyFieldBackground.SetActive(false);
+                }
+                // playing attack or defend card
+                else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
+                {
+                    drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z)));
+                    enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
+                }
+                else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
+                {
+                    NonCreatureCard enemyCard = (NonCreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                    enemyCard.enactEffect(enemyAction.cardTarget, enemyController);
+                    enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
 
-                removeAction(enemyAction);
-                Destroy(enemyAction.card);
+                    removeAction(enemyAction);
+                    Destroy(enemyAction.card);
+                }
+                // attacking with a creature
+                else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingHover && !enemyAction.showingArrow)
+                {
+                    drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
+                    enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
+                    CreatureCard enemyCard = (CreatureCard)enemyAction.cardTarget.GetComponent<CardDisplay>().card;
+                    enemyAction.cardTarget.GetComponent<AttackedManager>().tempReduceHealth(enemyCard);
+                    enemyAction.cardTarget.GetComponent<AttackDefenseManager>().decreaseDefense(enemyCard.currAttack);
+                }
+                else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingArrow)
+                {
+                    CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                    enemyAction.cardTarget.GetComponent<AttackedManager>().attackingCardObj = enemyAction.card;
+                    enemyAction.cardTarget.GetComponent<AttackedManager>().applyTempAttack(enemyCard);
+
+                    AttackDefenseManager atckDefManager = enemyAction.card.GetComponent<AttackDefenseManager>();
+                    atckDefManager.cantAttack();
+
+                    enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+                    enemyAction.card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+
+                    enemyController.decreaseCurrEnergy(enemyCard.cardCost);
+                    removeAction(enemyAction);
+                }
+                if (enemyActions.Count == 0)
+                {
+                    enemyActionTimer = 2f;
+                    
+                }
             }
-            // attacking with a creature
-            else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingHover && !enemyAction.showingArrow)
-            {
-                drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
-                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
-                CreatureCard enemyCard = (CreatureCard)enemyAction.cardTarget.GetComponent<CardDisplay>().card;
-                enemyAction.cardTarget.GetComponent<AttackedManager>().tempReduceHealth(enemyCard);
-                enemyAction.cardTarget.GetComponent<AttackDefenseManager>().decreaseDefense(enemyCard.currAttack);
-            }
-            else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingArrow)
-            {
-                CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
-                enemyAction.cardTarget.GetComponent<AttackedManager>().attackingCardObj = enemyAction.card;
-                enemyAction.cardTarget.GetComponent<AttackedManager>().applyTempAttack(enemyCard);
-
-                AttackDefenseManager atckDefManager = enemyAction.card.GetComponent<AttackDefenseManager>();
-                atckDefManager.cantAttack();
-
-                enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
-                enemyAction.card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
-
-                enemyController.decreaseCurrEnergy(enemyCard.cardCost);
-                removeAction(enemyAction);
-            }
-
-            if(enemyActions.Count == 0)
+            else if (!enemyTurnOver)
             {
                 turnManager.startPlayerTurn();
+                enemyTurnOver = true;
             }
-        } else if (enemyActions.Count > 0)
+        } else if (enemyActionTimer > 0f)
         {
             enemyActionTimer -= Time.deltaTime;
         }
@@ -128,6 +139,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public void enactEnemyIntent()
     {
         enemyActions = getEnemyActions();
+        enemyTurnOver = false;
     }
 
     private void placeCardInEnemyField(GameObject cardObj)

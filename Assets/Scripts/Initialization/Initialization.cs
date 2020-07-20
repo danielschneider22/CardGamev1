@@ -132,7 +132,7 @@ public class Initialization : MonoBehaviour
             copyCard.GetComponent<CardDisplay>().location = Location.enemyField;
             copyCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             copyCard.GetComponent<OnHover>().canvas = worldCanvas;
-            copyCard.GetComponent<ChangeBackgroundLighting>().selectableBacklighting();
+            copyCard.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
             copyCard.GetComponent<Animator>().enabled = false;
             copyCard.SetActive(true);
             if(i % 2 == 1)

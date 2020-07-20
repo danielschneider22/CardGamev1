@@ -16,13 +16,11 @@ public class CreatureCard : Card
     public int maxHealth;
     public int currHealth;
 
-    public bool tapped;
-
     public Sprite circleArtwork;
 
     public bool canAttack;
     public bool isDefending;
-    public bool isTapped;
+    public bool energized;
 
     public CardSlotEffect[] effects;
 }

@@ -84,8 +84,8 @@ public class AttackedManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
         animator.enabled = true;
         string animationTrigger = shouldDestroy ? "CardDestroyedTrigger" : "CardDamagedTrigger";
         animator.SetTrigger(animationTrigger);
-        TappedManager tappedManager = attackingCardObj.GetComponent<TappedManager>();
-        tappedManager.tapCard();
+        EnergizedManager energizedManager = attackingCardObj.GetComponent<EnergizedManager>();
+        energizedManager.deenergize();
         attackingCardObj = null;
     }
     private void makeDamageTextAnimation()

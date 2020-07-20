@@ -31,7 +31,7 @@ public class CanPlayManager
         canPlayTracker = canPlayTracker && targetCardAsCreature.canAttack == false;
         return canPlayTracker;
     }
-    static bool CreatureIsntTapped(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool CreatureIsEnergized(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
         if (!(targetCardDisplay.card is CreatureCard))
@@ -40,7 +40,7 @@ public class CanPlayManager
             return canPlayTracker;
         }
         CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
-        canPlayTracker = canPlayTracker && targetCardAsCreature.isTapped == false;
+        canPlayTracker = canPlayTracker && targetCardAsCreature.energized == true;
         return canPlayTracker;
     }
     static bool CreatureIsntDefending(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
@@ -86,9 +86,9 @@ public class CanPlayManager
                     combinedCanPlay += canPlay;
                     break;
                 }
-                case (CanPlayRequirementName.creatureIsntTapped):
+                case (CanPlayRequirementName.creatureIsEnergized):
                 {
-                    CanPlay canPlay = CreatureIsntTapped;
+                    CanPlay canPlay = CreatureIsEnergized;
                     combinedCanPlay += canPlay;
                     break;
                 }
@@ -103,7 +103,7 @@ public class CanPlayManager
                     CanPlay energyCost = PayEnergyCost;
                     CanPlay canPlayNonCreature = CanPlayNonCreature;
                     CanPlay isntAttacking = CreatureIsntAttacking;
-                    CanPlay isntTapped = CreatureIsntTapped;
+                    CanPlay isntTapped = CreatureIsEnergized;
                     combinedCanPlay = combinedCanPlay + energyCost + canPlayNonCreature + isntAttacking + isntTapped;
                     break;
                 }

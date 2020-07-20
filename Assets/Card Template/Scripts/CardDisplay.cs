@@ -30,6 +30,7 @@ public class CardDisplay : MonoBehaviour
     public Image healthOutline;
     public Image transparentOverlay;
     public Image shield;
+    public Image sword;
 
     public Image fireBack;
     // public Image shieldBack;
@@ -131,10 +132,6 @@ public class CardDisplay : MonoBehaviour
             Color fireColor = Color.red;
             fireBack.material = Instantiate(fireBackMaterial);
             fireBack.material.SetColor("_Color", fireColor);
-            // shieldBack.material = Instantiate(fireBackMaterial);
-            // Color shieldColor = Color.blue;
-            // shieldBack.material.SetColor("_Color", shieldColor);
-            // shieldBack.material.SetFloat("_DistortionAmount", .05f);
         }
     }
 

@@ -24,5 +24,5 @@ MonoBehaviour:
   effects:
   - effectName: 0
     effectNumber: 0
-  text: Target untapped creature can attack this turn.
+  text: Target energized creature can attack this turn.
   frameText: ATTACK

@@ -7,5 +7,5 @@
     canPlayNonCreature,
     creatureIsntAttacking,
     creatureIsntDefending,
-    creatureIsntTapped,
+    creatureIsEnergized,
 }

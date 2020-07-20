@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TappedManager : MonoBehaviour
+public class EnergizedManager : MonoBehaviour
 {
     private CreatureCard card;
     private CardDisplay cardDisplay;
@@ -16,12 +16,15 @@ public class TappedManager : MonoBehaviour
         cardDisplay = GetComponent<CardDisplay>();
     }
 
-    public void tapCard()
+    public void deenergize()
     {
-        animator.enabled = false;
-        // string animationTrigger = "TapCard";
-        // animator.SetTrigger(animationTrigger);
-        gameObject.transform.eulerAngles = new Vector3(0, 0, -5f);
-        card.isTapped = true;
+        card.energized = false;
+        cardDisplay.fireBack.enabled = false;
+    }
+
+    public void energize()
+    {
+        card.energized = true;
+        cardDisplay.fireBack.enabled = true;
     }
 }

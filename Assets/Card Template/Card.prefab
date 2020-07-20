@@ -1945,6 +1945,7 @@ MonoBehaviour:
   healthOutline: {fileID: 2701077619863609614}
   transparentOverlay: {fileID: 5570111589982746149}
   shield: {fileID: 0}
+  sword: {fileID: 0}
   fireBack: {fileID: 0}
   attackFrontSprite: {fileID: -8789170865316149833, guid: 5f1e064348bdea74bbe661f15b975187,
     type: 3}
