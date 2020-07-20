@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -149,11 +150,12 @@ public class EnemyIntentionManager : MonoBehaviour
         newChild.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         newChild.GetComponent<CardDisplay>().card = cardObj.GetComponent<CardDisplay>().card;
         newChild.GetComponent<CardDisplay>().material = cardObj.GetComponent<CardDisplay>().material;
-        newChild.GetComponent<CardDisplay>().location = Location.field;
+        newChild.GetComponent<CardDisplay>().location = Location.enemyField;
         newChild.GetComponent<ToggleVisibility>().makeVisible();
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
         newChild.transform.localScale = new Vector3(1f, 1f, 1);
         newChild.SetActive(true);
+        newChild.GetComponent<EnergizedManager>().energize();
         enemyFieldManager.addCardToField(newChild);
 
         // float halfHeight = newChild.GetComponent<RectTransform>().rect.height / 2;
