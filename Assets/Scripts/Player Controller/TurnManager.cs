@@ -13,6 +13,8 @@ public class TurnManager : MonoBehaviour
     public Image turnPopupImage;
     private static float popupTime = 2f;
     public PlayerController playerController;
+    public FieldManager playerFieldManager;
+    public FieldManager enemyFieldManager;
 
     private void FixedUpdate()
     {
@@ -22,6 +24,8 @@ public class TurnManager : MonoBehaviour
         }
         if(showPopupTimer <= 0f && showTurnPopup == "enemy" )
         {
+            playerFieldManager.toggleAllEnergized(false);
+            enemyFieldManager.toggleAllEnergized(true);
             enemyIntentionManager.enactEnemyIntent();
             showTurnPopup = "";
             hideTurnPopup();
@@ -40,14 +44,14 @@ public class TurnManager : MonoBehaviour
 
     public void startPlayerTurn()
     {
+        playerController.resetEnergy();
         showTurnPopup = "player";
         showPopupTimer = popupTime;
         turnPopupImage.enabled = true;
         turnText.enabled = true;
         turnText.text = "Player Turn";
-        playerController.resetEnergy();
-
-
+        playerFieldManager.toggleAllEnergized(true);
+        enemyFieldManager.toggleAllEnergized(false);
     }
 
     public void endTurn()

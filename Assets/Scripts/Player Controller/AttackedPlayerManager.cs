@@ -74,6 +74,9 @@ public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPoint
         // attackDefenseChangeManager.decreaseDefense(attackingCard.currAttack);
         bool shouldDestroy = healthBar.applyTempDecreaseHealth();
 
+        EnergizedManager energizedManager = attackingCardObj.GetComponent<EnergizedManager>();
+        energizedManager.deenergize();
+
         makeDamageTextAnimation();
         attackingCardObj = null;
     }

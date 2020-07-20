@@ -144,7 +144,7 @@ public class Initialization : MonoBehaviour
             enemyFieldManager.addCardToField(copyCard);
         }
         card.SetActive(true);
-        enemyFieldManager.resetFieldPositions();
+        enemyFieldManager.resetFieldPositionsImmediately();
     }
 
     /* private void initializeEnemyField()

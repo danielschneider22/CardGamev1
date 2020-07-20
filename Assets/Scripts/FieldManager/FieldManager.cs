@@ -88,6 +88,25 @@ public class FieldManager : MonoBehaviour
         }
     }
 
+    public void resetFieldPositionsImmediately()
+    {
+        List<MovingCard> cardsToRemove = new List<MovingCard>();
+        foreach (MovingCard movingCard in movingCards)
+        {
+            RectTransform movingCardRectTransform = movingCard.transform.gameObject.GetComponent<RectTransform>();
+            RectTransform endPointRectTransform = movingCard.endpointTransform.gameObject.GetComponent<RectTransform>();
+
+            movingCardRectTransform.anchoredPosition = endPointRectTransform.anchoredPosition;
+            movingCardRectTransform.localScale = movingCard.endpointScale;
+            cardsToRemove.Add(movingCard);
+        }
+
+        foreach (MovingCard fieldCard in cardsToRemove)
+        {
+            movingCards.Remove(fieldCard);
+        }
+    }
+
     // return if movement occurred
     private bool moveTowardEndPoint(MovingCard movingCard)
     {
@@ -236,6 +255,23 @@ public class FieldManager : MonoBehaviour
             {
                 return true;
             }
+        }
+        return false;
+    }
+
+    public bool toggleAllEnergized(bool energizeAll)
+    {
+        foreach (Transform child in field.transform)
+        {
+            if(energizeAll)
+            {
+                child.GetComponent<EnergizedManager>().energize();
+            }
+            else
+            {
+                child.GetComponent<EnergizedManager>().deenergize();
+            }
+            
         }
         return false;
     }
