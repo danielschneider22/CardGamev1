@@ -12,13 +12,14 @@ public class HandManager : MonoBehaviour
     public GameObject topOfHandArea;
     public float cellXSize;
     public HoverCopyTopCard hoverCopyTopCard;
+    public DiscardManager discardManager;
 
     private float centerOfHand;
     private float minMoveSpeed = 100f;
     private float hoverXPosMove = 20f;
     private float hoverYPosMove = 0f;
     private float hoverMoveUp = 50f;
-    
+
 
     public void Start()
     {
@@ -29,7 +30,7 @@ public class HandManager : MonoBehaviour
     private void FixedUpdate()
     {
         List<MovingCard> cardsToRemove = new List<MovingCard>();
-        foreach(MovingCard handCard in movingCards)
+        foreach (MovingCard handCard in movingCards)
         {
             bool moveOccurred = moveTowardEndPoint(handCard);
             bool resizeOccurred = rescale(handCard);
@@ -40,7 +41,7 @@ public class HandManager : MonoBehaviour
                 cardsToRemove.Add(handCard);
             }
 
-            if(hoverCopyTopCard != null && handCard.transform == hoverCopyTopCard.handTransform)
+            if (hoverCopyTopCard != null && handCard.transform == hoverCopyTopCard.handTransform)
             {
                 setCopyTransformToHandTransform(handCard.transform);
             }
@@ -49,7 +50,7 @@ public class HandManager : MonoBehaviour
         foreach (MovingCard handCard in cardsToRemove)
         {
             movingCards.Remove(handCard);
-        }   
+        }
     }
     public void clearMovingCards()
     {
@@ -85,24 +86,11 @@ public class HandManager : MonoBehaviour
 
     public void discardCard(GameObject card)
     {
-        removeCardFromHand(card.transform);
-        // int removeCardIdx = getCardIdxInTransform(hand.transform, cardTransform);
-        /*Transform cardTransform = card.transform;
-        Transform placeholderTransform = handPlacementGrid.transform.GetChild(i);
-
-        RectTransform placeholderRectTransform = placeholderTransform.GetComponent<RectTransform>();
-        RectTransform handRectTransform = cardTransform.GetComponent<RectTransform>();
-
-        MovingCard oldMovingHandCard = getExistingMovingHandCard(oldMoveCards, cardTransform);
-
-        cardTransform.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        cardTransform.GetComponent<ToggleVisibility>().makeVisible();
-        setCardPosition(childCount, i, placeholderRectTransform);
-        setCardRotation(childCount, i, placeholderRectTransform);
-        float speed = getCardSpeed(oldMovingHandCard, placeholderRectTransform, handRectTransform, resetSpeed);
-
-        MovingCard newHandCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.55f, .55f, 1));
-        movingCards.Add(newHandCard);*/
+        int removeCardIdx = getCardIdxInTransform(hand.transform, card.transform);
+        discardManager.addCardToDiscardArea(card.transform.gameObject);
+        DestroyImmediate(handPlacementGrid.transform.GetChild(removeCardIdx).gameObject);
+        movingCards.Remove(findMovingHandCard(card.transform));
+        resetHandPositions();
     }
 
     public void resetHandPositions(float resetSpeed = -1f)
@@ -135,7 +123,7 @@ public class HandManager : MonoBehaviour
 
     private void removeAllTopOfHandObjs()
     {
-        foreach(Transform child in topOfHandArea.transform)
+        foreach (Transform child in topOfHandArea.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
@@ -249,7 +237,7 @@ public class HandManager : MonoBehaviour
     public void hoverCard(Transform card)
     {
         int cardIdx = getCardIdxInTransform(hand.transform, card);
-        if(cardIdx != -1)
+        if (cardIdx != -1)
         {
             //set-up moving cards list to move everything back to original positions
             resetHandPositions();
@@ -267,7 +255,7 @@ public class HandManager : MonoBehaviour
 
     public void stopHandBlockingRaycasts()
     {
-        foreach(Transform card in hand.transform)
+        foreach (Transform card in hand.transform)
         {
             card.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
@@ -291,7 +279,7 @@ public class HandManager : MonoBehaviour
     private void moveCardsLeft(int cardIdx)
     {
         int currcardIdx = cardIdx - 1;
-        if(currcardIdx < 0) { return; }
+        if (currcardIdx < 0) { return; }
 
         GameObject placeholderObj = handPlacementGrid.transform.GetChild(currcardIdx).gameObject;
         GameObject card = hand.transform.GetChild(currcardIdx).gameObject;
@@ -351,9 +339,9 @@ public class HandManager : MonoBehaviour
 
     private MovingCard findMovingHandCard(Transform card)
     {
-        foreach(MovingCard movingHandCard in movingCards)
+        foreach (MovingCard movingHandCard in movingCards)
         {
-            if(card == movingHandCard.transform)
+            if (card == movingHandCard.transform)
             {
                 return movingHandCard;
             }
@@ -363,9 +351,9 @@ public class HandManager : MonoBehaviour
 
     private MovingCard getExistingMovingHandCard(List<MovingCard> moveCards, Transform transform)
     {
-        foreach(MovingCard moveCard in moveCards)
+        foreach (MovingCard moveCard in moveCards)
         {
-            if(moveCard.transform == transform)
+            if (moveCard.transform == transform)
             {
                 return moveCard;
             }
