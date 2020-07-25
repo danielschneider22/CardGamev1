@@ -17100,7 +17100,7 @@ GameObject:
   - component: {fileID: 480585300}
   m_Layer: 5
   m_Name: Screen Space Overlay
-  m_TagString: Untagged
+  m_TagString: Screen Space Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

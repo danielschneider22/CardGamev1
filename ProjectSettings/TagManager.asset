@@ -15,6 +15,7 @@ TagManager:
   - Enemy Field
   - Enemy Field Manager
   - Discard Manager
+  - Screen Space Canvas
   layers:
   - Default
   - TransparentFX

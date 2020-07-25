@@ -44,6 +44,7 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             pauseBeforeResettingHand -= Time.deltaTime;
             if(pauseBeforeResettingHand <= 0f)
             {
+                restoreCardPropertiesToMouseClickState();
                 pauseBeforeResettingHand = 0f;
                 handManager.resetHandPositions();
             }
@@ -93,7 +94,6 @@ public class DragDropCard : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        restoreCardPropertiesToMouseClickState();
         layout.ignoreLayout = false;
         if (transform.parent.name == "TopOfHandArea" && cardDisplay.card is CreatureCard)
         {

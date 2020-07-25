@@ -53,11 +53,15 @@ public class FieldManager : MonoBehaviour
 
     public void addCardToField(GameObject card)
     {
-        // Vector2 position = card.transform.GetComponent<RectTransform>().anchoredPosition;
-        // Vector3 scale = card.transform.localScale;
+        Vector2 test = new Vector2();
+        Canvas screenSpaceCanvas = GameObject.FindGameObjectWithTag("Screen Space Canvas").GetComponent<Canvas>();
+        // var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, card.transform.position);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(field.GetComponent<RectTransform>(), card.transform.position, Camera.main, out test);
+        Vector3 scale = card.transform.localScale;
+
         card.transform.SetParent(field.transform, false);
-        // card.transform.GetComponent<RectTransform>().anchoredPosition = position;
-        // card.transform.localScale = scale;
+        card.transform.GetComponent<RectTransform>().anchoredPosition = test;
+        card.transform.localScale = scale;
 
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(fieldPlacementGrid.transform, false);
@@ -133,11 +137,11 @@ public class FieldManager : MonoBehaviour
         {
             if (movingCard.transform.localScale.x < movingCard.endpointScale.x)
             {
-                movingCard.transform.localScale = new Vector3(movingCard.transform.localScale.x + .02f, movingCard.transform.localScale.y + .02f, movingCard.transform.localScale.z);
+                movingCard.transform.localScale = new Vector3(movingCard.transform.localScale.x + .01f, movingCard.transform.localScale.y + .01f, movingCard.transform.localScale.z);
             }
             else
             {
-                movingCard.transform.localScale = new Vector3(movingCard.transform.localScale.x - .02f, movingCard.transform.localScale.y - .02f, movingCard.transform.localScale.z);
+                movingCard.transform.localScale = new Vector3(movingCard.transform.localScale.x - .01f, movingCard.transform.localScale.y - .01f, movingCard.transform.localScale.z);
             }
             return true;
         }

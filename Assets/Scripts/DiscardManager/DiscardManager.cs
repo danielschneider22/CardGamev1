@@ -53,12 +53,12 @@ public class DiscardManager : MonoBehaviour
 
     public void addCardToDiscardArea(GameObject card)
     {
-        // Vector3 position = card.transform.position;
-        // Vector3 scale = card.transform.localScale;
+        Vector3 position = card.transform.position;
+        Vector3 scale = card.transform.localScale;
         card.transform.SetParent(discardArea.transform, false);
         card.transform.SetAsFirstSibling();
-        // card.transform.position = position;
-        // card.transform.localScale = scale;
+        card.transform.position = position;
+        card.transform.localScale = scale;
 
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(discardPlacementGrid.transform, false);
