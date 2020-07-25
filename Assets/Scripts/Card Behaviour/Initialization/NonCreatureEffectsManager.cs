@@ -22,6 +22,12 @@ public class NonCreatureEffectsManager
         ((CreatureCard)cardDisplay.card).currAttack = ((CreatureCard)cardDisplay.card).currAttack + 1;
         cardDisplay.attackText.text = ((CreatureCard)cardDisplay.card).currAttack.ToString();
     }
+    static void IncreaseDefense(GameObject targetGameObject, PlayerController cardOwnerController)
+    {
+        CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
+        ((CreatureCard)cardDisplay.card).currDefense = ((CreatureCard)cardDisplay.card).currDefense + 1;
+        cardDisplay.defenseText.text = ((CreatureCard)cardDisplay.card).currDefense.ToString();
+    }
     public EnactEffect getEnactEffect(List<NonCreatureEffect> effects)
     {
         EnactEffect combinedEffect = EmptyEffect;
@@ -38,6 +44,13 @@ public class NonCreatureEffectsManager
                 case (NonCreatureEffectName.increaseAttack):
                 {
                     EnactEffect enactEffect = IncreaseAttack;
+                    combinedEffect += enactEffect;
+                    break;
+
+                }
+                case (NonCreatureEffectName.increaseDefense):
+                {
+                    EnactEffect enactEffect = IncreaseDefense;
                     combinedEffect += enactEffect;
                     break;
                 }

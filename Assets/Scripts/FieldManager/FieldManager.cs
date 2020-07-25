@@ -53,7 +53,11 @@ public class FieldManager : MonoBehaviour
 
     public void addCardToField(GameObject card)
     {
+        // Vector2 position = card.transform.GetComponent<RectTransform>().anchoredPosition;
+        // Vector3 scale = card.transform.localScale;
         card.transform.SetParent(field.transform, false);
+        // card.transform.GetComponent<RectTransform>().anchoredPosition = position;
+        // card.transform.localScale = scale;
 
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(fieldPlacementGrid.transform, false);
@@ -291,6 +295,17 @@ public class FieldManager : MonoBehaviour
 
         }
         return false;
+    }
+
+    public void resetDefenses()
+    {
+        foreach (Transform child in field.transform)
+        {
+            CardDisplay cardDisplay = child.gameObject.GetComponent<CardDisplay>();
+            ((CreatureCard)cardDisplay.card).currDefense = ((CreatureCard)cardDisplay.card).defense;
+            cardDisplay.defenseText.text = ((CreatureCard)cardDisplay.card).currDefense.ToString();
+
+        }
     }
 
     public bool toggleAllCanAttack(bool allAttack)

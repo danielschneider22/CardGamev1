@@ -23,7 +23,8 @@ public class NonCreatureCard : Card
         public NonCreatureEffectName effectName;
         public int effectNumber;
     }
-    public List<NonCreatureEffect> effects; 
+    public List<NonCreatureEffect> effects;
+    [TextArea]
     public string text;
     public string frameText;
 }

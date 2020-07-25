@@ -104,6 +104,7 @@ public class EnemyIntentionManager : MonoBehaviour
             }
             else if (!enemyTurnOver)
             {
+                cards = new List<GameObject>();
                 turnManager.startPlayerTurn();
                 enemyTurnOver = true;
             }

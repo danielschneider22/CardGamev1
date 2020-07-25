@@ -1,1 +1,1 @@
-﻿public enum NonCreatureEffectName { makeCardAttack, makeCardDefend, increaseAttack }
+﻿public enum NonCreatureEffectName { makeCardAttack, makeCardDefend, increaseAttack, increaseDefense }

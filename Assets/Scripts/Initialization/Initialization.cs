@@ -31,17 +31,13 @@ public class Initialization : MonoBehaviour
 
     private float enemyIntentStartTimer;
     private bool enemyTurnStarted;
-    private float drawCardTimer;
-    private int numCardsDrawn;
     void Awake()
     {
         // initializeHand();
         // drawCards();
-        initializeEnemyField();
-        initializeEnemyIntent();
+        // initializeEnemyField();
+        // initializeEnemyIntent();
         // initializePlayerField();
-        drawCardTimer = 0f;
-        numCardsDrawn = 0;
         enemyIntentStartTimer = 3f;
         enemyTurnStarted = false;
     }
@@ -49,27 +45,6 @@ public class Initialization : MonoBehaviour
     private void Start()
     {
         turnManager.startPlayerTurn();
-    }
-
-    private void Update()
-    {
-        if(drawCardTimer <= 0f && numCardsDrawn < numCardsToDraw)
-        {
-            playerDeckManager.drawCard();
-            drawCardTimer = .3f;
-            numCardsDrawn++;
-        } else if (numCardsDrawn < numCardsToDraw)
-        {
-            drawCardTimer -= Time.deltaTime;
-        }
-        /* if(enemyIntentStartTimer >= 0f && !enemyTurnStarted)
-        {
-            enemyIntentStartTimer -= Time.deltaTime;
-        } else if (!enemyTurnStarted)
-        {
-            enemyIntentionManager.enactEnemyIntent();
-            enemyTurnStarted = true;
-        }*/
     }
 
     private void initializeHand()
@@ -174,7 +149,7 @@ public class Initialization : MonoBehaviour
         card.SetActive(true);
     } */
 
-    private void initializeEnemyIntent()
+    public void initializeEnemyIntent()
     {
         card.SetActive(false);
         Card cardObjToCopy = null;

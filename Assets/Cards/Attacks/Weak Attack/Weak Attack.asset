@@ -10,21 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aff1ce66587928b4ea1ca4e64cc2bfcc, type: 3}
-  m_Name: ShortShield 1
+  m_Name: Weak Attack
   m_EditorClassIdentifier: 
-  cardName: Short Shield
+  cardName: Weak Attack
   isDestroyed: 0
-  artwork: {fileID: 21300000, guid: d0b7881d55ff23e469406dc6bf15ddb4, type: 3}
+  artwork: {fileID: 21300000, guid: 8ff0a0b1b3a182f489c24fd53bf73830, type: 3}
   cardCost: 1
   canPlayRequirements:
-  - requirementName: 2
+  - requirementName: 1
     requirementNumber: 0
-  borderColorType: 1
+  borderColorType: 0
   target: 0
   effects:
-  - effectName: 1
+  - effectName: 0
     effectNumber: 0
-  - effectName: 3
-    effectNumber: 0
-  text: Target creature can defend this turn. Defense +1
-  frameText: DEFEND
+  text: Target energized creature can attack this turn. Attack +1
+  frameText: ATTACK

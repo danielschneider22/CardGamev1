@@ -375,19 +375,25 @@ public class HandManager : MonoBehaviour
         return -1;
     }
 
+    public List<GameObject> getCards()
+    {
+        List<GameObject> cards = new List<GameObject>();
+        foreach (Transform card in hand.transform)
+        {
+            cards.Add(card.gameObject);
+        }
+        return cards;
+    }
+
     private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
     {
         Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);
         Vector2 pos2 = new Vector2(t2.anchoredPosition.x, t2.anchoredPosition.y);
         return System.Math.Abs(pos1.x - pos2.x) <= .002 && System.Math.Abs(pos1.y - pos2.y) <= .002;
-        // return pos1.Equals(pos2);
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)
     {
         return System.Math.Abs(t1.x - t2.x) < .01;
-        // Vector2 scale1 = new Vector2(t1.x, t1.y);
-        // Vector2 scale2 = new Vector2(t2.x, t2.y);
-        // return scale1.Equals(scale2);
     }
     private bool rotationsAreTheSame(Vector3 t1, Vector3 t2)
     {
