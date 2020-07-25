@@ -154,10 +154,11 @@ public class EnemyIntentionManager : MonoBehaviour
         newChild.GetComponent<CardDisplay>().location = Location.enemyField;
         newChild.GetComponent<ToggleVisibility>().makeVisible();
         newChild.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        newChild.transform.localScale = new Vector3(1f, 1f, 1);
+        newChild.transform.localScale = cardObj.transform.localScale;
         newChild.SetActive(true);
         newChild.GetComponent<EnergizedManager>().energize();
-        enemyFieldManager.addCardToField(newChild);
+        newChild.transform.position = cardObj.transform.position;
+        enemyFieldManager.addCardToField(newChild, false);
 
         // float halfHeight = newChild.GetComponent<RectTransform>().rect.height / 2;
         // newChild.transform.position = playerFieldImage.transform.position;// Camera.main.ScreenToWorldPoint(cardObj.transform.position); // new Vector3(Input.mousePosition.x, Input.mousePosition.y - halfHeight, Input.mousePosition.z);

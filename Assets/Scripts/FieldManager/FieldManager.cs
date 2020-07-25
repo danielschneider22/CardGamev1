@@ -51,16 +51,22 @@ public class FieldManager : MonoBehaviour
         resetFieldPositions();
     }
 
-    public void addCardToField(GameObject card)
+    public void addCardToField(GameObject card, bool fromScreenSpace)
     {
-        Vector2 test = new Vector2();
-        Canvas screenSpaceCanvas = GameObject.FindGameObjectWithTag("Screen Space Canvas").GetComponent<Canvas>();
-        // var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, card.transform.position);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(field.GetComponent<RectTransform>(), card.transform.position, Camera.main, out test);
+        Vector2 newAnchoredPos = new Vector2();
+        if(fromScreenSpace)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(field.GetComponent<RectTransform>(), card.transform.position, Camera.main, out newAnchoredPos);
+        } else
+        {
+            Vector3 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, card.transform.position);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(field.GetComponent<RectTransform>(), screenPoint, Camera.main, out newAnchoredPos);
+        }
+
         Vector3 scale = card.transform.localScale;
 
         card.transform.SetParent(field.transform, false);
-        card.transform.GetComponent<RectTransform>().anchoredPosition = test;
+        card.transform.GetComponent<RectTransform>().anchoredPosition = newAnchoredPos;
         card.transform.localScale = scale;
 
         GameObject placeholder = Instantiate(placeholderObj);

@@ -87,7 +87,7 @@ public class Initialization : MonoBehaviour
             copyCard.SetActive(true);
             creatureCardTemplate.SetActive(true);
 
-            playerFieldManager.addCardToField(copyCard);
+            playerFieldManager.addCardToField(copyCard, true);
         }
         card.SetActive(true);
         playerFieldManager.resetFieldPositions();
@@ -116,7 +116,7 @@ public class Initialization : MonoBehaviour
             }
             creatureCardTemplate.SetActive(true);
 
-            enemyFieldManager.addCardToField(copyCard);
+            enemyFieldManager.addCardToField(copyCard, true);
         }
         card.SetActive(true);
         enemyFieldManager.resetFieldPositionsImmediately();
@@ -174,6 +174,7 @@ public class Initialization : MonoBehaviour
             newCard.GetComponent<DragDropCard>().canvas = worldCanvas;
             newCard.GetComponent<OnHover>().canvas = worldCanvas;
             newCard.transform.SetParent(enemyIntentArea, false);
+            newCard.transform.localScale = new Vector3(.25f, .25f, .25f);
             newCard.SetActive(true);
             enemyIntentionManager.addCard(newCard);
         }
