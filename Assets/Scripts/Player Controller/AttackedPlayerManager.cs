@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
-    private ChangeBackgroundLighting backgroundLighting;
+    public ChangeBackgroundLighting backgroundLighting;
     private DraggableArrow draggableArrow;
-    private GameObject attackingCardObj;
+    public GameObject attackingCardObj;
     public PlayerController playerController;
 
     public HealthBarPlayer healthBar;

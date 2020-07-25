@@ -20,6 +20,6 @@ public class Card : ScriptableObject
     }
     public List<CanPlayRequirement> canPlayRequirements;
 
-    public delegate bool CanPlay(ref bool canPlayTracker, GameObject targetGameObject, Card card, PlayerController playerController);
+    public delegate bool CanPlay(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController);
     public CanPlay canPlay;
 }

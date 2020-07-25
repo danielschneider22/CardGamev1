@@ -19,6 +19,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public PlayerController playerController;
     public Camera cam;
     public TurnManager turnManager;
+    public AttackedPlayerManager attackedPlayerManager;
     private bool enemyTurnOver;
 
     private float enemyActionTimer;
@@ -58,12 +59,12 @@ public class EnemyIntentionManager : MonoBehaviour
                     enemyFieldBackground.SetActive(false);
                 }
                 // playing attack or defend card
-                else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingHover && !enemyAction.showingArrow)
+                else if (enemyAction.actionType == EnemyActionType.playNonCreatureCard && enemyAction.showingHover && !enemyAction.showingArrow)
                 {
                     drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y + .3f, enemyAction.card.transform.position.z)));
                     enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().greenBacklighting();
                 }
-                else if ((enemyAction.actionType == EnemyActionType.playAttack || enemyAction.actionType == EnemyActionType.playDefend) && enemyAction.showingArrow)
+                else if (enemyAction.actionType == EnemyActionType.playNonCreatureCard && enemyAction.showingArrow)
                 {
                     NonCreatureCard enemyCard = (NonCreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
                     enemyCard.enactEffect(enemyAction.cardTarget, enemyController);
@@ -72,7 +73,7 @@ public class EnemyIntentionManager : MonoBehaviour
                     removeAction(enemyAction);
                     Destroy(enemyAction.card);
                 }
-                // attacking with a creature
+                // attacking a creature to another creature
                 else if ((enemyAction.actionType == EnemyActionType.attackCreature) && enemyAction.showingHover && !enemyAction.showingArrow)
                 {
                     drawIntentArrow(enemyAction, cam.WorldToScreenPoint(new Vector3(enemyAction.cardTarget.transform.position.x, enemyAction.card.transform.position.y, enemyAction.card.transform.position.z)));
@@ -92,6 +93,28 @@ public class EnemyIntentionManager : MonoBehaviour
 
                     enemyAction.cardTarget.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
                     enemyAction.card.GetComponent<ChangeBackgroundLighting>().nonselectableBacklighting();
+
+                    enemyController.decreaseCurrEnergy(enemyCard.cardCost);
+                    removeAction(enemyAction);
+                }
+                // attacking a creature to a player
+                else if ((enemyAction.actionType == EnemyActionType.attackPlayer) && enemyAction.showingHover && !enemyAction.showingArrow)
+                {
+                    drawIntentArrow(enemyAction, attackedPlayerManager.gameObject.transform.position);
+                    attackedPlayerManager.backgroundLighting.greenBacklighting();
+                    CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                    attackedPlayerManager.tempReduceHealth(enemyCard);
+                }
+                else if ((enemyAction.actionType == EnemyActionType.attackPlayer) && enemyAction.showingArrow)
+                {
+                    CreatureCard enemyCard = (CreatureCard)enemyAction.card.GetComponent<CardDisplay>().card;
+                    attackedPlayerManager.attackingCardObj = enemyAction.card;
+                    attackedPlayerManager.applyTempAttack(enemyCard);
+
+                    AttackDefenseManager atckDefManager = enemyAction.card.GetComponent<AttackDefenseManager>();
+                    atckDefManager.cantAttack();
+
+                    attackedPlayerManager.backgroundLighting.transparentBacklighting();
 
                     enemyController.decreaseCurrEnergy(enemyCard.cardCost);
                     removeAction(enemyAction);
@@ -180,11 +203,25 @@ public class EnemyIntentionManager : MonoBehaviour
 
     private List<EnemyAction> getEnemyActions()
     {
+        /*List<EnemyAction> enemyActions = new List<EnemyAction>();
+        foreach(GameObject cardObj in cards)
+        {
+            Card card = cardObj.GetComponent<Card>();
+            if(card is CreatureCard)
+            {
+                enemyActions.Add(new EnemyAction(cardObj, null, EnemyActionType.playCreature));
+            } else
+            {
+
+            }
+        }*/
         EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
-        EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
-        EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playAttack);
-        EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playCreature2, activateAttack, attackCreature };
+        // EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
+        EnemyAction playDefense = new EnemyAction(cards[1], cards[0], EnemyActionType.playNonCreatureCard);
+        EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playNonCreatureCard);
+        // EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
+        EnemyAction attackPlayer = new EnemyAction(cards[0], null, EnemyActionType.attackPlayer);
+        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playDefense, activateAttack, attackPlayer };
         
         /* List <CreatureCard> playerFieldCards = playerFieldManager.getFieldCards();
         List<CreatureCard> enemyFieldCards = enemyFieldManager.getFieldCards();

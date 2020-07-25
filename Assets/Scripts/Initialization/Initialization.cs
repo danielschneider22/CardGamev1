@@ -17,6 +17,7 @@ public class Initialization : MonoBehaviour
     public Card ninjaCard;
     public Card goblinCard;
     public Card bashCard;
+    public Card defendCard;
     public Material material;
     public Material fireBackMaterial;
     public PlayerDeckManager playerDeckManager;
@@ -161,7 +162,7 @@ public class Initialization : MonoBehaviour
                     cardObjToCopy = Instantiate(ninjaCard);
                     break;
                 case 1:
-                    cardObjToCopy = Instantiate(goblinCard);
+                    cardObjToCopy = Instantiate(defendCard);
                     break;
                 case 2:
                     cardObjToCopy = Instantiate(bashCard);
