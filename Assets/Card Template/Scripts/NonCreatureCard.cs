@@ -15,13 +15,11 @@ public class NonCreatureCard : Card
     public enum Target{ playerCreature, enemyCreature, playerCreatureOrEnemyCreature, player, enemy }
     public Target target;
 
-    public delegate void EnactEffect(GameObject targetGameObject, PlayerController targetController);
-    public EnactEffect enactEffect;
     [System.Serializable]
     public class NonCreatureEffect
     {
         public NonCreatureEffectName effectName;
-        public int effectNumber;
+        public int effectAmount;
     }
     public List<NonCreatureEffect> effects;
     [TextArea]

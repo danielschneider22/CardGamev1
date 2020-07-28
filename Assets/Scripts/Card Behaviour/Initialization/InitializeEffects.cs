@@ -10,11 +10,11 @@ public class InitializeCanPlay : MonoBehaviour
         NonCreatureEffectsManager nonCreatureEffectsManager = new NonCreatureEffectsManager();
 
         card = GetComponent<CardDisplay>().card;
-        if (card is NonCreatureCard)
+        /* if (card is NonCreatureCard)
         {
             NonCreatureCard cardAsNonCreatureCard = (NonCreatureCard)card;
 
             cardAsNonCreatureCard.enactEffect = nonCreatureEffectsManager.getEnactEffect(cardAsNonCreatureCard.effects);
-        }
+        }*/
     }
 }

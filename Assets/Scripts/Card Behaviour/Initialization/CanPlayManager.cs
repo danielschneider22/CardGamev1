@@ -6,117 +6,108 @@ using static NonCreatureCard;
 
 public class CanPlayManager
 {
-    static bool EmptyCanPlay(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController) { return canPlayTracker; }
-    static bool PayEnergyCost(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool EmptyCanPlay(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController) { return true; }
+    static bool PayEnergyCost(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
-        canPlayTracker = canPlayTracker && playerController.currEnergy >= cardBeingPlayed.cardCost;
-        return canPlayTracker;
+        return playerController.currEnergy >= cardBeingPlayed.cardCost;
     }
-    static bool CanPlayNonCreature(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool CanPlayNonCreature(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
         string parentObjName = targetGameObject.transform.parent.name;
-        canPlayTracker = canPlayTracker && parentObjName == "Player Field";
-        return canPlayTracker;
+        return parentObjName == "Player Field";
     }
-    static bool CreatureIsntAttacking(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool CreatureIsntAttacking(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
         if(!(targetCardDisplay.card is CreatureCard))
         {
-            canPlayTracker = false;
-            return canPlayTracker;
+            return false;
         }
         CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
-        canPlayTracker = canPlayTracker && targetCardAsCreature.canAttack == false;
-        return canPlayTracker;
+        return targetCardAsCreature.canAttack == false;
     }
-    static bool CreatureIsEnergized(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool CreatureIsEnergized(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
         if (!(targetCardDisplay.card is CreatureCard))
         {
-            canPlayTracker = false;
-            return canPlayTracker;
+            return false;
         }
         CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
-        canPlayTracker = canPlayTracker && targetCardAsCreature.energized == true;
-        return canPlayTracker;
+        return targetCardAsCreature.energized == true;
     }
-    static bool CreatureIsntDefending(ref bool canPlayTracker, GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
+    static bool CreatureIsntDefending(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
         CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
         if (!(targetCardDisplay.card is CreatureCard))
         {
-            canPlayTracker = false;
+            return false;
         }
         CreatureCard targetCardAsCreature = (CreatureCard)targetCardDisplay.card;
-        canPlayTracker = canPlayTracker && targetCardAsCreature.isDefending == false;
-        return canPlayTracker;
+        return targetCardAsCreature.isDefending == false;
     }
 
-    public CanPlay getCanPlay(List<CanPlayRequirement> canPlayRequirements)
+    public static bool canPlay(
+        List<CanPlayRequirement> canPlayRequirements,
+        GameObject targetGameObject,
+        Card cardBeingPlayed,
+        PlayerController playerController
+    )
     {
-        CanPlay combinedCanPlay = EmptyCanPlay;
+        bool canPlay = true;
         foreach(CanPlayRequirement requirement in canPlayRequirements)
         {
+            if(!canPlay) { return false; }
             switch (requirement.requirementName)
             {
                 case (CanPlayRequirementName.payEnergyCost):
                 {
-                    CanPlay canPlay = PayEnergyCost;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && PayEnergyCost(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.canPlayNonCreature):
                 {
-                    CanPlay canPlay = CanPlayNonCreature;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && CanPlayNonCreature(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.creatureIsntAttacking):
                 {
-                    CanPlay canPlay = CreatureIsntAttacking;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && CreatureIsntAttacking(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.creatureIsntDefending):
                 {
-                    CanPlay canPlay = CreatureIsntDefending;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && CreatureIsntDefending(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.creatureIsEnergized):
                 {
-                    CanPlay canPlay = CreatureIsEnergized;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && CreatureIsEnergized(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.genericCanPlayCreature):
                 {
-                    CanPlay canPlay = PayEnergyCost;
-                    combinedCanPlay += canPlay;
+                    canPlay = canPlay && PayEnergyCost(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.genericCanPlayAttackCard):
                 {
-                    CanPlay energyCost = PayEnergyCost;
-                    CanPlay canPlayNonCreature = CanPlayNonCreature;
-                    CanPlay isntAttacking = CreatureIsntAttacking;
-                    CanPlay isntTapped = CreatureIsEnergized;
-                    combinedCanPlay = combinedCanPlay + energyCost + canPlayNonCreature + isntAttacking + isntTapped;
+                    canPlay = canPlay && PayEnergyCost(targetGameObject, cardBeingPlayed, playerController);
+                    canPlay = canPlay && CanPlayNonCreature(targetGameObject, cardBeingPlayed, playerController);
+                    canPlay = canPlay && CreatureIsntAttacking(targetGameObject, cardBeingPlayed, playerController);
+                    canPlay = canPlay && CreatureIsEnergized(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
                 case (CanPlayRequirementName.genericCanPlayDefendCard):
                 {
-                    CanPlay energyCost = PayEnergyCost;
-                    CanPlay canPlayNonCreature = CanPlayNonCreature;
-                    CanPlay isntDefending = CreatureIsntDefending;
-                    combinedCanPlay = combinedCanPlay + energyCost + canPlayNonCreature + isntDefending;
+                    canPlay = canPlay && PayEnergyCost(targetGameObject, cardBeingPlayed, playerController);
+                    canPlay = canPlay && CanPlayNonCreature(targetGameObject, cardBeingPlayed, playerController);
+                    canPlay = canPlay && CreatureIsntDefending(targetGameObject, cardBeingPlayed, playerController);
                     break;
                 }
             }
         }
-        return combinedCanPlay;
+        return canPlay;
     }
 }

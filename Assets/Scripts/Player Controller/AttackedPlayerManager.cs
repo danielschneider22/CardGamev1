@@ -111,12 +111,14 @@ public class AttackedPlayerManager : MonoBehaviour, IPointerEnterHandler, IPoint
         string cardParent = transform.parent.name;
         string attackingCardParent = attackingCard.transform.parent.name;
 
-        CreatureCard attackingCardStats = (CreatureCard)attackingCard.GetComponent<CardDisplay>().card;
+        CardDisplay cardDisplay = attackingCard.GetComponent<CardDisplay>();
+        CreatureCard attackingCardStats = (CreatureCard)cardDisplay.card;
+        
 
         if ((attackingCardStats.canAttack &&
            (attackingCardParent == "Player Field" || attackingCardParent == "Enemy Field") &&
            cardParent != attackingCardParent) && !attackingCardStats.isDestroyed &&
-           !playerController.isDefended())
+           !playerController.isDefended() && (cardDisplay.location == CardDisplay.Location.field && playerController.isEnemyController || cardDisplay.location == CardDisplay.Location.enemyField && !playerController.isEnemyController))
         {
             return true;
         }

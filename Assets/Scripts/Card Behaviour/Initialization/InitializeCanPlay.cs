@@ -10,9 +10,5 @@ public class InitializeEffects : MonoBehaviour
         CanPlayManager canPlayManager = new CanPlayManager();
 
         card = GetComponent<CardDisplay>().card;
-        if (card is NonCreatureCard)
-        {
-            card.canPlay = canPlayManager.getCanPlay(card.canPlayRequirements);
-        }
     }
 }

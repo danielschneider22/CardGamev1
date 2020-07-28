@@ -5,63 +5,61 @@ using static NonCreatureCard;
 
 public class NonCreatureEffectsManager
 {
-    static void EmptyEffect(GameObject targetGameObject, PlayerController cardOwnerController){ }
-    static void MakeAttack(GameObject targetGameObject, PlayerController cardOwnerController)
+    static void EmptyEffect(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController){ }
+    static void MakeAttack(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
         attackDefenseManager.canAttack();
     }
-    static void MakeDefend(GameObject targetGameObject, PlayerController cardOwnerController)
+    static void MakeDefend(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         AttackDefenseManager attackDefenseManager = targetGameObject.GetComponent<AttackDefenseManager>();
         attackDefenseManager.setIsDefending();
     }
-    static void IncreaseAttack(GameObject targetGameObject, PlayerController cardOwnerController)
+    static void IncreaseAttack(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
         ((CreatureCard)cardDisplay.card).currAttack = ((CreatureCard)cardDisplay.card).currAttack + 1;
         cardDisplay.attackText.text = ((CreatureCard)cardDisplay.card).currAttack.ToString();
     }
-    static void IncreaseDefense(GameObject targetGameObject, PlayerController cardOwnerController)
+    static void IncreaseDefense(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
         ((CreatureCard)cardDisplay.card).currDefense = ((CreatureCard)cardDisplay.card).currDefense + 1;
         cardDisplay.defenseText.text = ((CreatureCard)cardDisplay.card).currDefense.ToString();
     }
-    public EnactEffect getEnactEffect(List<NonCreatureEffect> effects)
+    public static void enactNonCreatureEffect(
+        List<NonCreatureEffect> effects,
+        GameObject targetGameObject,
+        PlayerController cardOwnerController
+    )
     {
-        EnactEffect combinedEffect = EmptyEffect;
         foreach(NonCreatureEffect effect in effects)
         {
             switch (effect.effectName)
             {
                 case (NonCreatureEffectName.makeCardAttack):
                 {
-                    EnactEffect enactEffect = MakeAttack;
-                    combinedEffect += enactEffect;
+                    MakeAttack(effect.effectAmount, targetGameObject, cardOwnerController);
                     break;
                 }
                 case (NonCreatureEffectName.increaseAttack):
                 {
-                    EnactEffect enactEffect = IncreaseAttack;
-                    combinedEffect += enactEffect;
+                    IncreaseAttack(effect.effectAmount, targetGameObject, cardOwnerController);
                     break;
 
                 }
                 case (NonCreatureEffectName.increaseDefense):
                 {
-                    EnactEffect enactEffect = IncreaseDefense;
-                    combinedEffect += enactEffect;
+                    IncreaseDefense(effect.effectAmount, targetGameObject, cardOwnerController);
                     break;
                 }
                 case (NonCreatureEffectName.makeCardDefend):
                 {
-                    EnactEffect enactEffect = MakeDefend;
-                    combinedEffect += enactEffect;
+                    MakeDefend(effect.effectAmount, targetGameObject, cardOwnerController);
                     break;
                 }
             }
         }
-        return combinedEffect;
     }
 }

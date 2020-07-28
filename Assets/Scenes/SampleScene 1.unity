@@ -11662,8 +11662,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -41.600098, y: 35.859985}
-  m_SizeDelta: {x: 41.195007, y: 54.231995}
+  m_AnchoredPosition: {x: -39.04, y: 35.86}
+  m_SizeDelta: {x: 46.322678, y: 54.232025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &398344345
 GameObject:
@@ -19255,7 +19255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -13, y: 47.9}
+  m_AnchoredPosition: {x: -16.0425, y: 47.9}
   m_SizeDelta: {x: 32.007896, y: 36.98632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &681699697 stripped
@@ -19457,10 +19457,10 @@ RectTransform:
   m_Father: {fileID: 1942148798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 7.5, y: -6.599}
+  m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693921159
 MonoBehaviour:
@@ -21190,6 +21190,7 @@ MonoBehaviour:
   shieldSprite: {fileID: 21300000, guid: 7180008beb7b52547a4ef064e0c18050, type: 3}
   brokenShieldSprite: {fileID: 21300000, guid: c27435100acbb264ba8dd6816ce74fe8, type: 3}
   defendingStatus: 0
+  isEnemyController: 1
 --- !u!4 &905861226
 Transform:
   m_ObjectHideFlags: 0
@@ -39053,6 +39054,7 @@ MonoBehaviour:
   shieldSprite: {fileID: 21300000, guid: 7180008beb7b52547a4ef064e0c18050, type: 3}
   brokenShieldSprite: {fileID: 21300000, guid: c27435100acbb264ba8dd6816ce74fe8, type: 3}
   defendingStatus: 0
+  isEnemyController: 0
 --- !u!4 &1362549042
 Transform:
   m_ObjectHideFlags: 0
@@ -40819,10 +40821,10 @@ RectTransform:
   m_Father: {fileID: 1942148798}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25.5, y: -6.599}
+  m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510553026
 MonoBehaviour:
@@ -41260,7 +41262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -8.057432, y: 38.20309}
+  m_AnchoredPosition: {x: -11.099933, y: 38.20309}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1584123582
@@ -41295,10 +41297,10 @@ RectTransform:
   m_Father: {fileID: 1942148798}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 43.5, y: -6.599}
+  m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1584123584
 MonoBehaviour:
@@ -46416,7 +46418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 6.4905, y: 30.8}
+  m_AnchoredPosition: {x: 3.4479995, y: 30.8}
   m_SizeDelta: {x: 34.426926, y: 32.485977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1672572163 stripped
@@ -46653,6 +46655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundLighting: {fileID: 0}
+  attackingCardObj: {fileID: 0}
   playerController: {fileID: 905861225}
   healthBar: {fileID: 1504440307}
   damageTextContainer: {fileID: 4276231543945294890, guid: c42878a013b6d3940b85621a5384a449,
@@ -48447,7 +48450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -20.957489, y: 28.759083}
+  m_AnchoredPosition: {x: -24, y: 28.759083}
   m_SizeDelta: {x: 41.910034, y: 54.229996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1999894322
@@ -54509,6 +54512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundLighting: {fileID: 6880082981137937094}
+  attackingCardObj: {fileID: 0}
   playerController: {fileID: 1362549041}
   healthBar: {fileID: 1014297150}
   damageTextContainer: {fileID: 4276231543945294890, guid: c42878a013b6d3940b85621a5384a449,

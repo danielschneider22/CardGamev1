@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Sprite brokenShieldSprite;
     public enum DefendingStatus { defended, notDefended, shieldsBroken }
     public DefendingStatus defendingStatus;
+    public bool isEnemyController;
 
     public void Awake()
     {
