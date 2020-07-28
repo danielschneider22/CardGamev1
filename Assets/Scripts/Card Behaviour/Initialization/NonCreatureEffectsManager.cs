@@ -19,13 +19,13 @@ public class NonCreatureEffectsManager
     static void IncreaseAttack(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
-        ((CreatureCard)cardDisplay.card).currAttack = ((CreatureCard)cardDisplay.card).currAttack + 1;
+        ((CreatureCard)cardDisplay.card).currAttack = ((CreatureCard)cardDisplay.card).currAttack + effectAmount;
         cardDisplay.attackText.text = ((CreatureCard)cardDisplay.card).currAttack.ToString();
     }
     static void IncreaseDefense(int effectAmount, GameObject targetGameObject, PlayerController cardOwnerController)
     {
         CardDisplay cardDisplay = targetGameObject.GetComponent<CardDisplay>();
-        ((CreatureCard)cardDisplay.card).currDefense = ((CreatureCard)cardDisplay.card).currDefense + 1;
+        ((CreatureCard)cardDisplay.card).currDefense = ((CreatureCard)cardDisplay.card).currDefense + effectAmount;
         cardDisplay.defenseText.text = ((CreatureCard)cardDisplay.card).currDefense.ToString();
     }
     public static void enactNonCreatureEffect(

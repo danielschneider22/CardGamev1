@@ -13,6 +13,7 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI defenseText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI cardCostText;
+    public TextMeshProUGUI retreatCostText;
 
     public Image artworkImage;
 
@@ -20,6 +21,8 @@ public class CardDisplay : MonoBehaviour
     [SerializeField]
     public Image[] effectSlots;
     public Image attackImage;
+    public Image retreatImage;
+    public Image retreatImageBack;
     public Image defenseImage;
     public Image energyImage;
     public Image innerFrame;
@@ -47,7 +50,7 @@ public class CardDisplay : MonoBehaviour
 
     public Material material;
     public Material fireBackMaterial;
-    public enum Location { field, enemyField, hand, enemyIntent }
+    public enum Location { field, enemyField, hand, enemyIntent, discard }
     public Location location;
 
     private void Awake()
@@ -67,6 +70,7 @@ public class CardDisplay : MonoBehaviour
                 healthGreen.material = material;
                 healthOrange.material = material;
                 healthOutline.material = material;
+                retreatCostText.text = cardAsCreatureCard.retreatCost.ToString();
                 gameObject.AddComponent(typeof(AttackDefenseManager));
                 gameObject.GetComponent<AttackDefenseManager>().defenseText = defenseText;
             }
@@ -77,6 +81,9 @@ public class CardDisplay : MonoBehaviour
                 defenseText.enabled = false;
                 healthText.enabled = false;
                 attackImage.enabled = false;
+                retreatImage.enabled = false;
+                retreatImageBack.enabled = false;
+                retreatCostText.enabled = false;
                 defenseImage.enabled = false;
                 healthRed.enabled = false;
                 healthGreen.enabled = false;

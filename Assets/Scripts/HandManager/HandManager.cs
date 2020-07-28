@@ -87,7 +87,7 @@ public class HandManager : MonoBehaviour
     public void discardCard(GameObject card)
     {
         int removeCardIdx = getCardIdxInTransform(hand.transform, card.transform);
-        discardManager.addCardToDiscardArea(card.transform.gameObject);
+        discardManager.addCardToDiscardArea(card.transform.gameObject, true);
         DestroyImmediate(handPlacementGrid.transform.GetChild(removeCardIdx).gameObject);
         movingCards.Remove(findMovingHandCard(card.transform));
         resetHandPositions();

@@ -51,14 +51,28 @@ public class DiscardManager : MonoBehaviour
         movingCards.Clear();
     }
 
-    public void addCardToDiscardArea(GameObject card)
+    public void addCardToDiscardArea(GameObject card, bool isScreenSpace)
     {
         Vector3 position = card.transform.position;
         Vector3 scale = card.transform.localScale;
+        Vector2 newAnchoredPos = new Vector2();
+        if (!isScreenSpace)
+        {
+            Vector3 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, position);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(discardArea.GetComponent<RectTransform>(), screenPoint, Camera.main, out newAnchoredPos);
+        }
+
         card.transform.SetParent(discardArea.transform, false);
         card.transform.SetAsFirstSibling();
-        card.transform.position = position;
+        if(isScreenSpace)
+        {
+            card.transform.position = position;
+        } else
+        {
+            card.transform.GetComponent<RectTransform>().anchoredPosition = newAnchoredPos;
+        }
         card.transform.localScale = scale;
+        
 
         GameObject placeholder = Instantiate(placeholderObj);
         placeholder.transform.SetParent(discardPlacementGrid.transform, false);

@@ -27,10 +27,11 @@ MonoBehaviour:
   thisTurnDefense: 0
   maxHealth: 10
   currHealth: 10
-  isExhausted: 0
+  retreatCost: 1
   circleArtwork: {fileID: 21300000, guid: 7dafd097680e6ee439a37f36b8a53131, type: 3}
   canAttack: 0
   isDefending: 0
+  energized: 0
   effects:
   - name: Foul Stench
     description: When attacking or defending a creature, deal two damage to that

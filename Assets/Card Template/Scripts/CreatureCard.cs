@@ -16,6 +16,8 @@ public class CreatureCard : Card
     public int maxHealth;
     public int currHealth;
 
+    public int retreatCost;
+
     public Sprite circleArtwork;
 
     public bool canAttack;
