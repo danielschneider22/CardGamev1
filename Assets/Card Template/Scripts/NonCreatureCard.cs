@@ -12,7 +12,7 @@ public class NonCreatureCard : Card
         other = 2,
     };
     public BorderColorType borderColorType;
-    public enum Target{ playerCreature, enemyCreature, playerCreatureOrEnemyCreature, player, enemy }
+    public enum Target{ controllerCreature, opposingPlayerCreature, anyCreature, controller, opposingPlayer }
     public Target target;
 
     [System.Serializable]

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static CardDisplay;
+using static NonCreatureCard;
 
 public class EnemyIntentionManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class EnemyIntentionManager : MonoBehaviour
     public TurnManager turnManager;
     public AttackedPlayerManager attackedPlayerManager;
     private bool enemyTurnOver;
+    private CanPlayManager canPlayManager;
 
     private float enemyActionTimer;
     private void Awake()
@@ -28,6 +30,7 @@ public class EnemyIntentionManager : MonoBehaviour
         enemyActionTimer = 0f;
         enemyActions = new List<EnemyAction>{ };
         enemyTurnOver = true;
+        canPlayManager = new CanPlayManager();
     }
 
     public void addCard(GameObject card)
@@ -127,6 +130,10 @@ public class EnemyIntentionManager : MonoBehaviour
             }
             else if (!enemyTurnOver)
             {
+                foreach (GameObject cardObj in cards)
+                {
+                    Destroy(cardObj);
+                }
                 cards = new List<GameObject>();
                 turnManager.startPlayerTurn();
                 enemyTurnOver = true;
@@ -166,6 +173,19 @@ public class EnemyIntentionManager : MonoBehaviour
         enemyActions = getEnemyActions();
         enemyTurnOver = false;
     }
+    private GameObject simulatePlaceInEnemyField(GameObject cardObj)
+    {
+        creatureCardTemplate.SetActive(false);
+        GameObject newChild = Instantiate(creatureCardTemplate);
+        newChild.GetComponent<CardDisplay>().card = Instantiate(cardObj.GetComponent<CardDisplay>().card);
+        newChild.GetComponent<CardDisplay>().card.cardCost = 100;
+        newChild.GetComponent<CardDisplay>().material = cardObj.GetComponent<CardDisplay>().material;
+        newChild.GetComponent<CardDisplay>().location = Location.enemyField;
+        newChild.SetActive(true);
+        newChild.GetComponent<EnergizedManager>().energize();
+        creatureCardTemplate.SetActive(true);
+        return newChild;
+    }
 
     private void placeCardInEnemyField(GameObject cardObj)
     {
@@ -201,34 +221,68 @@ public class EnemyIntentionManager : MonoBehaviour
         Destroy(cardObj);
     }
 
+    private List<EnemyAction> getActionsBasedOnDanielsDumbAI()
+    {
+        List<EnemyAction> enemyActions = new List<EnemyAction>();
+        PlayerController tempEnemyController = Instantiate(enemyController);
+        List<GameObject> tempFieldGameObjects = enemyFieldManager.getFieldGameObjects().ConvertAll(item => Instantiate(item));
+        List<GameObject> actualEnemyFieldGameObjs = enemyFieldManager.getFieldGameObjects();
+
+        // first play creatures
+        foreach (GameObject cardObj in cards)
+        {
+            Card card = cardObj.GetComponent<CardDisplay>().card;
+            if (card is CreatureCard && CanPlayManager.canPlay(null, card, enemyController))
+            {
+                tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
+                enemyActions.Add(new EnemyAction(cardObj, null, EnemyActionType.playCreature));
+                actualEnemyFieldGameObjs.Add(cardObj);
+                GameObject copyCardObj = Instantiate(cardObj);
+                copyCardObj = simulatePlaceInEnemyField(copyCardObj);
+                tempFieldGameObjects.Add(Instantiate(copyCardObj));
+            }
+        }
+
+        // then play non-creatures
+        foreach (GameObject cardObj in cards)
+        {
+            Card card = cardObj.GetComponent<CardDisplay>().card;
+            if (card is NonCreatureCard)
+            {
+                NonCreatureCard nonCreatureCard = (NonCreatureCard)card;
+                if (nonCreatureCard.target == Target.controllerCreature && CanPlayManager.canPlay(tempFieldGameObjects[0], card, enemyController))
+                {
+                    enemyActions.Add(new EnemyAction(cardObj, actualEnemyFieldGameObjs[0], EnemyActionType.playNonCreatureCard));
+                    tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
+                    NonCreatureEffectsManager.enactNonCreatureEffect(nonCreatureCard.effects, tempFieldGameObjects[0], enemyController);
+                }
+            }
+        }
+
+        // choose which creatures to attack
+        int idx = 0;
+        foreach (GameObject cardObj in tempFieldGameObjects)
+        {
+            CreatureCard card = (CreatureCard)cardObj.GetComponent<CardDisplay>().card;
+            GameObject bestCardObjToAttck = playerFieldManager.getBestDefendingCreatureToAttack();
+            if (card.canAttack && bestCardObjToAttck != null)
+            {
+                enemyActions.Add(new EnemyAction(actualEnemyFieldGameObjs[idx], bestCardObjToAttck, EnemyActionType.attackCreature));
+            }
+            else if (card.canAttack && bestCardObjToAttck == null)
+            {
+                enemyActions.Add(new EnemyAction(actualEnemyFieldGameObjs[idx], null, EnemyActionType.attackPlayer));
+            }
+            idx++;
+        }
+
+        return enemyActions;
+    }
+
     private List<EnemyAction> getEnemyActions()
     {
-        /*List<EnemyAction> enemyActions = new List<EnemyAction>();
-        foreach(GameObject cardObj in cards)
-        {
-            Card card = cardObj.GetComponent<Card>();
-            if(card is CreatureCard)
-            {
-                enemyActions.Add(new EnemyAction(cardObj, null, EnemyActionType.playCreature));
-            } else
-            {
+        List<EnemyAction> enemyActions = getActionsBasedOnDanielsDumbAI();
 
-            }
-        }*/
-        EnemyAction playCreature = new EnemyAction(cards[0], null, EnemyActionType.playCreature);
-        // EnemyAction playCreature2 = new EnemyAction(cards[1], null, EnemyActionType.playCreature);
-        EnemyAction playDefense = new EnemyAction(cards[1], cards[0], EnemyActionType.playNonCreatureCard);
-        EnemyAction activateAttack = new EnemyAction(cards[2], cards[0], EnemyActionType.playNonCreatureCard);
-        // EnemyAction attackCreature = new EnemyAction(cards[0], playerFieldManager.field.transform.GetChild(0).gameObject, EnemyActionType.attackCreature);
-        EnemyAction attackPlayer = new EnemyAction(cards[0], null, EnemyActionType.attackPlayer);
-        List<EnemyAction> actions = new List<EnemyAction> { playCreature, playDefense, activateAttack, attackPlayer };
-        
-        /* List <CreatureCard> playerFieldCards = playerFieldManager.getFieldCards();
-        List<CreatureCard> enemyFieldCards = enemyFieldManager.getFieldCards();
-        Debug.Log(playerController.currHealth);
-        Debug.Log(enemyController.currHealth);
-        List<EnemyAction> actions = new List<EnemyAction> { }; */
-
-        return (actions);
+        return (enemyActions);
     }
 }

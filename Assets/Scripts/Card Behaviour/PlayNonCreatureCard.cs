@@ -31,7 +31,7 @@ public class PlayNonCreatureCard : MonoBehaviour, IPointerEnterHandler, IDropHan
         if (draggableArrow.drawArrow && draggableArrow.draggedCard.GetComponent<CardDisplay>().card is NonCreatureCard && parentObjName == "Player Field")
         {
             NonCreatureCard card = (NonCreatureCard)draggableArrow.draggedCard.GetComponent<CardDisplay>().card;
-            bool isPlayable = CanPlayManager.canPlay(card.canPlayRequirements, gameObject, card, playerController);
+            bool isPlayable = CanPlayManager.canPlay(gameObject, card, playerController);
 
             if (isPlayable)
             {

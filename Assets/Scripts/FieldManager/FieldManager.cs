@@ -345,6 +345,36 @@ public class FieldManager : MonoBehaviour
         }
         return cards;
     }
+    public GameObject getBestDefendingCreatureToAttack()
+    {
+        GameObject bestGameObjToAttack = null;
+        foreach (Transform child in field.transform)
+        {
+            CreatureCard card = (CreatureCard)child.GetComponent<CardDisplay>().card;
+            if(card.isDefending && bestGameObjToAttack == null)
+            {
+                bestGameObjToAttack = child.gameObject;
+            } else if (card.isDefending)
+            {
+                CreatureCard bestCaseCard = (CreatureCard)bestGameObjToAttack.GetComponent<CardDisplay>().card;
+                if(bestCaseCard.currDefense > card.currDefense || (bestCaseCard.currDefense == card.currDefense && bestCaseCard.currHealth > card.currHealth))
+                {
+                    bestGameObjToAttack = child.gameObject;
+                }
+            }
+        }
+        return bestGameObjToAttack;
+    }
+
+    public List<GameObject> getFieldGameObjects()
+    {
+        List<GameObject> gameObjects = new List<GameObject>();
+        foreach (Transform child in field.transform)
+        {
+            gameObjects.Add(child.gameObject);
+        }
+        return gameObjects;
+    }
 
     private bool positionsAreTheSame(RectTransform t1, RectTransform t2)
     {
