@@ -220,6 +220,19 @@ public class EnemyIntentionManager : MonoBehaviour
         }
         Destroy(cardObj);
     }
+    private int getBestTargetNonCreatureHelpfulIdx(NonCreatureCard nonCreatureCard, List<GameObject> enemyFieldCards, PlayerController enemyController)
+    {
+        int idx = 0;
+        foreach(GameObject cardObj in enemyFieldCards)
+        {
+            if(CanPlayManager.canPlay(cardObj, nonCreatureCard, enemyController))
+            {
+                return idx;
+            }
+            idx++;
+        }
+        return -1;
+    }
 
     private List<EnemyAction> getActionsBasedOnDanielsDumbAI()
     {
@@ -232,7 +245,7 @@ public class EnemyIntentionManager : MonoBehaviour
         foreach (GameObject cardObj in cards)
         {
             Card card = cardObj.GetComponent<CardDisplay>().card;
-            if (card is CreatureCard && CanPlayManager.canPlay(null, card, enemyController))
+            if (card is CreatureCard && CanPlayManager.canPlay(null, card, tempEnemyController))
             {
                 tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
                 enemyActions.Add(new EnemyAction(cardObj, null, EnemyActionType.playCreature));
@@ -250,11 +263,16 @@ public class EnemyIntentionManager : MonoBehaviour
             if (card is NonCreatureCard)
             {
                 NonCreatureCard nonCreatureCard = (NonCreatureCard)card;
-                if (nonCreatureCard.target == Target.controllerCreature && CanPlayManager.canPlay(tempFieldGameObjects[0], card, enemyController))
+                if (nonCreatureCard.target == Target.controllerCreature)
                 {
-                    enemyActions.Add(new EnemyAction(cardObj, actualEnemyFieldGameObjs[0], EnemyActionType.playNonCreatureCard));
-                    tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
-                    NonCreatureEffectsManager.enactNonCreatureEffect(nonCreatureCard.effects, tempFieldGameObjects[0], enemyController);
+                    int bestCardToPlayIdx = getBestTargetNonCreatureHelpfulIdx(nonCreatureCard, tempFieldGameObjects, tempEnemyController);
+                    if(bestCardToPlayIdx != -1)
+                    {
+                        enemyActions.Add(new EnemyAction(cardObj, actualEnemyFieldGameObjs[bestCardToPlayIdx], EnemyActionType.playNonCreatureCard));
+                        tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
+                        NonCreatureEffectsManager.enactNonCreatureEffect(nonCreatureCard.effects, tempFieldGameObjects[bestCardToPlayIdx], enemyController);
+                    }
+                    
                 }
             }
         }

@@ -153,21 +153,35 @@ public class Initialization : MonoBehaviour
     public void initializeEnemyIntent()
     {
         card.SetActive(false);
-        Card cardObjToCopy = null;
-        for (var i = 0; i < numIntentCards; i++)
+        int numCards = Random.Range(2, 3);
+        List<Card> enemyIntentCards = new List<Card>();
+        for (var i = 0; i < numCards; i++)
         {
-            switch(i % 3)
+            int randomCard = Random.Range(0, 7);
+            switch (randomCard)
             {
+
                 case 0:
-                    cardObjToCopy = Instantiate(ninjaCard);
+                    enemyIntentCards.Add(Instantiate(defendCard));
                     break;
                 case 1:
-                    cardObjToCopy = Instantiate(defendCard);
+                    enemyIntentCards.Add(Instantiate(goblinCard));
                     break;
                 case 2:
-                    cardObjToCopy = Instantiate(bashCard);
+                case 3:
+                case 4:
+                    enemyIntentCards.Add(Instantiate(ninjaCard));
+                    break;
+                case 5:
+                case 6:
+                    enemyIntentCards.Add(Instantiate(bashCard));
                     break;
             }
+        }
+        enemyIntentCards.Add(Instantiate(bashCard));
+        enemyIntentCards.Add(Instantiate(defendCard));
+        foreach (Card cardObjToCopy in enemyIntentCards)
+        { 
             GameObject newCard = Instantiate(card);
             newCard.GetComponent<CardDisplay>().material = Instantiate(material);
             newCard.GetComponent<CardDisplay>().card = cardObjToCopy;

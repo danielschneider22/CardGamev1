@@ -13,7 +13,7 @@ public class CanPlayManager
     }
     static bool CanPlayNonCreature(GameObject targetGameObject, Card cardBeingPlayed, PlayerController playerController)
     {
-        if(playerController.name != "EnemyController")
+        if(!playerController.name.Contains("EnemyController"))
         {
             CardDisplay targetCardDisplay = targetGameObject.GetComponent<CardDisplay>();
             string parentObjName = targetGameObject.transform.parent.name;
