@@ -32,8 +32,7 @@ public class CardDisplay : MonoBehaviour
     public Image healthOrange;
     public Image healthOutline;
     public Image transparentOverlay;
-    public Image shield;
-    public Image sword;
+    public Image attackingDefendingImage;
 
     public Image fireBack;
     // public Image shieldBack;

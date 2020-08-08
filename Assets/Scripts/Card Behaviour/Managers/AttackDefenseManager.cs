@@ -14,6 +14,8 @@ public class AttackDefenseManager : MonoBehaviour
     public bool isDefendingBeforeChange;
     public Sprite brokenShieldSprite;
     public Sprite shieldSprite;
+    public Sprite attackSprite;
+    public Sprite attackAndDefendSprite;
 
     private void Awake()
     {
@@ -57,27 +59,55 @@ public class AttackDefenseManager : MonoBehaviour
     public void cantAttack()
     {
         card.canAttack = false;
-        cardDisplay.sword.enabled = false;
+        if(!card.isDefending)
+        {
+            cardDisplay.attackingDefendingImage.enabled = false;
+        } else
+        {
+            cardDisplay.attackingDefendingImage.sprite = shieldSprite;
+        }
     }
     public void canAttack()
     {
         card.canAttack = true;
-        cardDisplay.sword.enabled = true;
+        cardDisplay.attackingDefendingImage.enabled = true;
+        if (card.isDefending)
+        {
+            cardDisplay.attackingDefendingImage.sprite = attackAndDefendSprite;
+        }
+        else
+        {
+            cardDisplay.attackingDefendingImage.sprite = attackSprite;
+        }
     }
     public void setIsDefending()
     {
         card.isDefending = true;
-        cardDisplay.shield.enabled = true;
-        cardDisplay.shield.sprite = shieldSprite;
+        cardDisplay.attackingDefendingImage.enabled = true;
+        if (card.canAttack)
+        {
+            cardDisplay.attackingDefendingImage.sprite = attackAndDefendSprite;
+        }
+        else
+        {
+            cardDisplay.attackingDefendingImage.sprite = shieldSprite;
+        }
     }
     public void setIsNotDefending()
     {
         card.isDefending = false;
-        cardDisplay.shield.enabled = false;
+        if (card.canAttack)
+        {
+            cardDisplay.attackingDefendingImage.sprite = attackSprite;
+        }
+        else
+        {
+            cardDisplay.attackingDefendingImage.enabled = false;
+        }
     }
     public void setShieldBroken()
     {
         card.isDefending = false;
-        cardDisplay.shield.sprite = brokenShieldSprite;
+        cardDisplay.attackingDefendingImage.sprite = brokenShieldSprite;
     }
 }

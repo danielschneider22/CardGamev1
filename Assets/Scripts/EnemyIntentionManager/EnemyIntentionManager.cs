@@ -178,7 +178,6 @@ public class EnemyIntentionManager : MonoBehaviour
         creatureCardTemplate.SetActive(false);
         GameObject newChild = Instantiate(creatureCardTemplate);
         newChild.GetComponent<CardDisplay>().card = Instantiate(cardObj.GetComponent<CardDisplay>().card);
-        newChild.GetComponent<CardDisplay>().card.cardCost = 100;
         newChild.GetComponent<CardDisplay>().material = cardObj.GetComponent<CardDisplay>().material;
         newChild.GetComponent<CardDisplay>().location = Location.enemyField;
         newChild.SetActive(true);
@@ -238,7 +237,11 @@ public class EnemyIntentionManager : MonoBehaviour
     {
         List<EnemyAction> enemyActions = new List<EnemyAction>();
         PlayerController tempEnemyController = Instantiate(enemyController);
-        List<GameObject> tempFieldGameObjects = enemyFieldManager.getFieldGameObjects().ConvertAll(item => Instantiate(item));
+        List<GameObject> tempFieldGameObjects = enemyFieldManager.getFieldGameObjects().ConvertAll(item => {
+            GameObject copyCardObj = Instantiate(item);
+            copyCardObj = simulatePlaceInEnemyField(copyCardObj);
+            return copyCardObj;
+        });
         List<GameObject> actualEnemyFieldGameObjs = enemyFieldManager.getFieldGameObjects();
 
         // first play creatures
@@ -270,7 +273,7 @@ public class EnemyIntentionManager : MonoBehaviour
                     {
                         enemyActions.Add(new EnemyAction(cardObj, actualEnemyFieldGameObjs[bestCardToPlayIdx], EnemyActionType.playNonCreatureCard));
                         tempEnemyController.currEnergy = tempEnemyController.currEnergy - card.cardCost;
-                        NonCreatureEffectsManager.enactNonCreatureEffect(nonCreatureCard.effects, tempFieldGameObjects[bestCardToPlayIdx], enemyController);
+                        NonCreatureEffectsManager.enactNonCreatureEffect(nonCreatureCard.effects, tempFieldGameObjects[bestCardToPlayIdx], tempEnemyController);
                     }
                     
                 }
