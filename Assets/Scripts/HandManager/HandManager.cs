@@ -29,28 +29,32 @@ public class HandManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        List<MovingCard> cardsToRemove = new List<MovingCard>();
-        foreach (MovingCard handCard in movingCards)
+        if(movingCards.Count > 0)
         {
-            bool moveOccurred = moveTowardEndPoint(handCard);
-            bool resizeOccurred = rescale(handCard);
-            bool rotationOcurred = rotate(handCard);
-
-            if (!moveOccurred && !resizeOccurred && !rotationOcurred)
+            List<MovingCard> cardsToRemove = new List<MovingCard>();
+            foreach (MovingCard handCard in movingCards)
             {
-                cardsToRemove.Add(handCard);
+                bool moveOccurred = moveTowardEndPoint(handCard);
+                bool resizeOccurred = rescale(handCard);
+                bool rotationOcurred = rotate(handCard);
+
+                if (!moveOccurred && !resizeOccurred && !rotationOcurred)
+                {
+                    cardsToRemove.Add(handCard);
+                }
+
+                if (hoverCopyTopCard != null && handCard.transform == hoverCopyTopCard.handTransform)
+                {
+                    setCopyTransformToHandTransform(handCard.transform);
+                }
             }
 
-            if (hoverCopyTopCard != null && handCard.transform == hoverCopyTopCard.handTransform)
+            foreach (MovingCard handCard in cardsToRemove)
             {
-                setCopyTransformToHandTransform(handCard.transform);
+                movingCards.Remove(handCard);
             }
         }
-
-        foreach (MovingCard handCard in cardsToRemove)
-        {
-            movingCards.Remove(handCard);
-        }
+        
     }
     public void clearMovingCards()
     {
@@ -161,13 +165,16 @@ public class HandManager : MonoBehaviour
         {
             if (handCard.transform.localScale.x < handCard.endpointScale.x)
             {
-                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .02f, handCard.transform.localScale.y + .02f, handCard.transform.localScale.z);
+                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x + .015f, handCard.transform.localScale.y + .015f, handCard.transform.localScale.z);
             }
             else
             {
-                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x - .02f, handCard.transform.localScale.y - .02f, handCard.transform.localScale.z);
+                handCard.transform.localScale = new Vector3(handCard.transform.localScale.x - .015f, handCard.transform.localScale.y - .015f, handCard.transform.localScale.z);
             }
             return true;
+        } else
+        {
+            handCard.transform.localScale = handCard.endpointScale;
         }
         return false;
     }
@@ -273,7 +280,7 @@ public class HandManager : MonoBehaviour
         placeholderRectTransform.anchoredPosition = new Vector3(placeholderRectTransform.anchoredPosition.x, hoverMoveUp, 1f);
         movingHandCard.speed = 600;
         movingHandCard.endpointTransform = placeholderObj.transform;
-        movingHandCard.endpointScale = new Vector3(.6f, 6f, 1);
+        movingHandCard.endpointScale = new Vector3(.7f, .7f, 1);
     }
 
     private void moveCardsLeft(int cardIdx)
@@ -389,7 +396,7 @@ public class HandManager : MonoBehaviour
     {
         Vector2 pos1 = new Vector2(t1.anchoredPosition.x, t1.anchoredPosition.y);
         Vector2 pos2 = new Vector2(t2.anchoredPosition.x, t2.anchoredPosition.y);
-        return System.Math.Abs(pos1.x - pos2.x) <= .002 && System.Math.Abs(pos1.y - pos2.y) <= .002;
+        return System.Math.Abs(pos1.x - pos2.x) <= .01 && System.Math.Abs(pos1.y - pos2.y) <= .01;
     }
     private bool scalesAreTheSame(Vector3 t1, Vector3 t2)
     {

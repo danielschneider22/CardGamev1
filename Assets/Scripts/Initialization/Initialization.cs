@@ -41,6 +41,8 @@ public class Initialization : MonoBehaviour
         // initializePlayerField();
         enemyIntentStartTimer = 3f;
         enemyTurnStarted = false;
+        // QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 300;
     }
 
     private void Start()

@@ -19,7 +19,7 @@ public class CardDisplay : MonoBehaviour
 
     public Image front;
     [SerializeField]
-    public Image[] effectSlots;
+    public List<Image> effectSlots;
     public Image attackImage;
     public Image retreatImage;
     public Image retreatImageBack;
@@ -43,7 +43,10 @@ public class CardDisplay : MonoBehaviour
     public GameObject healthBar;
     public GameObject nonCreatureTextGameObj;
 
-    public TextMeshProUGUI effect1;
+    [SerializeField]
+    public List<Image> effectIconImages;
+    [SerializeField]
+    public List<TextMeshProUGUI> effectNames;
     public TextMeshProUGUI cardType;
     public TextMeshProUGUI nonCreatureEffect;
 
@@ -97,7 +100,14 @@ public class CardDisplay : MonoBehaviour
                         front.sprite = defenseFrontSprite;
                         break;
                 }
-                effect1.enabled = false;
+                foreach (Image effectIcon in effectIconImages)
+                {
+                    effectIcon.enabled = false;
+                }
+                foreach (TextMeshProUGUI effectName in effectNames)
+                {
+                    effectName.gameObject.SetActive(false);
+                }
                 nonCreatureTextGameObj.SetActive(true);
                 nonCreatureEffect.text = cardAsNonCreatureCard.text;
                 foreach (Image slot in effectSlots)
@@ -124,7 +134,22 @@ public class CardDisplay : MonoBehaviour
             energyImage.material = material;
             if (card is CreatureCard)
             {
-                effect1.text = ((CreatureCard)card).effects[0].name;
+                int i = 0;
+                foreach (Image effectIcon in effectIconImages)
+                {
+                    effectIcon.enabled = false;
+                }
+                foreach (TextMeshProUGUI effectName in effectNames)
+                {
+                    effectName.gameObject.SetActive(false);
+                }
+                foreach (CardSlotEffect effect in ((CreatureCard)card).effects) {
+                    effectNames[i].text = ((CreatureCard)card).effects[i].description;
+                    effectNames[i].gameObject.SetActive(true);
+                    effectIconImages[i].sprite = ((CreatureCard)card).effects[i].icon;
+                    effectIconImages[i].enabled = true;
+                    i = i + 1;
+                }
             }
 
             foreach (Image slot in effectSlots)
@@ -138,6 +163,17 @@ public class CardDisplay : MonoBehaviour
             Color fireColor = Color.red;
             fireBack.material = Instantiate(fireBackMaterial);
             fireBack.material.SetColor("_Color", fireColor);
+            foreach (Image effectIcon in effectIconImages)
+            {
+                effectIcon.enabled = false;
+            }
+            int i = 0;
+            foreach (CardSlotEffect effect in ((CreatureCard)card).effects)
+            {
+                effectIconImages[i].sprite = ((CreatureCard)card).effects[i].icon;
+                effectIconImages[i].enabled = true;
+                i = i + 1;
+            }
         }
     }
 

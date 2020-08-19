@@ -23,8 +23,8 @@ MonoBehaviour:
   target: 0
   effects:
   - effectName: 1
-    effectNumber: 0
+    effectAmount: 0
   - effectName: 3
-    effectNumber: 0
-  text: Target creature can defend this turn. Defense +1
+    effectAmount: 0
+  text: Target creature defends this turn. Defense +1 until end of turn.
   frameText: DEFEND

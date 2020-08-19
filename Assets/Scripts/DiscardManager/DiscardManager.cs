@@ -24,27 +24,31 @@ public class DiscardManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        List<MovingCard> cardsToRemove = new List<MovingCard>();
-        foreach (MovingCard movingCard in movingCards)
+        if(movingCards.Count > 0 )
         {
-            bool moveOccurred = moveTowardEndPoint(movingCard);
-            bool resizeOccurred = rescale(movingCard);
-
-            if (!moveOccurred && !resizeOccurred)
+            List<MovingCard> cardsToRemove = new List<MovingCard>();
+            foreach (MovingCard movingCard in movingCards)
             {
-                cardsToRemove.Add(movingCard);
+                bool moveOccurred = moveTowardEndPoint(movingCard);
+                bool resizeOccurred = rescale(movingCard);
+
+                if (!moveOccurred && !resizeOccurred)
+                {
+                    cardsToRemove.Add(movingCard);
+                }
+
             }
 
+            foreach (MovingCard movingCard in cardsToRemove)
+            {
+                movingCards.Remove(movingCard);
+            }
+            if (playerDiscardText.text != discardArea.transform.childCount.ToString())
+            {
+                playerDiscardText.text = discardArea.transform.childCount.ToString();
+            }
         }
-
-        foreach (MovingCard movingCard in cardsToRemove)
-        {
-            movingCards.Remove(movingCard);
-        }
-        if(playerDiscardText.text != discardArea.transform.childCount.ToString())
-        {
-            playerDiscardText.text = discardArea.transform.childCount.ToString();
-        }
+        
     }
     public void clearMovingCards()
     {

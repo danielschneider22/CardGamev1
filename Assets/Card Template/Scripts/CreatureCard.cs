@@ -24,5 +24,5 @@ public class CreatureCard : Card
     public bool isDefending;
     public bool energized;
 
-    public CardSlotEffect[] effects;
+    public List<CardSlotEffect> effects;
 }

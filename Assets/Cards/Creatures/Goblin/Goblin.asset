@@ -34,5 +34,14 @@ MonoBehaviour:
   energized: 0
   effects:
   - name: Foul Stench
-    description: When attacking or defending a creature, deal two damage to that
-      creature at the end of combat.
+    description: 'On Summon: Deal 1 damage to the opponent'
+    icon: {fileID: 21300000, guid: 1fb46265da5cb404db44ab8710db3c9b, type: 3}
+    cardSlotEffectType: 0200000003000000
+  - name: Foul Attack
+    description: Deal 1 damage to blocking creature post-combat
+    icon: {fileID: 21300000, guid: 08c2b11c385911f46b9a101e7e38a4c6, type: 3}
+    cardSlotEffectType: 0200000003000000
+  - name: Bersker
+    description: When breaking a creature's shield, raise this card's attack by 1.
+    icon: {fileID: 21300000, guid: 08c2b11c385911f46b9a101e7e38a4c6, type: 3}
+    cardSlotEffectType: 0200000003000000

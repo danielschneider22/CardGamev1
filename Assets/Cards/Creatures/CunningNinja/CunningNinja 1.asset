@@ -34,4 +34,6 @@ MonoBehaviour:
   energized: 0
   effects:
   - name: Shadow Strike
-    description: Can attack twice per turn
+    description: This card can attack again after its first attack in a turn.
+    icon: {fileID: 21300000, guid: 08c2b11c385911f46b9a101e7e38a4c6, type: 3}
+    cardSlotEffectType: 2

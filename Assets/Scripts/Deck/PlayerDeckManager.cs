@@ -44,7 +44,7 @@ public class PlayerDeckManager : MonoBehaviour
     {
         card.SetActive(false);
         GameObject newCard = Instantiate(card);
-        newCard.GetComponent<CardDisplay>().material = Instantiate(material);
+        // newCard.GetComponent<CardDisplay>().material = Instantiate(material);
         newCard.GetComponent<CardDisplay>().card = cardObjToCopy;
         newCard.GetComponent<CardDisplay>().location = Location.hand;
         newCard.GetComponent<DragDropCard>().canvas = screenSpaceOverlayCanvas;

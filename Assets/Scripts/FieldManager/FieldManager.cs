@@ -22,21 +22,24 @@ public class FieldManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        List<MovingCard> cardsToRemove = new List<MovingCard>();
-        foreach (MovingCard fieldCard in movingCards)
+        if(movingCards.Count > 0)
         {
-            bool moveOccurred = moveTowardEndPoint(fieldCard);
-            bool resizeOccurred = rescale(fieldCard);
-
-            if (!moveOccurred && !resizeOccurred)
+            List<MovingCard> cardsToRemove = new List<MovingCard>();
+            foreach (MovingCard fieldCard in movingCards)
             {
-                cardsToRemove.Add(fieldCard);
-            }
-        }
+                bool moveOccurred = moveTowardEndPoint(fieldCard);
+                bool resizeOccurred = rescale(fieldCard);
 
-        foreach (MovingCard fieldCard in cardsToRemove)
-        {
-            movingCards.Remove(fieldCard);
+                if (!moveOccurred && !resizeOccurred)
+                {
+                    cardsToRemove.Add(fieldCard);
+                }
+            }
+
+            foreach (MovingCard fieldCard in cardsToRemove)
+            {
+                movingCards.Remove(fieldCard);
+            }
         }
     }
     public void clearMovingCards()
@@ -97,7 +100,7 @@ public class FieldManager : MonoBehaviour
             setCardPosition(childCount, i, placeholderRectTransform);
             float speed = getCardSpeed(oldMovingFieldCard, placeholderRectTransform, fieldRectTransform, resetSpeed);
 
-            MovingCard newMovingCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.65f, .65f, 1));
+            MovingCard newMovingCard = new MovingCard(cardTransform, speed, placeholderTransform, new Vector3(.60f, .60f, 1));
             movingCards.Add(newMovingCard);
         }
     }
