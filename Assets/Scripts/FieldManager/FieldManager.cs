@@ -49,8 +49,14 @@ public class FieldManager : MonoBehaviour
     public void removeCardFromField(Transform cardTransform)
     {
         int removeCardIdx = getCardIdxInTransform(field.transform, cardTransform);
-        DestroyImmediate(field.transform.GetChild(removeCardIdx).gameObject);
-        DestroyImmediate(fieldPlacementGrid.transform.GetChild(removeCardIdx).gameObject);
+        if(removeCardIdx != -1)
+        {
+            DestroyImmediate(field.transform.GetChild(removeCardIdx).gameObject);
+            DestroyImmediate(fieldPlacementGrid.transform.GetChild(removeCardIdx).gameObject);
+        } else
+        {
+            Destroy(cardTransform.gameObject);
+        }
         resetFieldPositions();
     }
 
